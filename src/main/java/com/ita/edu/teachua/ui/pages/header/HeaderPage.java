@@ -4,6 +4,7 @@ import com.ita.edu.teachua.ui.pages.about.AboutPage;
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +24,11 @@ public class HeaderPage extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
     private WebElement dropDownMenuNode;
 
+    @FindBy(xpath = "//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")
+    private WebElement searchInput;
+
+    @FindBy(xpath = "//span[@aria-label='control']")
+    private WebElement advancedSearch;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -52,5 +58,23 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
+    public ClubsPage clickAdvancedSearchBtn() {
+        advancedSearch.click();
+        return new ClubsPage(driver);
+    }
+
+    public ClubsPage enterSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+        searchInput.sendKeys(Keys.ENTER);
+        return new ClubsPage(driver);
+    }
+    public ClubsPage parseSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+        return new ClubsPage(driver);
+    }
 
 }
