@@ -4,10 +4,13 @@ import com.ita.edu.teachua.ui.pages.about.AboutPage;
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import java.time.Duration;
 
 public class HeaderPage extends BasePage {
 
@@ -22,6 +25,9 @@ public class HeaderPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
     private WebElement dropDownMenuNode;
+
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Додати гурток')]")
+    private WebElement addNewClubBtn;
 
 
     public HeaderPage(WebDriver driver) {
@@ -41,6 +47,11 @@ public class HeaderPage extends BasePage {
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+
+    public AddClubPage clickOnAddNewClubBtn() {
+        addNewClubBtn.click();
+        return new AddClubPage(driver);
     }
 
     public void login(String email, String password) {
