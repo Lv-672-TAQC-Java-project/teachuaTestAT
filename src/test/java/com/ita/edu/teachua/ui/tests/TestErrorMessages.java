@@ -52,7 +52,6 @@ public class TestErrorMessages extends TestRunner {
         BasicInformationCenterComponent checkCenterPage = new BasicInformationCenterComponent(driver);
         softAssert.assertSame(checkCenterPage.getFieldNameCenter(), "");
         checkCenterPage.clickNextButton();
-        System.out.println("TEXT   =>   " + checkCenterPage.getTextAfterClick());
         assertEquals(checkCenterPage.getTextAfterClick(), "Некоректна назва центру");
     }
 }
