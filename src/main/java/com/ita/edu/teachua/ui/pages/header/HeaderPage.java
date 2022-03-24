@@ -2,7 +2,6 @@ package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.about.AboutPage;
 import com.ita.edu.teachua.ui.pages.base.BasePage;
-import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.time.Duration;
 
 public class HeaderPage extends BasePage {
 
