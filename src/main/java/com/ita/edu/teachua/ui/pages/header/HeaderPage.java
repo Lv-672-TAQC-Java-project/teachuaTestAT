@@ -52,13 +52,14 @@ public class HeaderPage extends BasePage {
         return new AddClubPage(driver);
     }
 
-    public void login(String email, String password) {
+    public HeaderPage login(String email, String password) {
         this.clickUserProfile()
                 .clickLogin()
                 .setEmail(email)
                 .setPassword(password)
                 .clickLoginButton();
         sleep(2000);
+        return new HeaderPage(driver);
     }
 
 

@@ -30,5 +30,4 @@ public class AddClubPage extends HeaderPage {
     public WebElement getCreateClubBtn() {
         return createClubBtn;
     }
-
 }

@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.testng.Assert;
 
 public class DescriptionClubComponent extends ContactsClubComponent {
     @FindBy(how = How.XPATH, using = "//*[@id='basic_description']")
@@ -18,22 +17,22 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         super(driver);
     }
 
-    public DescriptionClubComponent correctAmountOfSymbolsCheck() {
+    public String getAlertMsg() {
+        return alert.getText();
+    }
+
+    public DescriptionClubComponent enterCorrectAmountOfSymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(50));
         return this;
     }
 
-    public DescriptionClubComponent notEnoughSymbolsCheck() {
+    public DescriptionClubComponent enterNotEnoughSymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(25));
-        String expected = "Некоректний опис гуртка";
-        Assert.assertTrue(alert.getText().contains(expected));
         return this;
     }
 
-    public DescriptionClubComponent tooManySymbolsCheck() {
+    public DescriptionClubComponent enterTooManySymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1502));
-        String expected = "Опис гуртка може містити від 40 до 1500 символів.";
-        Assert.assertTrue(alert.getText().contains(expected));
         return this;
     }
 
@@ -41,5 +40,4 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         getCreateClubBtn().click();
         return new BasePage(driver);
     }
-
 }
