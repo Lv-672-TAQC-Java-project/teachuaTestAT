@@ -8,4 +8,9 @@ public class ClubsPage extends CommonPage {
     public ClubsPage(WebDriver driver) {
         super(driver);
     }
+
+    public ClubsPage login(String email, String password) {
+        this.getHeader().login(email, password);
+        return new ClubsPage(driver);
+    }
 }

@@ -3,6 +3,7 @@ package com.ita.edu.teachua.ui.pages.header;
 import com.ita.edu.teachua.ui.pages.about.AboutPage;
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
+import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,13 @@ public class HeaderPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[@title = 'Розширений пошук']")
     private WebElement advancedSearchButton;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'user-profile')]")
+    private WebElement userProfileButton;
+
+    @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
+    private WebElement dropDownMenuNode;
+
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -38,4 +46,20 @@ public class HeaderPage extends BasePage {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
+
+    public GuestMenuDropDownComponent clickUserProfile() {
+        userProfileButton.click();
+        return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+
+    public void login(String email, String password) {
+        this.clickUserProfile()
+                .clickLogin()
+                .setEmail(email)
+                .setPassword(password)
+                .clickLoginButton();
+        sleep(2000);
+    }
+
+
 }
