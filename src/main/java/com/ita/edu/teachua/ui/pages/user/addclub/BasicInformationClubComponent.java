@@ -24,20 +24,23 @@ public class BasicInformationClubComponent extends AddClubPage {
         super(driver);
     }
 
-    public void enterClubName() {
+    public BasicInformationClubComponent enterClubName() {
         fieldName.sendKeys(RandomStringUtils.randomAlphabetic(8));
+        return this;
     }
 
-    public void selectCheckboxes() {
+    public BasicInformationClubComponent selectCheckboxes() {
         WebElement randomCheckbox = newClubCheckboxes.get(new Random().nextInt(newClubCheckboxes.size()));
         randomCheckbox.click();
+        return this;
     }
 
-    public void enterAge() {
+    public BasicInformationClubComponent enterAge() {
         minimumAgeField.clear();
         minimumAgeField.sendKeys("4");
         maximumAgeField.clear();
         maximumAgeField.sendKeys("16");
+        return this;
     }
 
     public ContactsClubComponent fillBasicInfo() {

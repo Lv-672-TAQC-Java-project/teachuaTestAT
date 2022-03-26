@@ -15,8 +15,9 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
         super(driver);
     }
 
-    public void fillContactPhone() {
+    public ContactsClubComponent fillContactPhone() {
         contactPhone.sendKeys("0" + RandomStringUtils.randomNumeric(9));
+        return this;
     }
 
     public DescriptionClubComponent fillContactsInfo() {
