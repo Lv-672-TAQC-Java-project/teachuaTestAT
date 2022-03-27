@@ -23,6 +23,8 @@ public class HeaderPage extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
     private WebElement dropDownMenuNode;
 
+    @FindBy(xpath = "//span[@title='Розширений пошук']")
+    private WebElement advancedSearchButton;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -52,5 +54,9 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
+    public ClubsPage clickAdvancedSearchButton() {
+        advancedSearchButton.click();
 
+        return new ClubsPage(driver);
+    }
 }
