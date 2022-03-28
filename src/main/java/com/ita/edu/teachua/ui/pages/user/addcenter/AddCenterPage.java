@@ -27,6 +27,7 @@ public class AddCenterPage extends BasePage {
 
     public void clickButtonAddCenter() {
         buttonAddCenter.click();
+    }
 
     public AddLocationComponent clickAddLocationBtn() {
         addLocationButton.click();

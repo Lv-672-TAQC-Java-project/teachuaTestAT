@@ -12,9 +12,8 @@ public class AddNewClubDescriptionTest extends TestRunnerWithValueProvider {
     @BeforeMethod
     public void loggingIn() {
         HomePage home = new HomePage(driver);
-        home
+        home.login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword())
                 .getHeader()
-                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword())
                 .clickOnAddNewClubBtn();
     }
 
