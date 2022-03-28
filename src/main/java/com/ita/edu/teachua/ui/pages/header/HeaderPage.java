@@ -27,6 +27,12 @@ public class HeaderPage extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
     private WebElement dropDownMenuNode;
 
+    @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]/span[2]/*[1]")
+    private WebElement adminProfileButton;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Додати центр')]")
+    private WebElement locationBtn;
+
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -52,6 +58,18 @@ public class HeaderPage extends BasePage {
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    public AdminMenuDropDownComponent clickAdminProfile() {
+        adminProfileButton.click();
+
+        return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+
+    public HeaderPage clickAddLocation() {
+        locationBtn.click();
+
+        return this;
+    }
+
     public void login(String email, String password) {
         this.clickUserProfile()
                 .clickLogin()
@@ -60,6 +78,4 @@ public class HeaderPage extends BasePage {
                 .clickLoginButton();
         sleep(2000);
     }
-
-
 }
