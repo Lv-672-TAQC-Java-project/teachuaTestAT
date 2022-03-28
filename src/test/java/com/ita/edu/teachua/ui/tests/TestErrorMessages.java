@@ -1,7 +1,6 @@
 package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.header.HeaderPage;
-import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
@@ -9,11 +8,9 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import static com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider.valueProvider;
 import static org.testng.Assert.assertEquals;
 
 public class TestErrorMessages extends TestRunner {

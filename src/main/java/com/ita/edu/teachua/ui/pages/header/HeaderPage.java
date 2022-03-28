@@ -31,13 +31,12 @@ public class HeaderPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Додати гурток')]")
     private WebElement addNewClubBtn;
-  
+
     @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]/span[2]/*[1]")
     private WebElement adminProfileButton;
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Додати центр')]")
     private WebElement locationBtn;
-
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -53,7 +52,7 @@ public class HeaderPage extends BasePage {
         return new AboutPage(driver);
     }
 
-    public AdvancedSearchComponent clickAdvancedSearchBtn(){
+    public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
@@ -87,5 +86,11 @@ public class HeaderPage extends BasePage {
                 .setPassword(password)
                 .clickLoginButton();
         sleep(2000);
+    }
+
+    public ClubsPage clickAdvancedSearchButton() {
+        advancedSearchButton.click();
+
+        return new ClubsPage(driver);
     }
 }
