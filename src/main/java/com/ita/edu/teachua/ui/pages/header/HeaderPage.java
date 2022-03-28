@@ -52,7 +52,7 @@ public class HeaderPage extends BasePage {
         return new AboutPage(driver);
     }
 
-    public AdvancedSearchComponent clickAdvancedSearchBtn(){
+    public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }

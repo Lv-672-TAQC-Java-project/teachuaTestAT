@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class AdminAddLocationTest extends TestRunnerWithValueProvider {
 
-    @Test (description = "TUA-160")
+    @Test(description = "TUA-160")
     public void verifyThatAdminCanNotAddLocationAfterLeavingAllFieldsEmpty() {
         HomePage homePage = new HomePage(driver);
         homePage

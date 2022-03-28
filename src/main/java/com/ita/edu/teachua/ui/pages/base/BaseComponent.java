@@ -9,7 +9,7 @@ public class BaseComponent {
     protected DefaultElementLocatorFactory parentContext;
     protected WebDriver driver;
 
-    public BaseComponent(WebDriver driver, WebElement root){
+    public BaseComponent(WebDriver driver, WebElement root) {
         this.driver = driver;
         parentContext = new DefaultElementLocatorFactory(root);
         PageFactory.initElements(parentContext, this);

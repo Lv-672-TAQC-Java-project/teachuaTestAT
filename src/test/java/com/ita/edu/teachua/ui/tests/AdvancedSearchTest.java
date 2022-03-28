@@ -4,10 +4,11 @@ import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class AdvancedSearchTest extends TestRunner{
+public class AdvancedSearchTest extends TestRunner {
 
     @Test(description = "TUA-510")
     public void verifyThatParametersDeactivatedAfterSelectingCenterBtn() {

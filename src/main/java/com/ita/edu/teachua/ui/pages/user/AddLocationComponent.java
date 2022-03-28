@@ -15,10 +15,6 @@ public class AddLocationComponent extends BasePage {
     }
 
     public boolean isAddButtonEnable() {
-        if (addButton.isEnabled()) {
-            return true;
-        } else {
-            return false;
-        }
+        return addButton.isEnabled();
     }
 }
