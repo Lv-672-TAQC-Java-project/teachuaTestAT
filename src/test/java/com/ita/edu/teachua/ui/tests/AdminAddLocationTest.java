@@ -38,15 +38,7 @@ public class AdminAddLocationTest extends TestRunnerWithValueProvider {
     @Test(description = "TUA-160")
     public void verifyThatAdminCanNotAddLocationAfterLeavingAllFieldsEmpty() {
         HomePage homePage = new HomePage(driver);
-        homePage
-                .getHeader()
-                .clickUserProfile()
-                .clickLogin()
-                .setEmail(valueProvider.getAdminEmail())
-                .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton();
-        homePage
-                .sleep(3000);
+        homePage.login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
 
         boolean isEnable = homePage
                 .getHeader()
