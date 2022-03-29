@@ -36,6 +36,16 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return this;
     }
 
+    public DescriptionClubComponent enterRussianSymbols() {
+        clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(40));
+        return this;
+    }
+
+    public DescriptionClubComponent enterGermanSymbols() {
+        clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(40));
+        return this;
+    }
+
     public BasePage finishClubCreation() {
         getCreateClubBtn().click();
         return new BasePage(driver);
