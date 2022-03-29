@@ -20,4 +20,12 @@ public class TestValueProvider {
     public String getAdminPassword() {
         return properties.getProperty("adminPassword");
     }
+
+    public String getSizeOfSearchResult() {
+        return properties.getProperty("sizeOfSearchResult");
+    }
+
+    public String getMaxSizeOfSearchField() {
+        return properties.getProperty("maxSizeOfSearchField");
+    }
 }
