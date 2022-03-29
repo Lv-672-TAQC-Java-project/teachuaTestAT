@@ -39,6 +39,9 @@ public class HeaderPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Додати центр')]")
     private WebElement locationBtn;
 
+    @FindBy(xpath = "//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")
+    private WebElement searchInput;
+
     public HeaderPage(WebDriver driver) {
         super(driver);
     }
