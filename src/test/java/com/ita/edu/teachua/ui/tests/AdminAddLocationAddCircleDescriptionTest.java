@@ -4,8 +4,9 @@ import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
-public class AdminAddLocationTest extends TestRunnerWithValueProvider {
+public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValueProvider {
     final String descriptionText40Characters = "Lorem ipsum dolor sit amet, consectetuer";
     final String descriptionText1000Characters = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean " +
             "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, " +
@@ -69,14 +70,16 @@ public class AdminAddLocationTest extends TestRunnerWithValueProvider {
                 .setCirclePhoneNumber("0673297976")
                 .clickCircleNextStageButton();
 
-        Assert.assertTrue(myProfilePage
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(myProfilePage
                 .setDescriptionField(descriptionText1000Characters)
                 .isCircleFinishButtonEnable());
-        Assert.assertTrue(myProfilePage
+        softAssert.assertTrue(myProfilePage
                 .setDescriptionField(descriptionText40Characters)
                 .isCircleFinishButtonEnable());
-        Assert.assertTrue(myProfilePage
+        softAssert.assertTrue(myProfilePage
                 .setDescriptionField(descriptionText1500Characters)
                 .isCircleFinishButtonEnable());
+        softAssert.assertAll();
     }
 }

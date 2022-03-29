@@ -9,37 +9,26 @@ import org.openqa.selenium.support.How;
 public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]")
     private WebElement dropDownProfileButton;
-
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Мій Профіль')]")
     private WebElement myProfileButton;
-
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Додати')]")
     private WebElement addButton;
-
     @FindBy(how = How.XPATH, using = "/html/body/div[5]/div/div/ul/li[1]")
     private WebElement addCircle;
-
     @FindBy(how = How.XPATH, using = "//*[@id='basic_name']")
     private WebElement circleNameField;
-
     @FindBy(how = How.XPATH, using = "//*[@id='basic_categories']/label[\"%s\"]")
     private WebElement circleCategory;
-
     @FindBy(how = How.XPATH, using = "//*[@id='basic_ageFrom']")
     private WebElement circleAgeFromField;
-
     @FindBy(how = How.XPATH, using = "//*[@id='basic_ageTo']")
     private WebElement circleAgeToField;
-
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Наступний крок')]")
     private WebElement circleNextStageButton;
-
     @FindBy(how = How.XPATH, using = "//input[@id='basic_contactТелефон']")
     private WebElement circlePhoneNumberField;
-
     @FindBy(how = How.XPATH, using = "//textarea[@id='basic_description']")
     private WebElement circleDescriptionField;
-
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Завершити')]")
     private WebElement circleFinishButton;
 
