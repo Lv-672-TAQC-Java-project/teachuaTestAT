@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
+import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -56,30 +57,31 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
         HomePage homePage = new HomePage(driver);
         homePage
                 .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
-
         MyProfilePage myProfilePage = new MyProfilePage(driver);
         myProfilePage
                 .clickDropDownProfileButton()
                 .clickMyProfileButton()
                 .clickAddButton()
-                .clickAddCircle()
-                .setCircleNameField("Football")
-                .setCircleCategory("1")
-                .setCircleAgeRange("7", "9")
-                .clickCircleNextStageButton()
-                .setCirclePhoneNumber("0673297976")
-                .clickCircleNextStageButton();
+                .clickAddWorkshop();
+        EditMyProfileComponent editMyProfileComponent = new EditMyProfileComponent(driver);
+        editMyProfileComponent
+                .setWorkshopNameField("Football")
+                .setWorkshopCategory("1")
+                .setWorkshopAgeRange("7", "9")
+                .clickWorkshopNextStageButton()
+                .setWorkshopPhoneNumber("0673297976")
+                .clickWorkshopNextStageButton();
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(myProfilePage
-                .setDescriptionField(descriptionText1000Characters)
-                .isCircleFinishButtonEnable());
-        softAssert.assertTrue(myProfilePage
-                .setDescriptionField(descriptionText40Characters)
-                .isCircleFinishButtonEnable());
-        softAssert.assertTrue(myProfilePage
-                .setDescriptionField(descriptionText1500Characters)
-                .isCircleFinishButtonEnable());
+        softAssert.assertTrue(editMyProfileComponent
+                .setWorkshopDescriptionField(descriptionText1000Characters)
+                .isWorkshopFinishButtonEnable());
+        softAssert.assertTrue(editMyProfileComponent
+                .setWorkshopDescriptionField(descriptionText40Characters)
+                .isWorkshopFinishButtonEnable());
+        softAssert.assertTrue(editMyProfileComponent
+                .setWorkshopDescriptionField(descriptionText1500Characters)
+                .isWorkshopFinishButtonEnable());
         softAssert.assertAll();
     }
 }
