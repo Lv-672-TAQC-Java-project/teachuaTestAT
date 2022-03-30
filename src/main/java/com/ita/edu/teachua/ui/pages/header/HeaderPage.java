@@ -6,6 +6,7 @@ import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +38,9 @@ public class HeaderPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Додати центр')]")
     private WebElement locationBtn;
+
+    @FindBy(xpath = "//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")
+    private WebElement searchInput;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -92,5 +96,26 @@ public class HeaderPage extends BasePage {
         advancedSearchButton.click();
 
         return new ClubsPage(driver);
+    }
+    public ClubsPage enterSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+        searchInput.sendKeys(Keys.ENTER);
+
+        return new ClubsPage(driver);
+    }
+
+    public ClubsPage parseSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+
+        return new ClubsPage(driver);
+    }
+
+    public String getSearchValue(){
+
+        return searchInput.getAttribute("value");
     }
 }
