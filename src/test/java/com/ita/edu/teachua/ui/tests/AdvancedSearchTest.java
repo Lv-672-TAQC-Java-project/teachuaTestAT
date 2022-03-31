@@ -54,4 +54,17 @@ public class AdvancedSearchTest extends TestRunner {
         assertFalse(isAdvancedSearchModalDisplayed, "Advanced search modal should not be displayed");
     }
 
+
+    @Test(description = "TUA-513")
+    public void verifyThatCentersDisplayedAsAList() {
+        int expectedHeight = 184;
+        int expectedWidth = 944;
+        HomePage home = new HomePage(driver);
+        AdvancedSearchComponent advancedSearchComponent = home.getHeader()
+                .clickAdvancedSearchBtn()
+                .clickOnСenterButton()
+                .clickOnListIcon();
+
+        assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight));
+    }
 }
