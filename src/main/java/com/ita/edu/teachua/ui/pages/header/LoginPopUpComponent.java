@@ -21,25 +21,24 @@ public class LoginPopUpComponent extends BasePage {
 
     }
 
-    public void clickLoginButton(){
+    public void clickLoginButton() {
         loginButton.click();
         sleep(2000);
     }
 
-    public void clickCloseButton(){
+    public void clickCloseButton() {
         loginButton.click();
     }
 
-    public LoginPopUpComponent setEmail(String email){
+    public LoginPopUpComponent setEmail(String email) {
         emailField.sendKeys(email);
         return this;
     }
 
-    public LoginPopUpComponent setPassword(String password){
+    public LoginPopUpComponent setPassword(String password) {
         passwordField.sendKeys(password);
         return this;
     }
-
 
 
 }

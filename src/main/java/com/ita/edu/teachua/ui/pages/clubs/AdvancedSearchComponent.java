@@ -1,7 +1,10 @@
 package com.ita.edu.teachua.ui.pages.clubs;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -10,6 +13,9 @@ import java.util.List;
 public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[text()='Центр']")
     private WebElement centerButton;
+
+    @FindBy(how = How.XPATH, using = "//div[text()='Розширений пошук']/parent::div")
+    private List<WebElement> advancedSearchModal;
 
     @FindBy(how = How.XPATH, using = "//label[@class='ant-radio-button-wrapper club-view-button']/span/img")
     private WebElement listIcon;
@@ -61,5 +67,9 @@ public class AdvancedSearchComponent extends CommonPage {
         } catch (NoSuchElementException noSuchElementException) {
             return false;
         }
+    }
+
+    public boolean isAdvancedSearchModalDisplayed() {
+        return advancedSearchModal.size() > 0;
     }
 }

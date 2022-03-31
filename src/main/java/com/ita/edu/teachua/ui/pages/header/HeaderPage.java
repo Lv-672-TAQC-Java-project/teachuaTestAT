@@ -5,10 +5,13 @@ import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
 
 public class HeaderPage extends BasePage {
 
@@ -27,6 +30,17 @@ public class HeaderPage extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[4]/div/div")
     private WebElement dropDownMenuNode;
 
+    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Додати гурток')]")
+    private WebElement addNewClubBtn;
+
+    @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]/span[2]/*[1]")
+    private WebElement adminProfileButton;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(text(),'Додати центр')]")
+    private WebElement locationBtn;
+
+    @FindBy(xpath = "//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")
+    private WebElement searchInput;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -42,7 +56,7 @@ public class HeaderPage extends BasePage {
         return new AboutPage(driver);
     }
 
-    public AdvancedSearchComponent clickAdvancedSearchBtn(){
+    public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
@@ -50,6 +64,23 @@ public class HeaderPage extends BasePage {
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+
+    public AddClubPage clickOnAddNewClubBtn() {
+        addNewClubBtn.click();
+        return new AddClubPage(driver);
+    }
+
+    public AdminMenuDropDownComponent clickAdminProfile() {
+        adminProfileButton.click();
+
+        return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+
+    public HeaderPage clickAddLocation() {
+        locationBtn.click();
+
+        return this;
     }
 
     public void login(String email, String password) {
@@ -61,5 +92,30 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
+    public ClubsPage clickAdvancedSearchButton() {
+        advancedSearchButton.click();
 
+        return new ClubsPage(driver);
+    }
+    public ClubsPage enterSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+        searchInput.sendKeys(Keys.ENTER);
+
+        return new ClubsPage(driver);
+    }
+
+    public ClubsPage parseSearch(String keyWords){
+        searchInput.click();
+        searchInput.clear();
+        searchInput.sendKeys(keyWords);
+
+        return new ClubsPage(driver);
+    }
+
+    public String getSearchValue(){
+
+        return searchInput.getAttribute("value");
+    }
 }
