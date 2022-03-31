@@ -21,12 +21,14 @@ public class AddCenterPage extends BasePage {
         super(driver);
     }
 
-    public void clickAddButton() {
+    public AddCenterPage clickAddButton() {
         buttonAdd.click();
+        return this;
     }
 
-    public void clickButtonAddCenter() {
+    public BasicInformationCenterComponent clickButtonAddCenter() {
         buttonAddCenter.click();
+        return new BasicInformationCenterComponent(driver);
     }
 
     @Step("click Add Location Btn")

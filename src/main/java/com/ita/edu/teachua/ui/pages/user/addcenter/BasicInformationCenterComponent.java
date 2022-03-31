@@ -22,8 +22,9 @@ public class BasicInformationCenterComponent extends BasePage {
         return fieldNameCenter.getText();
     }
 
-    public void clickNextButton() {
+    public BasicInformationCenterComponent clickNextButton() {
         clickToNextButton.click();
+        return this;
     }
 
     public String getTextAfterClick() {
