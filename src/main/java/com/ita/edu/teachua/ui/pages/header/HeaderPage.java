@@ -6,6 +6,7 @@ import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -60,7 +61,7 @@ public class HeaderPage extends BasePage {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
-
+    @Step("click User Profile")
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
@@ -71,6 +72,7 @@ public class HeaderPage extends BasePage {
         return new AddClubPage(driver);
     }
 
+    @Step("clickAdminProfile ")
     public AdminMenuDropDownComponent clickAdminProfile() {
         adminProfileButton.click();
 

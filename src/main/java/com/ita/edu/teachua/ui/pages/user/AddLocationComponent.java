@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ public class AddLocationComponent extends BasePage {
     public AddLocationComponent(WebDriver driver) {
         super(driver);
     }
-
+    @Step("check is Add Button Enable ")
     public boolean isAddButtonEnable() {
         return addButton.isEnabled();
     }

@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +21,7 @@ public class LoginPopUpComponent extends BasePage {
         super(driver);
 
     }
-
+    @Step("click Login")
     public void clickLoginButton() {
         loginButton.click();
         sleep(2000);
@@ -30,11 +31,12 @@ public class LoginPopUpComponent extends BasePage {
         loginButton.click();
     }
 
+    @Step("set email field value: {email}")
     public LoginPopUpComponent setEmail(String email) {
         emailField.sendKeys(email);
         return this;
     }
-
+    @Step("set password field value: {password}")
     public LoginPopUpComponent setPassword(String password) {
         passwordField.sendKeys(password);
         return this;

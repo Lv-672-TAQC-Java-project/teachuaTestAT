@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.pages.user.addcenter;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,6 +29,7 @@ public class AddCenterPage extends BasePage {
         buttonAddCenter.click();
     }
 
+    @Step("click Add Location Btn")
     public AddLocationComponent clickAddLocationBtn() {
         addLocationButton.click();
 

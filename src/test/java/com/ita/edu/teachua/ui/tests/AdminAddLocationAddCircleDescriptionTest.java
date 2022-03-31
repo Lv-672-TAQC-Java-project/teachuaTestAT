@@ -1,8 +1,11 @@
 package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -37,17 +40,18 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
             "quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, " +
             "mollis sed, nonummy id, met";
 
+    @Description("Verify that a 'Керівник' cannot add location to the list of locations after leaving all mandatory and optional fields empty")
+    @Issue("TUA-160")
     @Test(description = "TUA-160")
     public void verifyThatAdminCanNotAddLocationAfterLeavingAllFieldsEmpty() {
         HomePage homePage = new HomePage(driver);
         homePage.login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
-
-        boolean isEnable = homePage
+        AddLocationComponent addLocationComponent = homePage
                 .getHeader()
                 .clickAdminProfile()
                 .clickAddCenter()
-                .clickAddLocationBtn()
-                .isAddButtonEnable();
+                .clickAddLocationBtn();
+        boolean isEnable=   addLocationComponent.isAddButtonEnable();
 
         Assert.assertFalse(isEnable);
     }

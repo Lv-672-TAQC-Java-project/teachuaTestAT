@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.BaseComponent;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +22,7 @@ public class GuestMenuDropDownComponent extends BaseComponent {
         registrationBtn.click();
     }
 
+    @Step("click Login Btn in profile menu")
     public LoginPopUpComponent clickLogin() {
         loginBtn.click();
         return new LoginPopUpComponent(driver);
