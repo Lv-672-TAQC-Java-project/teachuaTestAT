@@ -44,6 +44,9 @@ public class EditMyProfileComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//button[@class='ant-btn ant-btn-default submit-button']/span")
     private WebElement buttonSaveChanges;
 
+    @FindBy(how = How.XPATH, using = "//input[@id='edit_lastName']")
+    private WebElement fieldLastName;
+
     public EditMyProfileComponent(WebDriver driver) {
         super(driver);
     }
@@ -101,8 +104,19 @@ public class EditMyProfileComponent extends CommonPage {
         fieldFirstName.sendKeys(Keys.DELETE);
 //        fieldFirstName.clear();
        fieldFirstName.sendKeys(name);
+        sleep(1000);
 
        return this;
+    }
+
+    public EditMyProfileComponent setLastName(String lastName) {
+        fieldLastName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        fieldLastName.sendKeys(Keys.DELETE);
+//        fieldFirstName.clear();
+        fieldLastName.sendKeys(lastName);
+        sleep(1000);
+
+        return this;
     }
 
     public String getErrorTextAfterInput() {
