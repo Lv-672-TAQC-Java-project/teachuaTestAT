@@ -23,6 +23,9 @@ public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "//body[1]/div[1]/section[1]/section[1]/main[1]/section[1]/main[1]/main[1]/div[3]/div[1]/div[2]/button[1]/span[2]")
     private WebElement buttonAdd;
 
+    @FindBy(how = How.XPATH, using = "//button[@class='ant-btn ant-btn-text button']/span[1]")
+    private WebElement editButton;
+
     public MyProfilePage(WebDriver driver) {
         super(driver);
     }
@@ -55,5 +58,10 @@ public class MyProfilePage extends CommonPage {
         buttonAdd.click();
 
         return new AddCenterPage(driver);
+    }
+
+    public EditMyProfileComponent clickEditMyProfileComponent() {
+        editButton.click();
+        return new EditMyProfileComponent(driver);
     }
 }

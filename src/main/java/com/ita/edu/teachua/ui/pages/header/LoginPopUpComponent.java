@@ -77,5 +77,10 @@ public class LoginPopUpComponent extends BasePage {
           return new MyProfilePage(driver).clickAddButton2();
     }
 
+    public MyProfilePage clickMyProfileButton() {
+        clickMyProfileButton.click();
+        return new MyProfilePage(driver).clickAddButton();
+    }
+
 
 }
