@@ -4,7 +4,6 @@ import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
-import com.ita.edu.teachua.utils.TestNGListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
@@ -41,21 +40,17 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
             "quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, " +
             "mollis sed, nonummy id, met";
 
-    TestNGListener testNGListener = new TestNGListener();
-
     @Description("Verify that a 'Керівник' cannot add location to the list of locations after leaving all mandatory and optional fields empty")
     @Issue("TUA-160")
     @Test(description = "TUA-160")
     public void verifyThatAdminCanNotAddLocationAfterLeavingAllFieldsEmpty() {
         HomePage homePage = new HomePage(driver);
         homePage.login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
-        testNGListener.saveScreenshot(driver);
         AddLocationComponent addLocationComponent = homePage
                 .getHeader()
                 .clickAdminProfile()
                 .clickAddCenter()
                 .clickAddLocationBtn();
-        testNGListener.saveScreenshot(driver);
 
         boolean isEnable = addLocationComponent.isAddButtonEnable();
         Assert.assertFalse(isEnable);
@@ -69,14 +64,12 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
         HomePage homePage = new HomePage(driver);
         homePage
                 .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
-        testNGListener.saveScreenshot(driver);
         MyProfilePage myProfilePage = new MyProfilePage(driver);
         myProfilePage
                 .clickDropDownProfileButton()
                 .clickMyProfileButton()
                 .clickAddButton()
                 .clickAddWorkshop();
-        testNGListener.saveScreenshot(driver);
         EditMyProfileComponent editMyProfileComponent = new EditMyProfileComponent(driver);
         editMyProfileComponent
                 .setWorkshopNameField("Football")
@@ -84,7 +77,6 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
                 .setWorkshopAgeRange("7", "9")
                 .clickWorkshopNextStageButton()
                 .setWorkshopPhoneNumber("0673297976");
-        testNGListener.saveScreenshot(driver);
         editMyProfileComponent
                 .clickWorkshopNextStageButton();
 
@@ -93,17 +85,14 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
                         .setWorkshopDescriptionField(DESCRIPTION_TEXT_1000_CHARACTERS)
                         .isWorkshopFinishButtonEnable(),
                 "Workshop description field should be filled in with the 1000 characters text");
-        testNGListener.saveScreenshot(driver);
         softAssert.assertTrue(editMyProfileComponent
                         .setWorkshopDescriptionField(DESCRIPTION_TEXT_40_CHARACTERS)
                         .isWorkshopFinishButtonEnable(),
                 "Workshop description field should be filled in with the 40 characters text");
-        testNGListener.saveScreenshot(driver);
         softAssert.assertTrue(editMyProfileComponent
                         .setWorkshopDescriptionField(DESCRIPTION_TEXT_1500_CHARACTERS)
                         .isWorkshopFinishButtonEnable(),
                 "Workshop description field should be filled in with the 1500 characters text");
-        testNGListener.saveScreenshot(driver);
         softAssert.assertAll();
     }
 }
