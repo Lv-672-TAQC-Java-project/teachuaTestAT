@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValueProvider {
-    final String descriptionText40Characters = "Lorem ipsum dolor sit amet, consectetuer";
-    final String descriptionText1000Characters = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean " +
+    final String DESCRIPTION_TEXT_40_CHARACTERS = "Lorem ipsum dolor sit amet, consectetuer";
+    final String DESCRIPTION_TEXT_1000_CHARACTERS = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean " +
             "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, " +
             "nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla " +
             "consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim " +
@@ -23,7 +23,7 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
             "Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. " +
             "Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
             "adipiscing sem neque sed ipsum. N";
-    final String descriptionText1500Characters = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean " +
+    final String DESCRIPTION_TEXT_1500_CHARACTERS = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean " +
             "commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, " +
             "nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla " +
             "consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim " +
@@ -51,11 +51,14 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
                 .clickAdminProfile()
                 .clickAddCenter()
                 .clickAddLocationBtn();
-        boolean isEnable=   addLocationComponent.isAddButtonEnable();
 
+        boolean isEnable = addLocationComponent.isAddButtonEnable();
         Assert.assertFalse(isEnable);
     }
 
+    @Description("Verify that the ‘Опис’ text field is filled in with valid data when a user enters " +
+            "from 40 to 1500 symbols into the field")
+    @Issue("TUA-172")
     @Test(description = "TUA-172")
     public void verifyThatDescriptionTextFieldIsFilledInWithValidData() {
         HomePage homePage = new HomePage(driver);
@@ -73,19 +76,23 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
                 .setWorkshopCategory("1")
                 .setWorkshopAgeRange("7", "9")
                 .clickWorkshopNextStageButton()
-                .setWorkshopPhoneNumber("0673297976")
+                .setWorkshopPhoneNumber("0673297976");
+        editMyProfileComponent
                 .clickWorkshopNextStageButton();
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(editMyProfileComponent
-                .setWorkshopDescriptionField(descriptionText1000Characters)
-                .isWorkshopFinishButtonEnable());
+                        .setWorkshopDescriptionField(DESCRIPTION_TEXT_1000_CHARACTERS)
+                        .isWorkshopFinishButtonEnable(),
+                "Workshop description field should be filled in with the 1000 characters text");
         softAssert.assertTrue(editMyProfileComponent
-                .setWorkshopDescriptionField(descriptionText40Characters)
-                .isWorkshopFinishButtonEnable());
+                        .setWorkshopDescriptionField(DESCRIPTION_TEXT_40_CHARACTERS)
+                        .isWorkshopFinishButtonEnable(),
+                "Workshop description field should be filled in with the 40 characters text");
         softAssert.assertTrue(editMyProfileComponent
-                .setWorkshopDescriptionField(descriptionText1500Characters)
-                .isWorkshopFinishButtonEnable());
+                        .setWorkshopDescriptionField(DESCRIPTION_TEXT_1500_CHARACTERS)
+                        .isWorkshopFinishButtonEnable(),
+                "Workshop description field should be filled in with the 1500 characters text");
         softAssert.assertAll();
     }
 }
