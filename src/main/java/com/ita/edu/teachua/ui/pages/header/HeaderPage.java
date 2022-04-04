@@ -57,6 +57,7 @@ public class HeaderPage extends BasePage {
         return new AboutPage(driver);
     }
 
+    @Step("Click advanced search modal")
     public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
@@ -94,11 +95,6 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
-    public ClubsPage clickAdvancedSearchButton() {
-        advancedSearchButton.click();
-
-        return new ClubsPage(driver);
-    }
     public ClubsPage enterSearch(String keyWords){
         searchInput.click();
         searchInput.clear();

@@ -17,7 +17,6 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//div[text()='Розширений пошук']/parent::div")
     private List<WebElement> advancedSearchModal;
 
-
     @FindBy(how = How.XPATH, using = "//label[@class='ant-radio-button-wrapper club-view-button']/span/img")
     private WebElement listIcon;
 
@@ -117,21 +116,12 @@ public class AdvancedSearchComponent extends CommonPage {
     }
 
     public boolean isCategoriesCheckboxesActivated() {
-        int size = categoriesCheckboxes.size();
-
-        boolean result = false;
-        for (int i = 0; i < size; i++) {
-
-            result = categoriesCheckboxes
-                    .get(i)
-                    .isEnabled();
-
-            if (!result) {
-                break;
+        for (WebElement category : categoriesCheckboxes) {
+            if (!category.isEnabled()) {
+                return false;
             }
         }
-
-        return result;
+        return true;
     }
 
     public boolean isAgeFieldActivated() {
