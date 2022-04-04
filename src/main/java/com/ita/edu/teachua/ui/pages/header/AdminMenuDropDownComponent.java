@@ -16,7 +16,7 @@ public class AdminMenuDropDownComponent extends BaseComponent {
         super(driver, root);
     }
 
-    @Step("clickAddCenter")
+    @Step("click add Center")
     public AddCenterPage clickAddCenter() {
         addCenter.click();
 
