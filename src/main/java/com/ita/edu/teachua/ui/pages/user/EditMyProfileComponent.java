@@ -103,10 +103,10 @@ public class EditMyProfileComponent extends CommonPage {
         fieldFirstName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         fieldFirstName.sendKeys(Keys.DELETE);
 //        fieldFirstName.clear();
-       fieldFirstName.sendKeys(name);
+        fieldFirstName.sendKeys(name);
         sleep(1000);
 
-       return this;
+        return this;
     }
 
     public EditMyProfileComponent setLastName(String lastName) {
@@ -125,12 +125,14 @@ public class EditMyProfileComponent extends CommonPage {
     }
 
     public boolean isButtonSaveChangedDisabled() {
-        List<WebElement> button = Collections.singletonList(buttonSaveChanges);
-        if (button.size() > 0 && button.get(0).isDisplayed())
-        {
-            return false;
-        }
-        return true;
+//        List<WebElement> button = Collections.singletonList(buttonSaveChanges);
+//        if (button.size() > 0 && button.get(0).isDisplayed())
+//        {
+//            return false;
+//        }
+
+        return buttonSaveChanges.isDisplayed();
+//        return true;
     }
 
 

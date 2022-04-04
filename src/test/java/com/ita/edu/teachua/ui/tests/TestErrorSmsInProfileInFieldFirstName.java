@@ -3,14 +3,34 @@ package com.ita.edu.teachua.ui.tests;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
 public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValueProvider {
+
+    @DataProvider
+    public Object[][] inputName() {
+
+        Object[][] parameters = new Object[][]{
+
+                {"1234", "Ім’я не може містити цифри"},
+                {"AfBbCcDdEeFfGgHhIiJjKkLlMmNn", "Ім'я не може містити більше, ніж 25 символів"},
+                {"AfBbCcDdEeFfGgHhIiJjKkLlMm", "Ім'я не може містити більше, ніж 25 символів"},
+                {"!@#$%^&,", "Ім'я не може містити спеціальні символи"},
+                {"-Name", "Ім’я повинно починатися та закінчуватися літерою"},
+                {" Name", "Ім’я повинно починатися та закінчуватися літерою"},
+                {"'Name", "Ім’я повинно починатися та закінчуватися літерою"},
+                {"Name-", "Ім’я повинно починатися та закінчуватися літерою"},
+                {"Name ", "Ім’я повинно починатися та закінчуватися літерою"},
+                {"Name'", "Ім’я повинно починатися та закінчуватися літерою"},
+                {"", "Введіть ім'я"},
+
+        };
+        return parameters;
+    }
 
     @BeforeMethod
     public void beforeMethot() throws InterruptedException {
@@ -22,45 +42,27 @@ public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValuePr
                 .clickLogin()
                 .setEmail(valueProvider.getAdminEmail())
                 .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton2()
+                .clickLoginButton()
                 .clickDropDownProfileButton()
                 .clickMyProfileButton()
                 .clickEditMyProfileComponent();
         sleep(3000);
-
     }
 
-    @Test
-    public void verifyThatErrorMessagesIsDisplayedInFirstNameField() throws InterruptedException {
+    @Test(dataProvider = "inputName")
+    public void verifyThatErrorMessagesIsDisplayedInFirstNameField(String input, String expected) throws InterruptedException {
 
         SoftAssert softAssert = new SoftAssert();
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("AfBbCcDdEeFfGgHhIiJjKkLlMmNn", "Ім'я не може містити більше, ніж 25 символів");
-        map.put("AfBbCcDdEeFfGgHhIiJjKkLlMm", "Ім'я не може містити більше, ніж 25 символів");
-        map.put("!@#$%^&,", "Ім’я не може містити спеціальні символи");
-        map.put("1234", "Ім’я не може містити цифри");
-        map.put("-Name", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put(" Name", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put("'Name", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put("Name-", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put("Name ", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put("Name'", "Ім’я повинно починатися та закінчуватися літерою");
-        map.put("", "Введіть ім'я");
-
         EditMyProfileComponent editMyProfileComponent = new EditMyProfileComponent(driver);
 
-        for (String key : map.keySet()) {
-            softAssert.assertEquals(editMyProfileComponent
-                            .setFirstName(key)
-                            .getErrorTextAfterInput(), map.get(key),
-                    String.format("In field should be text %s", map.get(key)));
-            softAssert.assertTrue(editMyProfileComponent.isButtonSaveChangedDisabled(),
-                    "button 'Save Changes' should be disabled");
-
-  //           assertTrue(editMyProfileComponent.isButtonSaveChangedDisabled(), "button 'Save Changes' should be disabled");
-
-        }
+        softAssert.assertEquals(editMyProfileComponent
+                        .setFirstName(input)
+                        .getErrorTextAfterInput(), expected,
+                         String.format("In field should be text %s", expected));
+        softAssert.assertTrue(editMyProfileComponent.isButtonSaveChangedDisabled(),
+                "button 'Save Changes' should be disabled");
+        softAssert.assertAll();
 
         editMyProfileComponent.setFirstName("admin");
         sleep(1000);

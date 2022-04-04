@@ -24,7 +24,7 @@ public class LoginPopUpComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]")
     private WebElement dropDownProfileButton;
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Мій Профіль')]")
-    private WebElement clickMyProfileButton;
+    private WebElement myProfileButton;
 
 
     LoginPopUpComponent(WebDriver driver) {
@@ -32,9 +32,10 @@ public class LoginPopUpComponent extends BasePage {
 
     }
     @Step("click Login")
-    public void clickLoginButton() {
+    public LoginPopUpComponent clickLoginButton() {
         loginButton.click();
         sleep(2000);
+        return this;
     }
 
     public void clickCloseButton() {
@@ -54,13 +55,13 @@ public class LoginPopUpComponent extends BasePage {
 
 
 
-
-    public LoginPopUpComponent clickLoginButton2() {
-        loginButton.click();
-        sleep(2000);
-
-        return this;
-    }
+//
+//    public LoginPopUpComponent clickLoginButton() {
+//        loginButton.click();
+//        sleep(2000);
+//
+//        return this;
+//    }
 
 
     public LoginPopUpComponent clickDropDownProfileButton() {
@@ -71,14 +72,14 @@ public class LoginPopUpComponent extends BasePage {
     }
 
 
-    public AddCenterPage clickMyProfileButton1() {
-        clickMyProfileButton.click();
-//        return myProfilePage1.clickAddButton2();
-          return new MyProfilePage(driver).clickAddButton2();
-    }
+//    public AddCenterPage clickMyProfileButton() {
+//        myProfileButton.click();
+////        return myProfilePage1.clickAddButton2();
+//          return new MyProfilePage(driver).clickAddButton2();
+//    }
 
     public MyProfilePage clickMyProfileButton() {
-        clickMyProfileButton.click();
+        myProfileButton.click();
         return new MyProfilePage(driver).clickAddButton();
     }
 

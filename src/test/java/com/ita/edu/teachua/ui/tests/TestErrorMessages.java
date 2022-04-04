@@ -6,8 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import static org.testng.Assert.assertEquals;
-
 public class TestErrorMessages extends TestRunnerWithValueProvider {
 
     @BeforeMethod
@@ -20,11 +18,10 @@ public class TestErrorMessages extends TestRunnerWithValueProvider {
                 .clickLogin()
                 .setEmail(valueProvider.getAdminEmail())
                 .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton2()
+                .clickLoginButton()
                 .clickDropDownProfileButton()
-                .clickMyProfileButton1()
-                .clickButtonAddCenter();
-
+                .clickMyProfileButton()
+                .clickAddCenter();
     }
 
     @Test
@@ -36,7 +33,9 @@ public class TestErrorMessages extends TestRunnerWithValueProvider {
         softAssert.assertSame(basicInformationCenterComponent
                 .getFieldNameCenter(),"","field 'Назва центру' have to be empty");
         basicInformationCenterComponent.clickNextButton();
-        assertEquals(basicInformationCenterComponent.getTextAfterClick(), "Некоректна назва центру");
+        softAssert.assertEquals(basicInformationCenterComponent.getTextAfterClick(), "Некоректна назва центру");
+        softAssert.assertAll();
 
     }
 }
+
