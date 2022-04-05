@@ -50,4 +50,23 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         getCreateClubBtn().click();
         return new BasePage(driver);
     }
+
+    public DescriptionClubComponent clearDescriptionField(){
+        clubDescriptionField.clear();
+        return this;
+    }
+
+    public DescriptionClubComponent enterDescriptionText(String descriptionText) {
+        clubDescriptionField.sendKeys(descriptionText);
+        return this;
+    }
+
+    public DescriptionClubComponent enterSymbols(int numberOfSymbols) {
+        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(numberOfSymbols));
+        return this;
+    }
+
+    public boolean isCreateClubButtonEnabled(){
+        return getCreateClubBtn().isEnabled();
+    }
 }
