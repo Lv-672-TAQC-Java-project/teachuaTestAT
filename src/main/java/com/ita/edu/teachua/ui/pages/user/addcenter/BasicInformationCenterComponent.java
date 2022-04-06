@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user.addcenter;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,15 +19,18 @@ public class BasicInformationCenterComponent extends BasePage {
         super(driver);
     }
 
+    @Step("get input field in 'Назва центру'")
     public String getFieldNameCenter() {
         return fieldNameCenter.getText();
     }
 
+    @Step("click Next button")
     public BasicInformationCenterComponent clickNextButton() {
         clickToNextButton.click();
         return this;
     }
 
+    @Step("get text after click")
     public String getTextAfterClick() {
         return textAfterClick.getText();
     }

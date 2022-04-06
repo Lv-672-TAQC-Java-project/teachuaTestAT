@@ -10,8 +10,6 @@ import org.openqa.selenium.support.How;
 
 public class AddCenterPage extends BasePage {
 
-    //    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Додати')]")
-//    private WebElement buttonAdd;
     @FindBy(how = How.XPATH, using = "//body[1]/div[5]/div[1]/div[1]/ul[1]/li[2]/span[1]/div[1]")
     private WebElement buttonAddCenter;
     @FindBy(how = How.XPATH, using = "//*[@id='basic']/div[1]/span/button")
@@ -20,11 +18,6 @@ public class AddCenterPage extends BasePage {
     public AddCenterPage(WebDriver driver) {
         super(driver);
     }
-
-//    public AddCenterPage clickAddButton() {
-//        buttonAdd.click();
-//        return this;
-//    }
 
     public BasicInformationCenterComponent clickButtonAddCenter() {
         buttonAddCenter.click();

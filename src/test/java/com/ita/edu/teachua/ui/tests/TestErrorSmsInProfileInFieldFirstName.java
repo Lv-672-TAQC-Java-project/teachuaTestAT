@@ -2,6 +2,8 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -14,22 +16,20 @@ public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValuePr
     @DataProvider
     public Object[][] inputName() {
 
-        Object[][] parameters = new Object[][]{
+        return new Object[][]{
 
-                {"1234", "Ім’я не може містити цифри"},
                 {"AfBbCcDdEeFfGgHhIiJjKkLlMmNn", "Ім'я не може містити більше, ніж 25 символів"},
                 {"AfBbCcDdEeFfGgHhIiJjKkLlMm", "Ім'я не може містити більше, ніж 25 символів"},
+                {"1234", "Ім'я не може містити цифри"},
                 {"!@#$%^&,", "Ім'я не може містити спеціальні символи"},
-                {"-Name", "Ім’я повинно починатися та закінчуватися літерою"},
-                {" Name", "Ім’я повинно починатися та закінчуватися літерою"},
-                {"'Name", "Ім’я повинно починатися та закінчуватися літерою"},
-                {"Name-", "Ім’я повинно починатися та закінчуватися літерою"},
-                {"Name ", "Ім’я повинно починатися та закінчуватися літерою"},
-                {"Name'", "Ім’я повинно починатися та закінчуватися літерою"},
-                {"", "Введіть ім'я"},
-
+                {"-Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {" Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"'Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name-", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name ", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name'", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"", "Будь ласка введіть Ваше ім'я"},
         };
-        return parameters;
     }
 
     @BeforeMethod
@@ -49,6 +49,9 @@ public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValuePr
         sleep(3000);
     }
 
+
+    @Description("Verify that error messages are shown and 'Зберегти зміни' button becomes disabled while entering invalid data into the 'Ім'я' field")
+    @Issue("TUA-328")
     @Test(dataProvider = "inputName")
     public void verifyThatErrorMessagesIsDisplayedInFirstNameField(String input, String expected) throws InterruptedException {
 

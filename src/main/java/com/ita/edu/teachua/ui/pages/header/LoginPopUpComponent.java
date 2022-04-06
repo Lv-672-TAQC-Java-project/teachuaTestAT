@@ -2,7 +2,6 @@ package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
-import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class LoginPopUpComponent extends BasePage {
-    //protected final MyProfilePage myProfilePage1 = new MyProfilePage(driver);
 
     @FindBy(how = How.ID, using = "basic_email")
     private WebElement emailField;
@@ -25,7 +23,6 @@ public class LoginPopUpComponent extends BasePage {
     private WebElement dropDownProfileButton;
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Мій Профіль')]")
     private WebElement myProfileButton;
-
 
     LoginPopUpComponent(WebDriver driver) {
         super(driver);
@@ -53,17 +50,7 @@ public class LoginPopUpComponent extends BasePage {
         return this;
     }
 
-
-
-//
-//    public LoginPopUpComponent clickLoginButton() {
-//        loginButton.click();
-//        sleep(2000);
-//
-//        return this;
-//    }
-
-
+    @Step("click drop down menu in My Profile")
     public LoginPopUpComponent clickDropDownProfileButton() {
         sleep(3000);
         dropDownProfileButton.click();
@@ -71,13 +58,7 @@ public class LoginPopUpComponent extends BasePage {
         return this;
     }
 
-
-//    public AddCenterPage clickMyProfileButton() {
-//        myProfileButton.click();
-////        return myProfilePage1.clickAddButton2();
-//          return new MyProfilePage(driver).clickAddButton2();
-//    }
-
+    @Step("click My Profile")
     public MyProfilePage clickMyProfileButton() {
         myProfileButton.click();
         return new MyProfilePage(driver).clickAddButton();

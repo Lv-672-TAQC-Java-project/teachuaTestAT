@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -99,40 +100,35 @@ public class EditMyProfileComponent extends CommonPage {
         return workshopFinishButton.isEnabled();
     }
 
+    @Step("set First Name in profile edit")
     public EditMyProfileComponent setFirstName(String name) {
         fieldFirstName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         fieldFirstName.sendKeys(Keys.DELETE);
-//        fieldFirstName.clear();
         fieldFirstName.sendKeys(name);
         sleep(1000);
 
         return this;
     }
 
+    @Step("set Last Name in profile edit")
     public EditMyProfileComponent setLastName(String lastName) {
         fieldLastName.sendKeys(Keys.chord(Keys.CONTROL, "a"));
         fieldLastName.sendKeys(Keys.DELETE);
-//        fieldFirstName.clear();
         fieldLastName.sendKeys(lastName);
         sleep(1000);
 
         return this;
     }
 
+    @Step("get error text after type in input field")
     public String getErrorTextAfterInput() {
 
         return textErrorMessages.getText();
     }
 
     public boolean isButtonSaveChangedDisabled() {
-//        List<WebElement> button = Collections.singletonList(buttonSaveChanges);
-//        if (button.size() > 0 && button.get(0).isDisplayed())
-//        {
-//            return false;
-//        }
 
         return buttonSaveChanges.isDisplayed();
-//        return true;
     }
 
 

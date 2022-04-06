@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -54,12 +55,14 @@ public class MyProfilePage extends CommonPage {
         return new MyProfilePage(driver);
     }
 
+    @Step("click button 'Додати центр' in My Profile")
     public AddCenterPage clickAddCenter() {
         buttonAddCenter.click();
 
         return new AddCenterPage(driver);
     }
 
+    @Step("click button edit profile")
     public EditMyProfileComponent clickEditMyProfileComponent() {
         editButton.click();
         return new EditMyProfileComponent(driver);
