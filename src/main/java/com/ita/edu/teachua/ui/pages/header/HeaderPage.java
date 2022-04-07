@@ -96,6 +96,7 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
+    @Step("Enter {keyWords} in search")
     public ClubsPage enterSearch(String keyWords){
         searchInput.click();
         searchInput.clear();
@@ -105,6 +106,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
+    @Step("Parse {keyWords} in search")
     public ClubsPage parseSearch(String keyWords){
         searchInput.click();
         searchInput.clear();

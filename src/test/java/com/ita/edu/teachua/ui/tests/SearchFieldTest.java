@@ -1,6 +1,8 @@
 package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -10,7 +12,9 @@ import java.util.List;
 
 public class SearchFieldTest extends TestRunnerWithValueProvider {
 
-    @Test
+    @Description("Verify search field behavior for one symbol entered")
+    @Issue("TUA-428")
+    @Test(description = "TUA-428")
     public void verifySearchFieldBehaviorForOneSymbolEntered() {
         HomePage home = new HomePage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -26,7 +30,9 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
                 "With 1 symbol entered Search Field does not start search process");
     }
 
-    @Test
+    @Description("Verify search field behavior for one hundred and fifty symbols entered")
+    @Issue("TUA-428")
+    @Test(description = "TUA-428")
     public void verifySearchFieldBehaviorForOneHundredAndFiftySymbolsEntered() {
         HomePage home = new HomePage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -42,7 +48,9 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
                 "With 150 symbols entered Search Field does not start search process");
     }
 
-    @Test
+    @Description("Verify search field behavior for invalid number of symbol entered")
+    @Issue("TUA-428")
+    @Test(description = "TUA-428")
     public void verifySearchFieldBehaviorForInvalidNumberOfSymbolsEntered() {
         HomePage home = new HomePage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -60,14 +68,16 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
 
         int symbolsInSearchField = home.getHeader().getSearchValue().length();
         softAssert.assertEquals(symbolsInSearchField,
-                valueProvider.getMaxSizeOfSearchField(),
+                Integer.parseInt(valueProvider.getMaxSizeOfSearchField()),
                 "With 151 symbols entered Search Field does not limit number of symbols. " +
                         symbolsInSearchField  + " symbols in Search Field");
 
         softAssert.assertAll();
     }
 
-    @Test
+    @Description("Verify search field behavior for one symbol parsed")
+    @Issue("TUA-428")
+    @Test(description = "TUA-428")
     public void verifySearchFieldBehaviorForOneSymbolParsed() {
         HomePage home = new HomePage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -83,7 +93,9 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
                 "With 1 symbol parsed Search Field does not start search process");
     }
 
-    @Test
+    @Description("Verify search field behavior for one hundred and fifty symbols parsed")
+    @Issue("TUA-428")
+    @Test(description = "TUA-428")
     public void verifySearchFieldBehaviorForOneHundredAndFiftySymbolsParsed() {
         HomePage home = new HomePage(driver);
         SoftAssert softAssert = new SoftAssert();
