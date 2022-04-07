@@ -39,12 +39,14 @@ public class AdvancedSearchTest extends TestRunner {
         softAssert.assertAll();
     }
 
+    @Description("This test case checks if “Advanced search” button opens “Advanced search” section")
+    @Issue("TUA-224")
     @Test
     public void verifyAdvancedSearchButtonOpensAdvancedSearchSection() {
         HomePage homePage = new HomePage(driver);
         homePage
                 .getHeader()
-                .clickAdvancedSearchButton();
+                .clickAdvancedSearchBtn();
 
         AdvancedSearchComponent advancedSearchComponent = new AdvancedSearchComponent(driver);
         boolean isAdvancedSearchModalDisplayed = advancedSearchComponent.isAdvancedSearchModalDisplayed();
@@ -52,7 +54,7 @@ public class AdvancedSearchTest extends TestRunner {
 
         homePage
                 .getHeader()
-                .clickAdvancedSearchButton();
+                .clickAdvancedSearchBtn();
 
         isAdvancedSearchModalDisplayed = advancedSearchComponent.isAdvancedSearchModalDisplayed();
         assertFalse(isAdvancedSearchModalDisplayed, "Advanced search modal should not be displayed");

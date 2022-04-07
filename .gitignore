@@ -15,3 +15,7 @@ buildNumber.properties
 data.properties
 
 allure-results/
+
+teachuaTestAT.iml
+
+.allure/
