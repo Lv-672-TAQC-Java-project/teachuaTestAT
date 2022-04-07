@@ -29,7 +29,7 @@ public class AddCenterPage extends BasePage {
         buttonAddCenter.click();
     }
 
-    @Step("click Add Location Btn")
+    @Step("click add Location Btn")
     public AddLocationComponent clickAddLocationBtn() {
         addLocationButton.click();
 

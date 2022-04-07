@@ -73,13 +73,14 @@ public class HeaderPage extends BasePage {
         return new AddClubPage(driver);
     }
 
-    @Step("clickAdminProfile ")
+    @Step("click Admin Profile")
     public AdminMenuDropDownComponent clickAdminProfile() {
         adminProfileButton.click();
 
         return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    @Step("click add Location")
     public HeaderPage clickAddLocation() {
         locationBtn.click();
 
