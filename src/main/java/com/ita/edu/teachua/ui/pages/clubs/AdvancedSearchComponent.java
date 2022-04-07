@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.clubs;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,6 @@ public class AdvancedSearchComponent extends CommonPage {
 
     @FindBy(how = How.XPATH, using = "//div[text()='Розширений пошук']/parent::div")
     private List<WebElement> advancedSearchModal;
-
 
     @FindBy(how = How.XPATH, using = "//label[@class='ant-radio-button-wrapper club-view-button']/span/img")
     private WebElement listIcon;
@@ -56,12 +56,13 @@ public class AdvancedSearchComponent extends CommonPage {
         super(driver);
     }
 
+    @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
         sleep(3000);
         return this;
     }
-
+    @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
         sleep(4000);
@@ -92,48 +93,47 @@ public class AdvancedSearchComponent extends CommonPage {
         }
     }
 
+    @Step("Verified that advanced search modal is displayed")
     public boolean isAdvancedSearchModalDisplayed() {
         return advancedSearchModal.size() > 0;
     }
 
+    @Step("Verified that club radio button is selected")
     public boolean isClubRadioButtonSelected() {
         return clubRadioButton.isSelected();
     }
 
+    @Step("Verified that city dropdown is activated")
     public boolean isCityDropdownActivated() {
         return cityDropdown.isEnabled();
     }
 
+    @Step("Verified that district dropdown is activated")
     public boolean isDistrictDropdownActivated() {
         return districtDropdown.isEnabled();
     }
 
+    @Step("Verified that subway station dropdown is activated")
     public boolean isSubwayStationDropdownActivated() {
         return subwayStationDropdown.isEnabled();
     }
 
+    @Step("Verified that available online checkbox is activated")
     public boolean isAvailableOnlineCheckboxActivated() {
         return availableOnlineCheckbox.isEnabled();
     }
 
+    @Step("Verified that categories checkboxes is activated")
     public boolean isCategoriesCheckboxesActivated() {
-        int size = categoriesCheckboxes.size();
-
-        boolean result = false;
-        for (int i = 0; i < size; i++) {
-
-            result = categoriesCheckboxes
-                    .get(i)
-                    .isEnabled();
-
-            if (!result) {
-                break;
+        for (WebElement category : categoriesCheckboxes) {
+            if (!category.isEnabled()) {
+                return false;
             }
         }
-
-        return result;
+        return true;
     }
 
+    @Step("Verified that age field is activated")
     public boolean isAgeFieldActivated() {
         return ageField.isEnabled();
     }

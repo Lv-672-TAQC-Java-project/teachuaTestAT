@@ -2,16 +2,20 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class AdvancedSearchModalTest extends TestRunner {
 
+    @Description("Verify that all parameters are activated with the selected 'Гурток' radio button")
+    @Issue("TUA-509")
     @Test
     public void verifyAdvancedSearchModalUi() {
         new HomePage(driver)
                 .getHeader()
-                .clickAdvancedSearchButton();
+                .clickAdvancedSearchBtn();
 
         AdvancedSearchComponent advancedSearchComponent = new AdvancedSearchComponent(driver);
 
