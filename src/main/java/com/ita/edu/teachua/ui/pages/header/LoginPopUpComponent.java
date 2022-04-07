@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
+import com.ita.edu.teachua.ui.pages.home.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,9 +22,10 @@ public class LoginPopUpComponent extends BasePage {
 
     }
 
-    public void clickLoginButton(){
+    public HomePage clickLoginButton(){
         loginButton.click();
         sleep(2000);
+        return new HomePage(driver);
     }
 
     public void clickCloseButton(){

@@ -2,7 +2,6 @@ package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.about.AboutPage;
 import com.ita.edu.teachua.ui.pages.base.BasePage;
-import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -43,6 +42,12 @@ public class HeaderPage extends BasePage {
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    public UserMenuDropDownComponent clickAdminProfile() {
+        sleep(2000);
+        userProfileButton.click();
+        return new UserMenuDropDownComponent(driver, dropDownMenuNode);
+    }
+    
     public void login(String email, String password) {
         this.clickUserProfile()
                 .clickLogin()
