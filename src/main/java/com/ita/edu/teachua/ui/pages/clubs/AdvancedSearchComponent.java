@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.clubs;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -56,12 +57,13 @@ public class AdvancedSearchComponent extends CommonPage {
         super(driver);
     }
 
+    @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
         sleep(3000);
         return this;
     }
-
+    @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
         sleep(4000);
