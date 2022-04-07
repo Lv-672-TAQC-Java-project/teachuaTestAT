@@ -56,12 +56,13 @@ public class AdvancedSearchComponent extends CommonPage {
         super(driver);
     }
 
+    @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
         sleep(3000);
         return this;
     }
-
+    @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
         sleep(4000);

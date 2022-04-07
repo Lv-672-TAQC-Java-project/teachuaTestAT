@@ -56,8 +56,8 @@ public class HeaderPage extends BasePage {
         aboutButton.click();
         return new AboutPage(driver);
     }
-
-    @Step("Click advanced search modal")
+  
+    @Step("Click advanced search button and show advanced search block")
     public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
