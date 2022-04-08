@@ -39,9 +39,9 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
                 .clickAddLocationButton()
                 .inputLocationNameField("test1")
                 .clickCityListButton()
-                .clickSelectedElements(1)
+                .clickSelectedElements("Київ")
                 .clickDistrictListButton()
-                .clickSelectedElements(1)
+                .clickSelectedElements("Деснянський")
                 .inputAddressField("Мазепи 55")
                 .inputCoordinatesField("49.829104498711104, 24.005058710351314")
                 .inputPhoneField("0938784576");
@@ -53,7 +53,6 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
         softAssert.assertTrue(addLocationComponent.isAddLocationButtonEnabled());
         softAssert.assertTrue(addLocationComponent.isCityListButtonEnabled());
         softAssert.assertTrue(addLocationComponent.isCheckCircleOfCityListButtonDisplayed());
-
 
         BasicInformationCenterComponent basicInformationCenterComponent1 = new AddLocationComponent(driver)
                 .clickAddLocationButton()
@@ -83,9 +82,6 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
                 .clickFinishButton()
                 .clickMyClubsButton()
                 .clickMyCenterButton();
-
-
-        //softAssert.assertTrue(new ClubsComponent(driver).isCheckBoxClubsSelected(new String[]{"test123456789"}));
 
         softAssert.assertAll();
     }

@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.util.List;
-
 public class ClubsComponent extends BasePage {
 
     public ClubsComponent(WebDriver driver) {
@@ -19,30 +17,27 @@ public class ClubsComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//button[@class = 'finish-btn']")
     private WebElement finishButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@id='clubs']//label")
-    private List<WebElement> checkBoxClubsList;
+    @FindBy(how = How.ID, using = "clubs")
+    private WebElement checkBoxClubs;
 
     public ClubsComponent clickSelectedClubs(String[] nameClubs) {
-        for (WebElement webElem : checkBoxClubsList) {
-            for (String club : nameClubs) {
-                if (webElem.getText().equals(club)) {
-                    webElem.click();
-                    sleep(1000);
-                }
-            }
+
+        for(String location: nameClubs) {
+            String nameLocationPath = String.format(".//label//span[text() = '%s']", location);
+            checkBoxClubs.findElement(By.xpath(nameLocationPath)).click();
+            sleep(1000);
         }
 
         return new ClubsComponent(driver);
     }
 
-    public boolean isCheckBoxClubsSelected(String[] nameLocations) {
+    public boolean isCheckBoxClubsSelected(String[] nameClubs) {
         boolean checkList = false;
-        for (WebElement webElem : checkBoxClubsList) {
-            for (String location : nameLocations) {
-                if (webElem.getText().equals(location)) {
-                    checkList = webElem.findElement(By.xpath(".//input")).isSelected();
-                }
-            }
+
+        for(String location: nameClubs) {
+            String nameLocationPath = String.format(".//label//input", location);
+            checkList = checkBoxClubs.findElement(By.xpath(nameLocationPath)).isSelected();
+            sleep(1000);
         }
 
         return checkList;

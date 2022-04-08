@@ -28,7 +28,9 @@ public class ContactsCenterComponent extends BasePage {
     }
 
     public boolean isCheckCircleOfPhoneNumberFieldDisplayed() {
-        return phoneNumberField.findElement(By.xpath("./..//*[contains(@aria-label, 'check-circle')]")).isDisplayed();
+        String checkCirclePath = "./..//*[contains(@aria-label, 'check-circle')]";
+
+        return phoneNumberField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public DescriptionCenterComponent clickNextButton() {

@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BasicInformationCenterComponent extends BasePage {
     public BasicInformationCenterComponent(WebDriver driver) {
         super(driver);
@@ -25,8 +22,30 @@ public class BasicInformationCenterComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@id = 'basic']//button[contains(@class, 'next-btn')]")
     private WebElement nextStepButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@id='basic_locations']//label")
-    private List<WebElement> checkBoxLocationList;
+    @FindBy(how = How.ID, using = "basic_locations")
+    private WebElement checkBoxLocation;
+
+    public BasicInformationCenterComponent clickSelectedLocations(String[] nameLocations) {
+
+        for(String location: nameLocations) {
+            String nameLocationPath = String.format(".//label//span[text() = '%s']", location);
+            checkBoxLocation.findElement(By.xpath(nameLocationPath)).click();
+            sleep(1000);
+        }
+
+        return new BasicInformationCenterComponent(driver);
+    }
+
+    public boolean isCheckBoxLocationSelected(String[] nameLocations) {
+        boolean checkList = false;
+        for(String location: nameLocations) {
+            String nameLocationPath = String.format(".//label//input", location);
+            checkList = checkBoxLocation.findElement(By.xpath(nameLocationPath)).isSelected();
+            sleep(1000);
+        }
+
+        return checkList;
+    }
 
     public BasicInformationCenterComponent inputNameCenterField(String name) {
         nameCenterField.sendKeys(name);
@@ -52,30 +71,5 @@ public class BasicInformationCenterComponent extends BasePage {
 
     public boolean IsNextStepButtonEnabled() {
         return nextStepButton.isEnabled();
-    }
-
-    public BasicInformationCenterComponent clickSelectedLocations(String[] nameLocations) {
-        for (WebElement webElem : checkBoxLocationList) {
-            for (String location : nameLocations) {
-                if (webElem.getText().equals(location)) {
-                    webElem.click();
-                    sleep(1000);
-                }
-            }
-        }
-        return new BasicInformationCenterComponent(driver);
-    }
-
-    public boolean isCheckBoxLocationSelected(String[] nameLocations) {
-        boolean checkList = false;
-        for (WebElement webElem : checkBoxLocationList) {
-            for (String location : nameLocations) {
-                if (webElem.getText().equals(location)) {
-                    checkList = webElem.findElement(By.xpath(".//input")).isSelected();
-                }
-            }
-        }
-
-        return checkList;
     }
 }

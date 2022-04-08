@@ -1,7 +1,6 @@
 package com.ita.edu.teachua.ui.pages.user.addcenter;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
-import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,7 +28,9 @@ public class DescriptionCenterComponent extends BasePage {
     }
 
     public boolean isCheckCircleOfDescriptionFieldDisplayed() {
-        return descriptionField.findElement(By.xpath("./..//*[contains(@aria-label, 'check-circle')]")).isDisplayed();
+        String checkCirclePath = "./..//*[contains(@aria-label, 'check-circle')]";
+
+        return descriptionField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public ClubsComponent clickNextButton() {

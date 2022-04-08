@@ -13,7 +13,6 @@ public class AddLocationComponent extends BasePage {
         super(driver);
     }
 
-    //Field
     @FindBy(how = How.ID, using = "name")
     private WebElement locationNameField;
 
@@ -26,7 +25,6 @@ public class AddLocationComponent extends BasePage {
     @FindBy(how = How.ID, using = "phone")
     private WebElement phoneField;
 
-    //Button
     @FindBy(how = How.ID, using = "cityName")
     private WebElement cityListButton;
 
@@ -39,14 +37,15 @@ public class AddLocationComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[contains(@class, 'add-club-content-next')]")
     private WebElement addLocationButton;
 
-    //input
+    private String checkCirclePath = "./..//*[@aria-label ='check-circle']";
+    
     public AddLocationComponent inputLocationNameField(String locationName) {
         locationNameField.sendKeys(locationName);
         return new AddLocationComponent(driver);
     }
 
     public boolean isCheckCircleOfLocationNameFieldDisplayed() {
-        return locationNameField.findElement(By.xpath("./..//*[@aria-label ='check-circle']")).isDisplayed();
+        return locationNameField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public AddLocationComponent inputAddressField(String address) {
@@ -55,7 +54,7 @@ public class AddLocationComponent extends BasePage {
     }
 
     public boolean isCheckCircleOfLocationAddressFieldDisplayed() {
-        return addressField.findElement(By.xpath("./..//*[@aria-label ='check-circle']")).isDisplayed();
+        return addressField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public AddLocationComponent inputCoordinatesField(String coordinates) {
@@ -64,7 +63,7 @@ public class AddLocationComponent extends BasePage {
     }
 
     public boolean isCheckCircleOfLocationCoordinatesFieldDisplayed() {
-        return coordinatesField.findElement(By.xpath("./..//*[@aria-label ='check-circle']")).isDisplayed();
+        return coordinatesField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public AddLocationComponent inputPhoneField(String phone) {
@@ -74,7 +73,7 @@ public class AddLocationComponent extends BasePage {
     }
 
     public boolean isCheckCircleOfLocationPhoneFieldDisplayed() {
-        return phoneField.findElement(By.xpath("./..//*[@aria-label ='check-circle']")).isDisplayed();
+        return phoneField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public LocationListBoxDropDownComponent clickCityListButton() {
