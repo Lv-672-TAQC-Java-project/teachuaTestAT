@@ -85,9 +85,17 @@ public class AdvancedSearchComponent extends CommonPage {
         return true;
     }
 
-    public boolean isDisplayedCategory(String nameOfCategory) {
+    public boolean isCategoryDisplayed(String categoryName) {
         try {
-            return driver.findElement(By.xpath(String.format("//label[@title='%s']/ancestor::div[2]", nameOfCategory))).isDisplayed();
+            return driver.findElement(By.xpath(String.format("//label[@title='%s']/ancestor::div[2]", categoryName))).isDisplayed();
+        } catch (NoSuchElementException noSuchElementException) {
+            return false;
+        }
+    }
+
+    public boolean isCheckBoxDisplayed(String labelName, String checkBoxName) {
+        try {
+            return driver.findElement(By.xpath(String.format("//label[@title='%s']/ancestor::div[2]//label/span[contains(text(),'%s')]", labelName, checkBoxName))).isDisplayed();
         } catch (NoSuchElementException noSuchElementException) {
             return false;
         }
