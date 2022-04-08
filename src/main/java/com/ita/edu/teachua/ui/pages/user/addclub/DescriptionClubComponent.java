@@ -30,7 +30,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1500));
         return this;
     }
-    
+
     @Step("Type in too long 1501 symbols club description")
     public DescriptionClubComponent enterTooManySymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1501));
