@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         super(driver);
     }
 
+    @Step("Get text of alert message")
     public String getAlertMsg() {
         return alert.getText();
     }
@@ -51,22 +53,26 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return new BasePage(driver);
     }
 
-    public DescriptionClubComponent clearDescriptionField(){
+    @Step("Clear description field")
+    public DescriptionClubComponent clearDescriptionField() {
         clubDescriptionField.clear();
         return this;
     }
 
+    @Step("Enter text in the description field")
     public DescriptionClubComponent enterDescriptionText(String descriptionText) {
         clubDescriptionField.sendKeys(descriptionText);
         return this;
     }
 
+    @Step("Enter {numberOfSymbols} symbols in the description field")
     public DescriptionClubComponent enterSymbols(int numberOfSymbols) {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(numberOfSymbols));
         return this;
     }
 
-    public boolean isCreateClubButtonEnabled(){
+    @Step("Verify that create club button is enabled")
+    public boolean isCreateClubButtonEnabled() {
         return getCreateClubBtn().isEnabled();
     }
 }

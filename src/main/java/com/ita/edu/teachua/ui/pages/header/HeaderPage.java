@@ -68,6 +68,7 @@ public class HeaderPage extends BasePage {
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    @Step("Click add new club button")
     public AddClubPage clickOnAddNewClubBtn() {
         addNewClubBtn.click();
         return new AddClubPage(driver);
