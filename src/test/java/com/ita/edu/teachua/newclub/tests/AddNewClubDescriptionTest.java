@@ -25,8 +25,8 @@ public class AddNewClubDescriptionTest extends TestRunnerWithValueProvider {
         descriptionClub
                 .fillBasicInfo()
                 .fillContactsInfo()
-                .enterCorrectAmountOfSymbols()
-                .finishClubCreation();
+                .enterCorrectAmountOfSymbols();
+                Assert.assertTrue(descriptionClub.isSuccessCheckCircleVisible());
     }
 
     @Description("Verify that error message ‘Опис гуртка задовгий’ appears " +

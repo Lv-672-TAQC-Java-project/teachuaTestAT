@@ -13,6 +13,8 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     private WebElement clubDescriptionField;
     @FindBy(how = How.XPATH, using = "//*[@role = 'alert']")
     private WebElement alert;
+    @FindBy(how = How.XPATH, using = "//*[@data-icon = 'check-circle']")
+    private WebElement successCheckCircle;
 
     public DescriptionClubComponent(WebDriver driver) {
         super(driver);
@@ -23,7 +25,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return alert.getText();
     }
 
-    @Step("")
+    @Step("Type in valid 50 symbols group description")
     public DescriptionClubComponent enterCorrectAmountOfSymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(50));
         return this;
@@ -34,22 +36,27 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return this;
     }
 
-    @Step("")
+    @Step("Type in too long 1501 symbols club description")
     public DescriptionClubComponent enterTooManySymbols() {
-        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1502));
+        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1501));
         return this;
     }
 
-    @Step("")
+    @Step("Type in 40 symbols description with russian letters")
     public DescriptionClubComponent enterRussianSymbols() {
         clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(40));
         return this;
     }
 
-    @Step("")
+    @Step("Type in 40 symbols description with german letters")
     public DescriptionClubComponent enterGermanSymbols() {
         clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(40));
         return this;
+    }
+
+    @Step("Visibility of Success check circle")
+    public boolean isSuccessCheckCircleVisible() {
+        return successCheckCircle.isDisplayed();
     }
 
     public BasePage finishClubCreation() {
