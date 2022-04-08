@@ -18,8 +18,10 @@ public class GuestMenuDropDownComponent extends BaseComponent {
         super(driver, root);
     }
 
-    public void clickRegistration() {
+    @Step("click Sing Up Btn in profile menu")
+    public SingUpPopUpComponent clickRegistration() {
         registrationBtn.click();
+        return new SingUpPopUpComponent(driver);
     }
 
     @Step("click Login Btn in profile menu")
