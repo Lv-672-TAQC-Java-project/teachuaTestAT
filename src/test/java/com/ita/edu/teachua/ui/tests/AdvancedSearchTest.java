@@ -23,18 +23,42 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnСenterButton();
 
         softAssert.assertTrue(advancedSearchComponent
-                .isDisplayedCategory("Місто"),"Category with title 'Місто' should be displayed");
+                .isCategoryDisplayed("Місто"), "Category with label 'Місто' is not displayed");
         softAssert.assertTrue(advancedSearchComponent
-                .isDisplayedCategory("Район міста"),"Category with title 'Район міста' should be displayed");
+                .isCategoryDisplayed("Район міста"), "Category with label 'Район міста' is not displayed");
         softAssert.assertTrue(advancedSearchComponent
-                .isDisplayedCategory("Найближча станція метро"),"Category with title 'Найближча станція метро' should be displayed");
+                .isCategoryDisplayed("Найближча станція метро"), "Category with label 'Найближча станція метро' is not displayed");
 
         softAssert.assertFalse(advancedSearchComponent
-                .isDisplayedCategory("Категорії"),"Category with title 'Категорії' should not be displayed");
+                .isCheckBoxDisplayed("Ремоут", "Доступний онлайн"), "Available online checkbox is displayed");
         softAssert.assertFalse(advancedSearchComponent
-                .isDisplayedCategory("Ремоут"),"Category with title 'Ремоут' should not be displayed");
+                .isCheckBoxDisplayed("Категорії", "Спортивні секції"), "Sport sections checkbox is displayed");
         softAssert.assertFalse(advancedSearchComponent
-                .isDisplayedCategory("Вік дитини"),"Category with title 'Вік дитини' should not be displayed");
+                .isCheckBoxDisplayed("Категорії", "Танці, хореографія"), "Dance checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Студії раннього розвитку"), "Early development studies checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Програмування, робототехніка, STEM"), "Programming checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Вокальна студія, музика, музичні інструменти"), "Vocal studio, music checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Акторська майстерність, театр"), "Acting skills, theater checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Вчіться, діти"), "Learn, children checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Основи"), "Basics checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Основи Java444"), "Java Basics checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Особистісний розвиток"), "Personal development checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Журналістика, дитяче телебачення, монтаж відео, влогів"), "Journalism checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Центр розвитку"), "Development center checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCheckBoxDisplayed("Категорії", "Інше"), "Other checkbox is displayed");
+        softAssert.assertFalse(advancedSearchComponent
+                .isCategoryDisplayed("Вік дитини"), "Category with label 'Вік дитини' is displayed");
 
         softAssert.assertAll();
     }
@@ -72,6 +96,6 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnСenterButton()
                 .clickOnListIcon();
 
-        assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight),"Centers should be displayed as a list");
+        assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight), "Centers is not displayed as a list");
     }
 }
