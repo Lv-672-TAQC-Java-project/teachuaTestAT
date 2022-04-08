@@ -28,4 +28,28 @@ public class TestValueProvider {
     public String getMaxSizeOfSearchField() {
         return properties.getProperty("maxSizeOfSearchField");
     }
+
+    public String getLastName() {
+        return properties.getProperty("lastName");
+    }
+
+    public String getFirstName() {
+        return properties.getProperty("firstName");
+    }
+
+    public String getPhone() {
+        return properties.getProperty("phone");
+    }
+
+    public String getEmail() {
+        return properties.getProperty("email");
+    }
+
+    public String getPassword() {
+        return properties.getProperty("password");
+    }
+
+    public String getConfirmPassword() {
+        return properties.getProperty("confirmPassword");
+    }
 }
