@@ -23,6 +23,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return alert.getText();
     }
 
+    @Step("")
     public DescriptionClubComponent enterCorrectAmountOfSymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(50));
         return this;
@@ -33,16 +34,19 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return this;
     }
 
+    @Step("")
     public DescriptionClubComponent enterTooManySymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1502));
         return this;
     }
 
+    @Step("")
     public DescriptionClubComponent enterRussianSymbols() {
         clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(40));
         return this;
     }
 
+    @Step("")
     public DescriptionClubComponent enterGermanSymbols() {
         clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(40));
         return this;

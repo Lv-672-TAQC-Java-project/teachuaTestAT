@@ -3,6 +3,8 @@ package com.ita.edu.teachua.newclub.tests;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,18 +29,10 @@ public class AddNewClubDescriptionTest extends TestRunnerWithValueProvider {
                 .finishClubCreation();
     }
 
-    @Test
-    public void notEnoughSymbolsClubDescriptionTest() {
-        DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
-        String expectedMsg = "Некоректний опис гуртка";
-        descriptionClub
-                .fillBasicInfo()
-                .fillContactsInfo()
-                .enterNotEnoughSymbols();
-        Assert.assertTrue(descriptionClub.getAlertMsg().contains(expectedMsg));
-    }
-
-    @Test
+    @Description("Verify that error message ‘Опис гуртка задовгий’ appears " +
+            "when the user enters more than 1500 symbols into the field.")
+    @Issue("TUA-177")
+    @Test(description = "TUA-177")
     public void tooManySymbolsClubDescriptionTest() {
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
         String expectedMsg = "Опис гуртка може містити від 40 до 1500 символів.";
