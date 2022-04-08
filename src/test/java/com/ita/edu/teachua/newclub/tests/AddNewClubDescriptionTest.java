@@ -19,7 +19,10 @@ public class AddNewClubDescriptionTest extends TestRunnerWithValueProvider {
                 .clickOnAddNewClubBtn();
     }
 
-    @Test
+    @Description("Verify that there are no error messages " +
+            "when the user enters precisely 1500 symbols into the description field.")
+    @Issue("TUA-177")
+    @Test(description = "TUA-177")
     public void validClubDescriptionTest() {
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
         descriptionClub

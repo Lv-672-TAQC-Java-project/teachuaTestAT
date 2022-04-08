@@ -9,9 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-@Description("Verify that error message appears when user enters letters in " +
-        "Russian or German languages into the field.")
-@Issue("TUA-178")
 public class NewClubForeignSymbolsTest extends TestRunnerWithValueProvider {
 
     @BeforeMethod
@@ -22,6 +19,9 @@ public class NewClubForeignSymbolsTest extends TestRunnerWithValueProvider {
                 .clickOnAddNewClubBtn();
     }
 
+    @Description("Verify that error message appears when user enters letters in " +
+            "Russian language into the field.")
+    @Issue("TUA-178")
     @Test(description = "TUA-178")
     public void russianLettersTest() {
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
@@ -33,6 +33,9 @@ public class NewClubForeignSymbolsTest extends TestRunnerWithValueProvider {
         Assert.assertTrue(descriptionClub.getAlertMsg().contains(expectedMsg));
     }
 
+    @Description("Verify that error message appears when user enters letters in " +
+            "German language into the field.")
+    @Issue("TUA-178")
     @Test(description = "TUA-178")
     public void germanLettersTest() {
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);

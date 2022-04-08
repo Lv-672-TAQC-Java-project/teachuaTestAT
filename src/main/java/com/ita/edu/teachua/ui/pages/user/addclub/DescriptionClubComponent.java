@@ -25,17 +25,12 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return alert.getText();
     }
 
-    @Step("Type in valid 50 symbols group description")
+    @Step("Type in valid 1500 symbols group description")
     public DescriptionClubComponent enterCorrectAmountOfSymbols() {
-        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(50));
+        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1500));
         return this;
     }
-
-    public DescriptionClubComponent enterNotEnoughSymbols() {
-        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(25));
-        return this;
-    }
-
+    
     @Step("Type in too long 1501 symbols club description")
     public DescriptionClubComponent enterTooManySymbols() {
         clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1501));
