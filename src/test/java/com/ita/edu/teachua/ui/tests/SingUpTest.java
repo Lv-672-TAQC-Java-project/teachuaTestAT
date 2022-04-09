@@ -20,8 +20,8 @@ public class SingUpTest extends TestRunnerWithValueProvider {
                 .getHeader()
                 .clickUserProfile()
                 .clickRegistration()
-                .setLastName("Вайтович")
-                .setFirstName("Світлана")
+                .setLastName(valueProvider.getLastName())
+                .setFirstName(valueProvider.getFirstName())
                 .setPhone(valueProvider.getPhone())
                 .setEmail(valueProvider.getEmail())
                 .setPassword(valueProvider.getPassword())
@@ -32,13 +32,13 @@ public class SingUpTest extends TestRunnerWithValueProvider {
                 .clickRegistration();
 
         String lastNameFieldValue = singUpPopUpComponent.getLastNameFieldValue();
-        softAssert.assertEquals(lastNameFieldValue, "Вайтович",
-                "The last name field should be filled in with " + "Вайтович" + " not with " +
+        softAssert.assertEquals(lastNameFieldValue, valueProvider.getLastName(),
+                "The last name field should be filled in with " + valueProvider.getLastName() + " not with " +
                         lastNameFieldValue);
 
         String firstNameFieldValue = singUpPopUpComponent.getFirstNameFieldValue();
-        softAssert.assertEquals(firstNameFieldValue, "Світлана",
-                "The first name field should be filled in with " + "Світлана" + " not with " +
+        softAssert.assertEquals(firstNameFieldValue, valueProvider.getFirstName(),
+                "The first name field should be filled in with " + valueProvider.getFirstName() + " not with " +
                         firstNameFieldValue);
 
         String phoneFieldValue = singUpPopUpComponent.getPhoneFieldValue();

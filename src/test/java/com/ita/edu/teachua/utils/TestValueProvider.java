@@ -2,6 +2,8 @@ package com.ita.edu.teachua.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class TestValueProvider {
@@ -9,8 +11,9 @@ public class TestValueProvider {
 
     public TestValueProvider() throws IOException {
         FileInputStream fileInputStream = new FileInputStream("src/test/resources/data.properties");
+        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
         properties = new Properties();
-        properties.load(fileInputStream);
+        properties.load(inputStreamReader);
     }
 
     public String getAdminEmail() {
