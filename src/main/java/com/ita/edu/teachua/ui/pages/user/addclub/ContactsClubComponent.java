@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
+import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +13,16 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
     @FindBy(how = How.XPATH, using = "//*[@name = 'Телефон']")
     private WebElement contactPhone;
 
+    @FindBy(how = How.XPATH, using = "//*[@class = 'add-club-location']")
+    private WebElement addLocationButton;
+
     public ContactsClubComponent(WebDriver driver) {
         super(driver);
+    }
+
+    public AddLocationComponent clickAddLocationButton() {
+        addLocationButton.click();
+        return new AddLocationComponent(driver);
     }
 
     @Step("Fill contact phone")
