@@ -11,8 +11,6 @@ public class AddClubPage extends HeaderPage {
 
     @FindBy(how = How.XPATH, using = "//*[contains(span, 'Наступний крок')]")
     private WebElement nextStepBtn;
-    @FindBy(how = How.XPATH, using = "//span[contains(text(),'Назад')]")
-    private WebElement returnBtn;
     @FindBy(how = How.XPATH, using = "//span[contains(text(),'Завершити')]")
     private WebElement createClubBtn;
 
@@ -23,10 +21,6 @@ public class AddClubPage extends HeaderPage {
     @Step("Get next step button")
     public WebElement getNextStepBtn() {
         return nextStepBtn;
-    }
-
-    public WebElement getReturnBtn() {
-        return returnBtn;
     }
 
     public WebElement getCreateClubBtn() {

@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class NewClubForeignSymbolsTest extends TestRunnerWithValueProvider {
+public class ClubDescriptionForeignSymbolsTest extends TestRunnerWithValueProvider {
 
     @BeforeMethod
     public void loggingIn() {

@@ -5,22 +5,26 @@ import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class ClubDescriptionFieldTest extends TestRunnerWithValueProvider {
+
+    @BeforeMethod
+    public void loggingIn() {
+        HomePage home = new HomePage(driver);
+        home.login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword())
+                .getHeader()
+                .clickOnAddNewClubBtn();
+    }
 
     @Description("Verify that error message ‘Опис гуртка закороткий’ appears when the user enters " +
             "less than 40 symbols into the field")
     @Issue("TUA-176")
     @Test(description = "TUA-176")
     public void verifyThatErrorMessageAppearsWhenNotEnoughSymbolsInClubDescriptionField() {
-        HomePage homePage = new HomePage(driver);
-        homePage
-                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword())
-                .getHeader()
-                .clickOnAddNewClubBtn();
-
         DescriptionClubComponent descriptionClubComponent = new DescriptionClubComponent(driver);
         descriptionClubComponent
                 .fillBasicInfo()
@@ -56,12 +60,6 @@ public class ClubDescriptionFieldTest extends TestRunnerWithValueProvider {
     @Issue("TUA-173")
     @Test(description = "TUA-173")
     public void verifyThatDescriptionFieldIsFilledInWithValidData() {
-        HomePage homePage = new HomePage(driver);
-        homePage
-                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword())
-                .getHeader()
-                .clickOnAddNewClubBtn();
-
         DescriptionClubComponent descriptionClubComponent = new DescriptionClubComponent(driver);
         descriptionClubComponent
                 .fillBasicInfo()
@@ -88,5 +86,26 @@ public class ClubDescriptionFieldTest extends TestRunnerWithValueProvider {
                         .isCreateClubButtonEnabled(),
                 "Data with special characters (from 40 to 1500 symbols) should be valid");
         softAssert.assertAll();
+    }
+
+    @Description("Verify that error message ‘Опис гуртка задовгий’ appears " +
+            "when the user enters more than 1500 symbols into the field," +
+            "and that no error messages appear when the user" +
+            "enters precisely 1500 symbols into the field.")
+    @Issue("TUA-177")
+    @Test(description = "TUA-177")
+    public void tooManySymbolsClubDescriptionTest() {
+        DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
+        String expectedMsg = "Опис гуртка може містити від 40 до 1500 символів.";
+        descriptionClub
+                .fillBasicInfo()
+                .fillContactsInfo()
+                .enterSymbols(1501);
+        Assert.assertTrue(descriptionClub.getAlertMsg().contains(expectedMsg));
+
+        descriptionClub
+                .clearDescriptionField()
+                .enterSymbols(1500);
+        Assert.assertTrue(descriptionClub.isSuccessCheckCircleVisible());
     }
 }

@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
-import com.ita.edu.teachua.ui.pages.base.BasePage;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
@@ -25,38 +24,21 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return alert.getText();
     }
 
-    @Step("Type in valid 1500 symbols group description")
-    public DescriptionClubComponent enterCorrectAmountOfSymbols() {
-        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1500));
-        return this;
-    }
-
-    @Step("Type in too long 1501 symbols club description")
-    public DescriptionClubComponent enterTooManySymbols() {
-        clubDescriptionField.sendKeys(RandomStringUtils.randomAlphabetic(1501));
-        return this;
-    }
-
     @Step("Type in 40 symbols description with russian letters")
     public DescriptionClubComponent enterRussianSymbols() {
-        clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(40));
+        clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(90));
         return this;
     }
 
     @Step("Type in 40 symbols description with german letters")
     public DescriptionClubComponent enterGermanSymbols() {
-        clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(40));
+        clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(90));
         return this;
     }
 
-    @Step("Visibility of Success check circle")
+    @Step("Visibility of description field success check circle")
     public boolean isSuccessCheckCircleVisible() {
         return successCheckCircle.isDisplayed();
-    }
-
-    public BasePage finishClubCreation() {
-        getCreateClubBtn().click();
-        return new BasePage(driver);
     }
 
     @Step("Clear description field")
