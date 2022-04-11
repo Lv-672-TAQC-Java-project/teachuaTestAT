@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
+import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,8 +28,22 @@ public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "/html/body/div[5]/div/div/ul/li[2]/span/div")
     private WebElement buttonAddCenter;
 
+    @FindBy(how = How.XPATH, using = "/html/body/div[5]/div/div/ul/li[2]/span/div")
+    private WebElement addCenterButton;
+
     public MyProfilePage(WebDriver driver) {
         super(driver);
+    }
+
+    @Step("Click on add center button in drop down list")
+    public BasicInformationCenterComponent clickAddCenterInDropDownButton() {
+        addCenterButton.click();
+        sleep(2000);
+        return new BasicInformationCenterComponent(driver);
+    }
+
+    public boolean addCenterButtonIsEnabled() {
+        return addCenterButton.isEnabled();
     }
 
     public MyProfilePage clickDropDownProfileButton() {
