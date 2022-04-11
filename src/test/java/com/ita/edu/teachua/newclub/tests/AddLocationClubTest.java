@@ -27,7 +27,7 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
     @Description("Verify optional fields are displayed")
     @Issue("TUA-237")
     @Test(description = "TUA-237")
-    public void verifyThatOptionalFieldsAreDisplayedTest() {
+    public void verifyThatOptionalFieldsAreDisplayed() {
 
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
         descriptionClub
