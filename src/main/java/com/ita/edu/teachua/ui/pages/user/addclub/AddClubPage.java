@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
 import com.ita.edu.teachua.ui.pages.header.HeaderPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,7 @@ public class AddClubPage extends HeaderPage {
         super(driver);
     }
 
+    @Step("Get next step button")
     public WebElement getNextStepBtn() {
         return nextStepBtn;
     }

@@ -56,7 +56,8 @@ public class HeaderPage extends BasePage {
         aboutButton.click();
         return new AboutPage(driver);
     }
-
+  
+    @Step("Click advanced search button and show advanced search block")
     public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
@@ -67,6 +68,7 @@ public class HeaderPage extends BasePage {
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    @Step("Click add new club button")
     public AddClubPage clickOnAddNewClubBtn() {
         addNewClubBtn.click();
         return new AddClubPage(driver);
@@ -95,11 +97,7 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
-    public ClubsPage clickAdvancedSearchButton() {
-        advancedSearchButton.click();
-
-        return new ClubsPage(driver);
-    }
+    @Step("Enter {keyWords} in search")
     public ClubsPage enterSearch(String keyWords){
         searchInput.click();
         searchInput.clear();
@@ -109,6 +107,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
+    @Step("Parse {keyWords} in search")
     public ClubsPage parseSearch(String keyWords){
         searchInput.click();
         searchInput.clear();

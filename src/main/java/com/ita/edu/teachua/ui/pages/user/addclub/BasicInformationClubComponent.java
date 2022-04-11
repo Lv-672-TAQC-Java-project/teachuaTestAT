@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,17 +25,20 @@ public class BasicInformationClubComponent extends AddClubPage {
         super(driver);
     }
 
+    @Step("Enter club name")
     public BasicInformationClubComponent enterClubName() {
         fieldName.sendKeys(RandomStringUtils.randomAlphabetic(8));
         return this;
     }
 
+    @Step("Select checkboxes")
     public BasicInformationClubComponent selectCheckboxes() {
         WebElement randomCheckbox = newClubCheckboxes.get(new Random().nextInt(newClubCheckboxes.size()));
         randomCheckbox.click();
         return this;
     }
 
+    @Step("Enter age")
     public BasicInformationClubComponent enterAge() {
         minimumAgeField.clear();
         minimumAgeField.sendKeys("4");
@@ -43,6 +47,7 @@ public class BasicInformationClubComponent extends AddClubPage {
         return this;
     }
 
+    @Step("Fill basic information and click next step button")
     public ContactsClubComponent fillBasicInfo() {
         enterClubName();
         selectCheckboxes();
