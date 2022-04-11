@@ -1,7 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
-import com.ita.edu.teachua.ui.pages.user.addclub.ContactsClubComponent;
+import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -41,14 +41,22 @@ public class AddLocationComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[6]/div/div/div/div[2]/div[1]/div/div")
     private WebElement locationList;
 
+    private String checkCirclePath = "./..//*[@aria-label ='check-circle']";
+
     public AddLocationComponent(WebDriver driver) {
         super(driver);
     }
+
 
     @Step("input location name {locationName}")
     public AddLocationComponent inputLocationNameField(String locationName) {
         locationNameField.sendKeys(locationName);
         return new AddLocationComponent(driver);
+    }
+
+    @Step("Check if Data in name field is displayed")
+    public boolean isCheckCircleOfLocationNameFieldDisplayed() {
+        return locationNameField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     @Step("input address {address}")
@@ -57,16 +65,31 @@ public class AddLocationComponent extends BasePage {
         return new AddLocationComponent(driver);
     }
 
+    @Step("Check if address is displayed")
+    public boolean isCheckCircleOfLocationAddressFieldDisplayed() {
+        return addressField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    }
+
     @Step("input coordinates {coordinates}")
     public AddLocationComponent inputCoordinatesField(String coordinates) {
         coordinatesField.sendKeys(coordinates);
         return new AddLocationComponent(driver);
     }
 
+    @Step("Check if coordinates is displayed")
+    public boolean isCheckCircleOfLocationCoordinatesFieldDisplayed() {
+        return coordinatesField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    }
+
     @Step("input phone {phone}")
     public AddLocationComponent inputPhoneField(String phone) {
         phoneField.sendKeys(phone);
         return new AddLocationComponent(driver);
+    }
+
+    @Step("Check if phone number is displayed")
+    public boolean isCheckCircleOfLocationPhoneFieldDisplayed() {
+        return phoneField.findElement(By.xpath(checkCirclePath)).isDisplayed();
     }
 
     public AddLocationComponent clickCityListButton() {
@@ -87,7 +110,7 @@ public class AddLocationComponent extends BasePage {
         return new AddLocationComponent(driver);
     }
 
-    @Step("Verify that listbox contain {location}")
+    @Step("Verify that listBox contain {location}")
     public boolean isElementFromDropDownListDisplayed(String location) {
         String str = String.format(".//div[text() = '%s']", location);
         try {
@@ -108,15 +131,19 @@ public class AddLocationComponent extends BasePage {
         return new AddLocationComponent(driver);
     }
 
-    @Step("add location")
-    public ContactsClubComponent clickAddButton() {
-        addLocationButton.click();
-        sleep(1000);
-        return new ContactsClubComponent(driver);
-    }
-
     @Step("check is Add Button Enable ")
     public boolean isAddLocationButtonEnable() {
+        return addLocationButton.isEnabled();
+    }
+
+    @Step("add location")
+    public BasicInformationCenterComponent clickAddLocationButton() {
+        addLocationButton.click();
+        sleep(2000);
+        return new BasicInformationCenterComponent(driver);
+    }
+
+    public boolean isAddLocationButtonEnabled() {
         return addLocationButton.isEnabled();
     }
 

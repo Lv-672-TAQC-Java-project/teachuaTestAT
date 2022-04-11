@@ -39,17 +39,17 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
         AddLocationComponent addLocationComponent = new AddLocationComponent(driver);
         softAssert.assertTrue(addLocationComponent
                 .clickCityListButton()
-                .isElementFromDropDownListDisplayed(CITY));
+                .isElementFromDropDownListDisplayed(CITY), CITY + " should be displayed in drop down list");
         addLocationComponent.clickElementFromDropDownList(CITY);
 
         softAssert.assertTrue(addLocationComponent
                 .clickDistrictListButton()
-                .isElementFromDropDownListDisplayed(DISTRICT));
+                .isElementFromDropDownListDisplayed(DISTRICT), DISTRICT + " should be displayed in drop down list");
         addLocationComponent.clickElementFromDropDownList(DISTRICT);
 
         softAssert.assertTrue(addLocationComponent
                 .clickStationListButton()
-                .isElementFromDropDownListDisplayed(STATION));
+                .isElementFromDropDownListDisplayed(STATION),STATION + " should be displayed in drop down list" );
         addLocationComponent.clickElementFromDropDownList(STATION);
 
         softAssert.assertAll();
@@ -72,7 +72,7 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
 
         softAssert.assertTrue(addLocationComponent
                 .clickCityListButton()
-                .isElementFromDropDownListDisplayed(CITY));
+                .isElementFromDropDownListDisplayed(CITY), CITY + " should be displayed in drop down list");
 
         addLocationComponent.clickElementFromDropDownList(CITY);
 
@@ -82,9 +82,9 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
                 .inputPhoneField("0938784576");
 
         softAssert.assertTrue(addLocationComponent
-                        .isAddLocationButtonEnable());
+                        .isAddLocationButtonEnable(), "All fields should be filled");
         addLocationComponent
-                .clickAddButton();
+                .clickAddLocationButton();
 
         String descriptionText = "An English Club is a place for language learners to use English in a casual setting." +
                 " In the classroom, you often focus on one skill and one item (for example: grammar - future tense)." +
