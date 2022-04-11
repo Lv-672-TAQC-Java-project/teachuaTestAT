@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,6 +36,7 @@ public class EditMyProfileComponent extends CommonPage {
         super(driver);
     }
 
+    @Step("Set Workshop Name as \"{nameField}\"")
     public EditMyProfileComponent setWorkshopNameField(String nameField) {
         workshopNameField.click();
         workshopNameField.sendKeys(nameField);
@@ -42,6 +44,7 @@ public class EditMyProfileComponent extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
+    @Step("Set Workshop Category as \"{categoryNumber}\"")
     public EditMyProfileComponent setWorkshopCategory(String categoryNumber) {
         workshopCategory.sendKeys(categoryNumber);
         workshopCategory.click();
@@ -49,6 +52,7 @@ public class EditMyProfileComponent extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
+    @Step("Set Workshop age range from {ageFrom} to {ageTo}")
     public EditMyProfileComponent setWorkshopAgeRange(String ageFrom, String ageTo) {
         workshopAgeFromField.click();
         workshopAgeFromField.sendKeys(ageFrom);
@@ -58,12 +62,14 @@ public class EditMyProfileComponent extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
+    @Step("Click Workshop Next Stage Button")
     public EditMyProfileComponent clickWorkshopNextStageButton() {
         workshopNextStageButton.click();
 
         return new EditMyProfileComponent(driver);
     }
 
+    @Step("Set Workshop phone number \"{phoneNumber}\"")
     public EditMyProfileComponent setWorkshopPhoneNumber(String phoneNumber) {
         workshopPhoneNumberField.click();
         workshopPhoneNumberField.sendKeys(phoneNumber);
@@ -71,6 +77,7 @@ public class EditMyProfileComponent extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
+    @Step("Set Workshop description field")
     public EditMyProfileComponent setWorkshopDescriptionField(String descriptionText) {
         workshopDescriptionField.click();
         workshopDescriptionField.clear();
