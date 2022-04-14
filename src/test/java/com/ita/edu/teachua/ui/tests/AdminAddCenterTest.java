@@ -34,7 +34,8 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
                 .clickAdminProfile()
                 .clickMyProfileButton()
                 .clickAddButton()
-                .clickAddCenterInDropDownButton();
+                .clickAddCenterInDropDownButton()
+                .clickAddLocationButton();
 
         SoftAssert softAssert = new SoftAssert();
 
@@ -76,9 +77,8 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
 
         BasicInformationCenterComponent basicInformationCenterComponent = new BasicInformationCenterComponent(driver);
 
-        softAssert.assertTrue(basicInformationCenterComponent
-                .inputNameCenterField("Center#1")
-                .getFieldNameCenter().isEmpty(), "The name of the center should be filled");
+        basicInformationCenterComponent
+                .inputNameCenterField("Center#1");
 
         basicInformationCenterComponent.clickAddLocationButton();
 
@@ -101,8 +101,8 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
         softAssert.assertTrue(addLocationComponent.isCheckCircleOfLocationPhoneFieldDisplayed(),
                 "the phone number of location is entered correctly");
 
-        addLocationComponent.clickAddLocationButton();
         softAssert.assertTrue(addLocationComponent.isAddLocationButtonEnable());
+        addLocationComponent.clickAddLocationButton();
 
         basicInformationCenterComponent
                 .clickSelectedLocations(new String[]{"Школярик001"})

@@ -38,7 +38,7 @@ public class AddLocationComponent extends BasePage {
     @FindBy(how = How.ID, using = "stationName")
     private WebElement stationListButton;
 
-    @FindBy(how = How.XPATH, using = "/html/body/div[6]/div/div/div/div[2]/div[1]/div/div")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'rc-virtual-list-holder-inner']//div")
     private WebElement locationList;
 
     private String checkCirclePath = "./..//*[@aria-label ='check-circle']";
