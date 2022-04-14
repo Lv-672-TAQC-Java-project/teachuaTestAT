@@ -2,9 +2,6 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.utils.TestNGListener;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;

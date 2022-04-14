@@ -11,7 +11,7 @@ import java.util.List;
 public class TempTest2 {
 
 
-//    @Test
+    //    @Test
 //    public void test3() {
 //        HomePage home = new HomePage(driver);
 //        SoftAssert softAssert = new SoftAssert();
@@ -29,7 +29,7 @@ public class TempTest2 {
     public void test4() {
         UserService userService = new UserService();
         List<UserEntity> users = userService.getAllUsers();
-        for (UserEntity user: users){
+        for (UserEntity user : users) {
             System.out.println(user);
         }
 

@@ -62,7 +62,7 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         softAssert.assertEquals(symbolsInSearchField,
                 valueProvider.getMaxSizeOfSearchField(),
                 "With 151 symbols entered Search Field does not limit number of symbols. " +
-                        symbolsInSearchField  + " symbols in Search Field");
+                        symbolsInSearchField + " symbols in Search Field");
 
         softAssert.assertAll();
     }

@@ -12,9 +12,9 @@ import java.util.Map;
 public class ManagerDao {
     private static volatile ManagerDao instance = null;
     private final Map<Long, Connection> connections;
-    private String userName;
-    private String password;
-    private String url;
+    private final String userName;
+    private final String password;
+    private final String url;
     private ValueProvider property;
 
     private ManagerDao() {
@@ -34,10 +34,10 @@ public class ManagerDao {
         this.url = property.getJDBCTeachUAURL();
     }
 
-    public static ManagerDao get(){
-        if(instance == null){
+    public static ManagerDao get() {
+        if (instance == null) {
             synchronized (ManagerDao.class) {
-                if (instance == null){
+                if (instance == null) {
                     instance = new ManagerDao();
                 }
             }
@@ -46,11 +46,11 @@ public class ManagerDao {
     }
 
     public static void closeAllConnection() {
-        if(instance != null){
-            for (Map.Entry<Long, Connection> entry: instance.connections.entrySet()) {
+        if (instance != null) {
+            for (Map.Entry<Long, Connection> entry : instance.connections.entrySet()) {
                 try {
                     entry.getValue().close();
-                } catch (SQLException e){
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
@@ -70,7 +70,7 @@ public class ManagerDao {
     public Connection getConnection() {
         Long idThread = Thread.currentThread().getId();
         Connection connection = connections.get(idThread);
-        if(connection==null){
+        if (connection == null) {
             connection = createConnection();
             connections.put(idThread, connection);
         }
@@ -78,7 +78,7 @@ public class ManagerDao {
     }
 
 
-    public Statement getStatement(){
+    public Statement getStatement() {
         Statement statement = null;
         try {
             statement = getConnection().createStatement();
@@ -88,7 +88,7 @@ public class ManagerDao {
         return statement;
     }
 
-    public void closeStatement(Statement statement){
+    public void closeStatement(Statement statement) {
         try {
             statement.close();
         } catch (SQLException e) {
@@ -108,10 +108,6 @@ public class ManagerDao {
         }
         return result;
     }
-
-
-
-
 
 
 }

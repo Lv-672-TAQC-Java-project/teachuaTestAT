@@ -21,6 +21,7 @@ public class LoginPopUpComponent extends BasePage {
         super(driver);
 
     }
+
     @Step("click Login")
     public void clickLoginButton() {
         loginButton.click();
@@ -36,6 +37,7 @@ public class LoginPopUpComponent extends BasePage {
         emailField.sendKeys(email);
         return this;
     }
+
     @Step("set password field value: {password}")
     public LoginPopUpComponent setPassword(String password) {
         passwordField.sendKeys(password);

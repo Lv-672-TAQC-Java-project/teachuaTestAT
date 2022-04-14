@@ -14,6 +14,7 @@ public class AddLocationComponent extends BasePage {
     public AddLocationComponent(WebDriver driver) {
         super(driver);
     }
+
     @Step("check is Add Button Enable ")
     public boolean isAddButtonEnable() {
         return addButton.isEnabled();

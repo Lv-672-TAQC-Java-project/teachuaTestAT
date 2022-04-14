@@ -2,8 +2,8 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
-import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
+import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;
@@ -51,7 +51,7 @@ public class AdminAddLocationAddCircleDescriptionTest extends TestRunnerWithValu
                 .clickAdminProfile()
                 .clickAddCenter()
                 .clickAddLocationBtn();
-        boolean isEnable=   addLocationComponent.isAddButtonEnable();
+        boolean isEnable = addLocationComponent.isAddButtonEnable();
 
         Assert.assertFalse(isEnable);
     }

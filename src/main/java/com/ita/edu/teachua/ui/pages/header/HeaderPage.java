@@ -61,6 +61,7 @@ public class HeaderPage extends BasePage {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
+
     @Step("click User Profile")
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
@@ -99,7 +100,8 @@ public class HeaderPage extends BasePage {
 
         return new ClubsPage(driver);
     }
-    public ClubsPage enterSearch(String keyWords){
+
+    public ClubsPage enterSearch(String keyWords) {
         searchInput.click();
         searchInput.clear();
         searchInput.sendKeys(keyWords);
@@ -108,7 +110,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-    public ClubsPage parseSearch(String keyWords){
+    public ClubsPage parseSearch(String keyWords) {
         searchInput.click();
         searchInput.clear();
         searchInput.sendKeys(keyWords);
@@ -116,7 +118,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-    public String getSearchValue(){
+    public String getSearchValue() {
 
         return searchInput.getAttribute("value");
     }

@@ -12,7 +12,7 @@ public class UserService {
         this.userDao = new UserDao();
     }
 
-    public List<UserEntity> getAllUsers(){
+    public List<UserEntity> getAllUsers() {
         return userDao.selectAll();
     }
 }
