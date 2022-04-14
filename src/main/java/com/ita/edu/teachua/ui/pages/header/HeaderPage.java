@@ -56,30 +56,32 @@ public class HeaderPage extends BasePage {
         aboutButton.click();
         return new AboutPage(driver);
     }
-
+  
+    @Step("Click advanced search button and show advanced search block")
     public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
-
     @Step("click User Profile")
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
         return new GuestMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    @Step("Click add new club button")
     public AddClubPage clickOnAddNewClubBtn() {
         addNewClubBtn.click();
         return new AddClubPage(driver);
     }
 
-    @Step("clickAdminProfile ")
+    @Step("click Admin Profile")
     public AdminMenuDropDownComponent clickAdminProfile() {
         adminProfileButton.click();
 
         return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
     }
 
+    @Step("click add Location")
     public HeaderPage clickAddLocation() {
         locationBtn.click();
 
@@ -95,13 +97,8 @@ public class HeaderPage extends BasePage {
         sleep(2000);
     }
 
-    public ClubsPage clickAdvancedSearchButton() {
-        advancedSearchButton.click();
-
-        return new ClubsPage(driver);
-    }
-
-    public ClubsPage enterSearch(String keyWords) {
+    @Step("Enter {keyWords} in search")
+    public ClubsPage enterSearch(String keyWords){
         searchInput.click();
         searchInput.clear();
         searchInput.sendKeys(keyWords);
@@ -110,7 +107,8 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-    public ClubsPage parseSearch(String keyWords) {
+    @Step("Parse {keyWords} in search")
+    public ClubsPage parseSearch(String keyWords){
         searchInput.click();
         searchInput.clear();
         searchInput.sendKeys(keyWords);
@@ -118,7 +116,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-    public String getSearchValue() {
+    public String getSearchValue(){
 
         return searchInput.getAttribute("value");
     }

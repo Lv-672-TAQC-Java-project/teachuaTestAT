@@ -1,34 +1,18 @@
 package com.ita.edu.teachua.ui.tests;
 
-import com.ita.edu.teachua.ui.pages.header.HeaderPage;
-import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
-import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
+import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+public class TestErrorMessages extends TestRunnerWithValueProvider {
 
-import static org.testng.Assert.assertEquals;
+    @BeforeMethod
+    public void beforeMethot ()  {
 
-public class TestErrorMessages extends TestRunner {
-
-    @Test
-    public void testOpen() throws IOException {
-
-        SoftAssert softAssert = new SoftAssert();
-
-        FileInputStream fileInputStream = new FileInputStream("src/test/resources/data.properties");
-        Properties properties = new Properties();
-        properties.load(fileInputStream);
-
-        HeaderPage headP = new HeaderPage(driver);
-        headP.clickUserProfile();
-        headP.clickLogo();
-        headP.login(properties.getProperty("adminEmail"), properties.getProperty("adminPassword"));
-/*
         HomePage home = new HomePage(driver);
         home
                 .getHeader()
@@ -36,19 +20,26 @@ public class TestErrorMessages extends TestRunner {
                 .clickLogin()
                 .setEmail(valueProvider.getAdminEmail())
                 .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton();
-*/
-        MyProfilePage mypr = new MyProfilePage(driver);
-        mypr.clickDropDownProfileButton();
-        mypr.clickMyProfileButton();
+                .clickLoginButton()
+                .clickDropDownProfileButton()
+                .clickMyProfileButton()
+                .clickAddCenter();
+    }
 
-        AddCenterPage addCenterPage = new AddCenterPage(driver);
-        addCenterPage.clickAddButton();
-        addCenterPage.clickButtonAddCenter();
+    @Description("Verify that error messages is displayed after user leaves fields empty and clicks 'Наступний крок' button on 'Основна інформація' tab")
+    @Issue("TUA-252")
+    @Test(description = "TUA-252")
+    public void verifyThatErrorMessagesIsDisplayed() {
 
-        BasicInformationCenterComponent checkCenterPage = new BasicInformationCenterComponent(driver);
-        softAssert.assertSame(checkCenterPage.getFieldNameCenter(), "");
-        checkCenterPage.clickNextButton();
-        assertEquals(checkCenterPage.getTextAfterClick(), "Некоректна назва центру");
+        SoftAssert softAssert = new SoftAssert();
+
+        BasicInformationCenterComponent basicInformationCenterComponent = new BasicInformationCenterComponent(driver);
+        softAssert.assertSame(basicInformationCenterComponent
+                .getFieldNameCenter(),"","field 'Назва центру' have to be empty");
+        basicInformationCenterComponent.clickNextButton();
+        softAssert.assertEquals(basicInformationCenterComponent.getTextAfterClick(),
+                "Некоректна назва центру");
+        softAssert.assertAll();
     }
 }
+
