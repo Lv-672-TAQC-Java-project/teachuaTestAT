@@ -39,9 +39,6 @@ public class AboutUsItemsEntity {
         aboutUsItem.setText(row.get(3));
         aboutUsItem.setType(Long.parseLong(row.get(4)));
         aboutUsItem.setVideo(row.get(5));
-        if (row.get(6) != null) {
-            aboutUsItem.setId(Long.parseLong(row.get(6)));
-        }
 
         return aboutUsItem;
     }
