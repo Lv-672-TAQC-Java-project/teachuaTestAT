@@ -1,7 +1,11 @@
 package com.ita.edu.teachua.ui.tests;
 
 
+import com.ita.edu.teachua.utils.jdbc.entity.ChallengesEntity;
+import com.ita.edu.teachua.utils.jdbc.entity.NewsEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
+import com.ita.edu.teachua.utils.jdbc.services.ChallengesService;
+import com.ita.edu.teachua.utils.jdbc.services.NewsService;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import org.testng.annotations.Test;
 
@@ -32,6 +36,23 @@ public class TempTest2 {
         for (UserEntity user : users) {
             System.out.println(user);
         }
+    }
 
+    @Test
+    public void Challenges() {
+        ChallengesService challengesService = new ChallengesService();
+        List<ChallengesEntity> challenges = challengesService.getAllChallenges();
+        for (ChallengesEntity challenge : challenges) {
+            System.out.println(challenge);
+        }
+    }
+
+    @Test
+    public void News() {
+        NewsService newsService = new NewsService();
+        List<NewsEntity> news = newsService.getAllNews();
+        for (NewsEntity newsItem : news) {
+            System.out.println(newsItem);
+        }
     }
 }

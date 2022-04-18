@@ -1,0 +1,25 @@
+package com.ita.edu.teachua.utils.jdbc.dao;
+
+import com.ita.edu.teachua.utils.jdbc.entity.ChallengesEntity;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+public class ChallengesDao {
+
+    public List<ChallengesEntity> selectAll() {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(ChallengesEntity.SELECT_ALL);
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return ChallengesEntity.getChallenges(rows);
+    }
+}
