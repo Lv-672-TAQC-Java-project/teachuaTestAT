@@ -8,7 +8,7 @@ public class ValueProvider {
     private final Properties properties;
 
     public ValueProvider() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Yura\\teachuaTestAT\\src\\test\\resources\\data.properties");
+        FileInputStream fileInputStream = new FileInputStream("src/main/resources/data.properties");
         properties = new Properties();
         properties.load(fileInputStream);
     }
