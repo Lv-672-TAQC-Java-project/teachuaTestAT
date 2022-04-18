@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TasksEntity {
 
-    public static final String SELECT_ALL = "SELECT * FROM users ORDER BY id;";
+    public static final String SELECT_ALL = "SELECT * FROM tasks ORDER BY id;";
 
     private Long challengeId;
     private String description;
