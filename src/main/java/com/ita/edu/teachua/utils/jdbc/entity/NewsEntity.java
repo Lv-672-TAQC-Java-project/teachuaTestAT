@@ -6,18 +6,18 @@ import java.util.List;
 public class NewsEntity {
     public static final String SELECT_ALL = "SELECT * FROM news ORDER BY id;";
 
+    private Long id;
     private String date;
     private String description;
-    private Long id;
     private Boolean isActive;
     private String title;
     private String urlTitleLogo;
     private Integer userId;
 
     public NewsEntity(String date, String description, Long id, Boolean isActive, String title, String urlTitleLogo, Integer userId) {
+        this.id = id;
         this.date = date;
         this.description = description;
-        this.id = id;
         this.isActive = isActive;
         this.title = title;
         this.urlTitleLogo = urlTitleLogo;
@@ -25,9 +25,9 @@ public class NewsEntity {
     }
 
     public NewsEntity() {
+        this.id = 0L;
         this.date = null;
         this.description = null;
-        this.id = 0L;
         this.isActive = null;
         this.title = null;
         this.urlTitleLogo = null;
@@ -55,6 +55,14 @@ public class NewsEntity {
         return news;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getDate() {
         return date;
     }
@@ -69,14 +77,6 @@ public class NewsEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Boolean getIsActive() {

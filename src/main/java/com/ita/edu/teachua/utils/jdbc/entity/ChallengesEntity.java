@@ -6,8 +6,8 @@ import java.util.List;
 public class ChallengesEntity {
     public static final String SELECT_ALL = "SELECT * FROM challenges ORDER BY id;";
 
-    private String description;
     private Long id;
+    private String description;
     private Boolean isActive;
     private String name;
     private String picture;
@@ -17,8 +17,8 @@ public class ChallengesEntity {
     private Integer userId;
 
     public ChallengesEntity(String description, Long id, Boolean isActive, String name, String picture, String registrationLink, Integer sortNumber, String title, Integer userId) {
-        this.description = description;
         this.id = id;
+        this.description = description;
         this.isActive = isActive;
         this.name = name;
         this.picture = picture;
@@ -29,8 +29,8 @@ public class ChallengesEntity {
     }
 
     public ChallengesEntity() {
-        this.description = null;
         this.id = 0L;
+        this.description = null;
         this.isActive = null;
         this.name = null;
         this.picture = null;
@@ -53,7 +53,6 @@ public class ChallengesEntity {
         if (row.get(8) != null) {
             challenge.setUserId(Integer.parseInt(row.get(8)));
         }
-//        challenge.setUserId(Integer.parseInt(row.get(8)));
 
         return challenge;
     }
@@ -66,20 +65,20 @@ public class ChallengesEntity {
         return challenges;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Boolean getIsActive() {
@@ -141,7 +140,7 @@ public class ChallengesEntity {
     @Override
     public String toString() {
         return "ChallengesEntity{" +
-                "id=" + id  +
+                "id=" + id +
                 ", description='" + description + '\'' +
                 ", isActive=" + isActive +
                 ", name='" + name + '\'' +
