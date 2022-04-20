@@ -1,8 +1,15 @@
 package com.ita.edu.teachua.utils.jdbc.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@Setter
+@Getter
 public class ArchiveEntity {
 
     public static final String SELECT_ALL = "SELECT * FROM archive ORDER BY id;";
@@ -10,12 +17,6 @@ public class ArchiveEntity {
     private Long id;
     private String className;
     private String data;
-
-    public ArchiveEntity(Long id, String className, String data) {
-        this.id = id;
-        this.className = className;
-        this.data = data;
-    }
 
     public ArchiveEntity() {
         this.id = 0L;
@@ -38,30 +39,6 @@ public class ArchiveEntity {
             archives.add(getArchive(row));
         }
         return archives;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     @Override

@@ -1,19 +1,21 @@
 package com.ita.edu.teachua.utils.jdbc.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@Setter
+@Getter
 public class RolesEntity {
 
     public static final String SELECT_ALL = "SELECT * FROM roles ORDER BY id;";
 
     private Integer id;
     private String name;
-
-    public RolesEntity(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public RolesEntity() {
         this.id = 0;
@@ -34,22 +36,6 @@ public class RolesEntity {
             roles.add(getRole(row));
         }
         return roles;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
