@@ -25,9 +25,9 @@ public class GalleriesEntity {
 
     public static GalleriesEntity getGallery(List<String> row) {
         GalleriesEntity gallery = new GalleriesEntity();
-        gallery.setClubId(Long.parseLong(row.get(0)));
-        gallery.setId(Long.parseLong(row.get(1)));
-        gallery.setUrl(row.get(2));
+        gallery.setId(Long.parseLong(row.get(0)));
+        gallery.setUrl(row.get(1));
+        gallery.setClubId(Long.parseLong(row.get(2)));
 
         return gallery;
     }

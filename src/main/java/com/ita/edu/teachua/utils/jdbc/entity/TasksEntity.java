@@ -37,13 +37,15 @@ public class TasksEntity {
 
     public static TasksEntity getTask(List<String> row) {
         TasksEntity task = new TasksEntity();
-        task.setChallengeId(Long.parseLong(row.get(0)));
+        task.setId(Long.parseLong(row.get(0)));
         task.setDescription(row.get(1));
-        task.setHeaderText(row.get(2));
-        task.setId(Long.parseLong(row.get(3)));
-        task.setName(row.get(4));
-        task.setPicture(row.get(5));
-        task.setStartDate(row.get(6));
+        task.setName(row.get(2));
+        task.setPicture(row.get(3));
+        task.setStartDate(row.get(4));
+        if (row.get(5) != null) {
+            task.setChallengeId(Long.parseLong(row.get(5)));
+        }
+        task.setHeaderText(row.get(6));
 
         return task;
     }
@@ -125,4 +127,3 @@ public class TasksEntity {
                 '}';
     }
 }
-
