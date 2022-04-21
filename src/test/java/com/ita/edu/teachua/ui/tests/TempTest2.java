@@ -1,7 +1,9 @@
 package com.ita.edu.teachua.ui.tests;
 
 
+import com.ita.edu.teachua.utils.jdbc.entity.FeedbackEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
+import com.ita.edu.teachua.utils.jdbc.services.FeedbackService;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import org.testng.annotations.Test;
 
@@ -33,5 +35,18 @@ public class TempTest2 {
             System.out.println(user);
         }
 
+    }
+
+    @Test
+    public void test5() {
+        FeedbackService feedbackService = new FeedbackService();
+        List<FeedbackEntity> feedbacks = feedbackService.getAllFeedbacks();
+
+//        FeedbackEntity feedback = new FeedbackEntity();
+//        System.out.println(feedback);
+
+        for (FeedbackEntity feedback : feedbacks) {
+            System.out.println(feedback);
+        }
     }
 }
