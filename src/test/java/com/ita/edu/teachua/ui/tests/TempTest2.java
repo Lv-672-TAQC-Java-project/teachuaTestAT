@@ -1,7 +1,11 @@
 package com.ita.edu.teachua.ui.tests;
 
 
+import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
+import com.ita.edu.teachua.utils.jdbc.entity.CityEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
+import com.ita.edu.teachua.utils.jdbc.services.CenterService;
+import com.ita.edu.teachua.utils.jdbc.services.CityService;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import org.testng.annotations.Test;
 
@@ -27,11 +31,24 @@ public class TempTest2 {
 //
     @Test
     public void test4() {
-        UserService userService = new UserService();
-        List<UserEntity> users = userService.getAllUsers();
-        for (UserEntity user : users) {
-            System.out.println(user);
+        CityService cityService = new CityService();
+        List<CityEntity> cities = cityService.getAllCities();
+        for (CityEntity city : cities) {
+            System.out.println(city);
         }
 
     }
+
+    @Test
+    public void test5() {
+        CenterService clubsService = new CenterService();
+        List<CenterEntity> clubs = clubsService.getAllCenters();
+        for (CenterEntity club : clubs) {
+            System.out.println(club);
+        }
+
+    }
+
+
+
 }
