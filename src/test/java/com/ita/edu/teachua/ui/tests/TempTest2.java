@@ -36,17 +36,4 @@ public class TempTest2 {
         }
 
     }
-
-    @Test
-    public void test5() {
-        FeedbackService feedbackService = new FeedbackService();
-        List<FeedbackEntity> feedbacks = feedbackService.getAllFeedbacks();
-
-//        FeedbackEntity feedback = new FeedbackEntity();
-//        System.out.println(feedback);
-
-        for (FeedbackEntity feedback : feedbacks) {
-            System.out.println(feedback);
-        }
-    }
 }
