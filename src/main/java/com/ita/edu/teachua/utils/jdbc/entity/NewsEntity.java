@@ -14,7 +14,7 @@ public class NewsEntity {
     private String urlTitleLogo;
     private Integer userId;
 
-    public NewsEntity(String date, String description, Long id, Boolean isActive, String title, String urlTitleLogo, Integer userId) {
+    public NewsEntity(Long id, String date, String description, Boolean isActive, String title, String urlTitleLogo, Integer userId) {
         this.id = id;
         this.date = date;
         this.description = description;
