@@ -1,47 +1,62 @@
 package com.ita.edu.teachua.utils.jdbc.entity;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TasksEntity {
 
     public static final String SELECT_ALL = "SELECT * FROM tasks ORDER BY id;";
 
-    private Long challengeId;
-    private String description;
-    private String headerText;
     private Long id;
+    private String description;
     private String name;
     private String picture;
-    private String startDate;
+    private Timestamp startDate;
+    private Long challengeId;
+    private String headerText;
 
-    public TasksEntity(Long challengeId, String description, String headerText, Long id, String name, String picture, String startDate) {
-        this.challengeId = challengeId;
-        this.description = description;
-        this.headerText = headerText;
+    public TasksEntity(Long id, String description, String name, String picture, Timestamp startDate, Long challengeId, String headerText) {
         this.id = id;
+        this.description = description;
         this.name = name;
         this.picture = picture;
         this.startDate = startDate;
+        this.challengeId = challengeId;
+        this.headerText = headerText;
     }
 
     public TasksEntity() {
-        this.challengeId = 0L;
-        this.description = null;
-        this.headerText = null;
         this.id = 0L;
+        this.description = null;
         this.name = null;
         this.picture = null;
         this.startDate = null;
+        this.challengeId = 0L;
+        this.headerText = null;
+
     }
 
     public static TasksEntity getTask(List<String> row) {
         TasksEntity task = new TasksEntity();
         task.setId(Long.parseLong(row.get(0)));
-        task.setDescription(row.get(1));
+        if (row.get(1) != null) {
+            task.setDescription(row.get(1));
+        }
         task.setName(row.get(2));
         task.setPicture(row.get(3));
-        task.setStartDate(row.get(4));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            if (row.get(4) != null) {
+                Date date = dateFormat.parse(row.get(4));
+                task.setStartDate(new Timestamp(date.getTime()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (row.get(5) != null) {
             task.setChallengeId(Long.parseLong(row.get(5)));
         }
@@ -106,11 +121,11 @@ public class TasksEntity {
         this.picture = picture;
     }
 
-    public String getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
