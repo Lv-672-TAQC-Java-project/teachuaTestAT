@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChallengesEntity {
-    public static final String SELECT_ALL = "SELECT * FROM challenges ORDER BY id;";
+    public static final String SELECT_ALL = "SELECT id, description, is_active, name, picture, registration_link, sort_number, title, user_id FROM challenges ORDER BY id;";
 
     private Long id;
     private String description;
@@ -16,7 +16,7 @@ public class ChallengesEntity {
     private String title;
     private Integer userId;
 
-    public ChallengesEntity(Long id, String description, Boolean isActive, String name, String picture, String registrationLink, Integer sortNumber, String title, Integer userId) {
+    public ChallengesEntity(String description, Long id, Boolean isActive, String name, String picture, String registrationLink, Integer sortNumber, String title, Integer userId) {
         this.id = id;
         this.description = description;
         this.isActive = isActive;
@@ -44,7 +44,14 @@ public class ChallengesEntity {
         ChallengesEntity challenge = new ChallengesEntity();
         challenge.setId(Long.parseLong(row.get(0)));
         challenge.setDescription(row.get(1));
-        challenge.setIsActive(row.get(2) == "t");
+
+        if (row.get(2).equals("t")) {
+            challenge.setIsActive(true);
+        }
+        else {
+            challenge.setIsActive(false);
+        }
+
         challenge.setName(row.get(3));
         challenge.setPicture(row.get(4));
         challenge.setRegistrationLink(row.get(5));
@@ -85,8 +92,8 @@ public class ChallengesEntity {
         return isActive;
     }
 
-    public void setIsActive(Boolean active) {
-        isActive = active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getName() {
