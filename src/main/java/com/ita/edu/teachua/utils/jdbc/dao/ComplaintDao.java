@@ -5,11 +5,12 @@ import com.ita.edu.teachua.utils.jdbc.entity.ComplaintEntity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.List;
 
 public class ComplaintDao {
 
-    public List<ComplaintEntity> selectAll() {
+    public List<ComplaintEntity> selectAll() throws ParseException {
         Statement statement = ManagerDao.get().getStatement();
         List<List<String>> rows = null;
 
