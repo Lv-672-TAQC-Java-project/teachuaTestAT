@@ -9,23 +9,23 @@ public class ComplaintEntity {
     private Long id;
     private String date;
     private String text;
-    private Long club_id;
-    private Long user_id;
+    private Long clubId;
+    private Long userId;
 
-    public ComplaintEntity(Long id, String date, String text, Long club_id, Long user_id) {
+    public ComplaintEntity(Long id, String date, String text, Long clubId, Long userId) {
         this.id = id;
         this.date = date;
         this.text = text;
-        this.club_id = club_id;
-        this.user_id = user_id;
+        this.clubId = clubId;
+        this.userId = userId;
     }
 
     public ComplaintEntity() {
         this.id = 0l;
         this.date = null;
         this.text = null;
-        this.club_id = 0l;
-        this.user_id = 0l;
+        this.clubId = 0l;
+        this.userId = 0l;
     }
 
     public static ComplaintEntity getComplaint(List<String> row) {
@@ -33,8 +33,8 @@ public class ComplaintEntity {
         complaint.setId(Long.parseLong(row.get(0)));
         complaint.setDate(row.get(1));
         complaint.setText(row.get(2));
-        complaint.setClub_id(Long.parseLong(row.get(3)));
-        complaint.setUser_id(Long.parseLong(row.get(4)));
+        complaint.setClubId(Long.parseLong(row.get(3)));
+        complaint.setUserId(Long.parseLong(row.get(4)));
         return complaint;
     }
 
@@ -58,12 +58,12 @@ public class ComplaintEntity {
         this.text = text;
     }
 
-    public void setClub_id(Long club_id) {
-        this.club_id = club_id;
+    public void setClubId(Long clubId) {
+        this.clubId = clubId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -78,12 +78,12 @@ public class ComplaintEntity {
         return text;
     }
 
-    public Long getClub_id() {
-        return club_id;
+    public Long getClubId() {
+        return clubId;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
     @Override
@@ -92,8 +92,8 @@ public class ComplaintEntity {
                 "id=" + id +
                 ", date='" + date + '\'' +
                 ", text='" + text + '\'' +
-                ", club_id=" + club_id +
-                ", user_id=" + user_id +
+                ", clubId=" + clubId +
+                ", userId=" + userId +
                 '}';
     }
 }
