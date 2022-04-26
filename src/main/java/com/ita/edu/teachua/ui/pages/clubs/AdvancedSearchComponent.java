@@ -8,7 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class AdvancedSearchComponent extends CommonPage {
@@ -65,23 +68,15 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
-        sleep(4000);
         return this;
     }
 
     public boolean isCentersDisplayedAsAList(int expectedWidth, int expectedHeight) {
-        for (WebElement numberOfPageButton : listOfPaginationButtons) {
-            for (WebElement element : centers) {
+        for (WebElement element : centers) {
                 if (!(element.getSize().height == expectedHeight && element.getSize().width == expectedWidth)) {
                     return false;
                 }
-                sleep(4000);
             }
-            if (numberOfPageButton.getAttribute("class").contains("active")) {
-                nextPageButton.click();
-                sleep(4000);
-            }
-        }
         return true;
     }
 
