@@ -1,20 +1,23 @@
 package com.ita.edu.teachua.utils.jdbc.entity;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewsEntity {
-    public static final String SELECT_ALL = "SELECT * FROM news ORDER BY id;";
+    public static final String SELECT_ALL = "SELECT id, date, description, is_Active, title, url_Title_Logo, user_Id FROM news ORDER BY id;";
 
     private Long id;
-    private String date;
+    private Timestamp date;
     private String description;
     private Boolean isActive;
     private String title;
     private String urlTitleLogo;
     private Integer userId;
 
-    public NewsEntity(Long id, String date, String description, Boolean isActive, String title, String urlTitleLogo, Integer userId) {
+    public NewsEntity(Long id, Timestamp date, String description, Boolean isActive, String title, String urlTitleLogo, Integer userId) {
         this.id = id;
         this.date = date;
         this.description = description;
@@ -37,9 +40,25 @@ public class NewsEntity {
     public static NewsEntity getNewsItem(List<String> row) {
         NewsEntity newsItem = new NewsEntity();
         newsItem.setId(Long.parseLong(row.get(0)));
-        newsItem.setDate(row.get(1));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try {
+            if (row.get(1) != null) {
+                Date date = dateFormat.parse(row.get(1));
+                newsItem.setDate(new Timestamp(date.getTime()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         newsItem.setDescription(row.get(2));
-        newsItem.setIsActive(row.get(3) == "t");
+
+        if (row.get(3).equals("t")) {
+            newsItem.setIsActive(true);
+        }
+        else {
+            newsItem.setIsActive(false);
+        }
+
         newsItem.setTitle(row.get(4));
         newsItem.setUrlTitleLogo(row.get(5));
         newsItem.setUserId(Integer.parseInt(row.get(6)));
@@ -63,11 +82,11 @@ public class NewsEntity {
         this.id = id;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -83,8 +102,8 @@ public class NewsEntity {
         return isActive;
     }
 
-    public void setIsActive(Boolean active) {
-        isActive = active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getTitle() {
@@ -115,7 +134,7 @@ public class NewsEntity {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", description='" + description + '\'' +
                 ", isActive=" + isActive +
                 ", title='" + title + '\'' +
