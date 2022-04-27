@@ -62,9 +62,11 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
-        sleep(3000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        wait.until(ExpectedConditions.visibilityOfAllElements(centers));
         return this;
     }
+
     @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
