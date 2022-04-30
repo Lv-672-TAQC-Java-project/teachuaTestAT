@@ -8,11 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.LinkedList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[text()='Центр']")
@@ -54,6 +56,19 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//label[text()='Категорії']/ancestor::div[contains(@class,'club-list-row')]//input")
     private List<WebElement> categoriesCheckboxes;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='за алфавітом']")
+    private WebElement sortAlphabeticallyButton;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='ant-select-clear']")
+    private WebElement removeFilterButton;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='center-name']")
+    List<WebElement> centerLabels;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
+    private WebElement sortArrowUpIcon;
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
@@ -139,6 +154,44 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Verified that age field is activated")
     public boolean isAgeFieldActivated() {
         return ageField.isEnabled();
+    }
+
+    @Step("Clicked sort alphabetically button ")
+    public AdvancedSearchComponent clickSortAlphabeticallyButton() {
+        sortAlphabeticallyButton.click();
+        sleep(10000);
+
+        return this;
+    }
+
+    @Step("Clicked remove filter button")
+    public AdvancedSearchComponent clickRemoveFilterButton() {
+        removeFilterButton.click();
+        sleep(10000);
+
+        return this;
+    }
+
+    @Step("Clicked on arrow-up button")
+    public AdvancedSearchComponent clickArrowUpButton() {
+        sortArrowUpIcon.click();
+        sleep(10000);
+
+        return this;
+    }
+
+    public List<String> getCenterLabels() {
+        List<String> centerLabelNames = new LinkedList<>();
+        sleep(10000);
+        int amountOfCenters = centerLabels.size();
+
+        for (int i = 1; i <= amountOfCenters; i++) {
+            centerLabelNames.add(driver.findElement(By.xpath(String.format("(//div[@class='center-name'])[%d]", i))).getText().trim());
+        }
+
+        return centerLabelNames
+                .stream()
+                .collect(toList());
     }
 }
 

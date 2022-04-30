@@ -5,6 +5,8 @@ import java.util.List;
 
 public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id;";
+    public static final String SELECT_ID_NAME_ASC = "SELECT id, name FROM centers ORDER BY name ASC;";
+    public static final String SELECT_ID_NAME_DESC = "SELECT id, name FROM centers ORDER BY name DESC;";
 
     private Long id;
     private Long centerExternalId;
@@ -71,6 +73,23 @@ public class CenterEntity {
         for (List<String> row : rows) {
             centers.add(getCenter(row));
         }
+        return centers;
+    }
+
+    public static CenterEntity getCenterName(List<String> row) {
+        CenterEntity center = new CenterEntity();
+        center.setId(Long.parseLong(row.get(0)));
+        center.setName(row.get(1));
+
+        return center;
+    }
+
+    public static List<CenterEntity> getCentersName(List<List<String>> rows) {
+        List<CenterEntity> centers = new ArrayList<>();
+        for (List<String> row : rows) {
+            centers.add(getCenterName(row));
+        }
+
         return centers;
     }
 
