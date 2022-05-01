@@ -1,9 +1,7 @@
 package com.ita.edu.teachua.utils.jdbc.services;
 
-
 import com.ita.edu.teachua.utils.jdbc.dao.ClubsDao;
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
-import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
 
 import java.util.List;
 

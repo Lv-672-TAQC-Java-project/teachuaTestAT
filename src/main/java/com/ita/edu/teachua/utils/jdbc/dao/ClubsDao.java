@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.utils.jdbc.dao;
 
-
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
 
 import java.sql.ResultSet;

@@ -7,27 +7,29 @@ public class GalleriesEntity {
 
     public static final String SELECT_ALL = "SELECT * FROM galleries ORDER BY id;";
 
-    private Long clubId;
     private Long id;
     private String url;
+    private Long clubId;
 
-    public GalleriesEntity(Long clubId, Long id, String url) {
-        this.clubId = clubId;
+    public GalleriesEntity(Long id, String url, Long clubId) {
         this.id = id;
         this.url = url;
+        this.clubId = clubId;
     }
 
     public GalleriesEntity() {
-        this.clubId = 0L;
         this.id = 0L;
         this.url = null;
+        this.clubId = 0L;
     }
 
     public static GalleriesEntity getGallery(List<String> row) {
         GalleriesEntity gallery = new GalleriesEntity();
-        gallery.setClubId(Long.parseLong(row.get(0)));
-        gallery.setId(Long.parseLong(row.get(1)));
-        gallery.setUrl(row.get(2));
+        gallery.setId(Long.parseLong(row.get(0)));
+        if (row.get(1) != null) {
+            gallery.setUrl(row.get(1));
+        }
+        gallery.setClubId(Long.parseLong(row.get(2)));
 
         return gallery;
     }

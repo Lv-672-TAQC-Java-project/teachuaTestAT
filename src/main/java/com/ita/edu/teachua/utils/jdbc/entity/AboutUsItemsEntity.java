@@ -35,10 +35,16 @@ public class AboutUsItemsEntity {
         AboutUsItemsEntity aboutUsItem = new AboutUsItemsEntity();
         aboutUsItem.setId(Long.parseLong(row.get(0)));
         aboutUsItem.setNumber(Long.parseLong(row.get(1)));
-        aboutUsItem.setPicture(row.get(2));
-        aboutUsItem.setText(row.get(3));
+        if (row.get(2) != null) {
+            aboutUsItem.setPicture(row.get(2));
+        }
+        if (row.get(3) != null) {
+            aboutUsItem.setText(row.get(3));
+        }
         aboutUsItem.setType(Long.parseLong(row.get(4)));
-        aboutUsItem.setVideo(row.get(5));
+        if (row.get(5) != null) {
+            aboutUsItem.setVideo(row.get(5));
+        }
 
         return aboutUsItem;
     }
