@@ -8,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 public class AdvancedSearchComponent extends CommonPage {
@@ -67,6 +69,12 @@ public class AdvancedSearchComponent extends CommonPage {
 
     @FindBy(how = How.XPATH, using = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
     private WebElement sortArrowUpIcon;
+
+    @FindBy(how = How.XPATH, using = "//span[@title='Київ']")
+    private WebElement kyivCityFilter;
+
+    @FindBy(how = How.XPATH, using = "//a[@rel='nofollow']")
+    List<WebElement> pagesButtons;
 
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -158,8 +166,9 @@ public class AdvancedSearchComponent extends CommonPage {
 
     @Step("Clicked sort alphabetically button ")
     public AdvancedSearchComponent clickSortAlphabeticallyButton() {
+        String firstCenterName = centerLabels.get(0).getText();
         sortAlphabeticallyButton.click();
-        sleep(10000);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(format("//div[@class='center-name' and text()='%s']", firstCenterName))));
 
         return this;
     }
@@ -167,22 +176,22 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Clicked remove filter button")
     public AdvancedSearchComponent clickRemoveFilterButton() {
         removeFilterButton.click();
-        sleep(10000);
+        wait.until(ExpectedConditions.invisibilityOf(kyivCityFilter));
 
         return this;
     }
 
     @Step("Clicked on arrow-up button")
     public AdvancedSearchComponent clickArrowUpButton() {
+        String firstCenterName = centerLabels.get(0).getText();
         sortArrowUpIcon.click();
-        sleep(10000);
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(format("//div[@class='center-name' and text()='%s']", firstCenterName))));
 
         return this;
     }
 
     public List<String> getCenterLabels() {
         List<String> centerLabelNames = new LinkedList<>();
-        sleep(10000);
         int amountOfCenters = centerLabels.size();
 
         for (int i = 1; i <= amountOfCenters; i++) {
