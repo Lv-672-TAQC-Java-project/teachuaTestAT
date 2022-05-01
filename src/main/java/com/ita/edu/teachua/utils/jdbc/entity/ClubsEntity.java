@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 public class ClubsEntity {
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id;";
-    public static final String SELECT_NAME = "SELECT name FROM public.clubs;";
+    public static final String SELECT_NAME = "SELECT name FROM public.clubs ORDER BY id;";
 
     private Long id;
     private Integer ageFrom;
@@ -69,8 +69,12 @@ public class ClubsEntity {
         }
         clubs.setContacts(row.get(5));
         clubs.setDescription(row.get(6));
-        clubs.setIsApproved(Boolean.valueOf(row.get(7)));
-        clubs.setIsOnline(Boolean.valueOf(row.get(8)));
+        if (row.get(7) != null) {
+            clubs.setIsApproved(Boolean.valueOf(row.get(7)));
+        }
+        if (row.get(8) != null) {
+            clubs.setIsOnline(row.get(8) == "t");
+        }
         clubs.setName(row.get(9));
         clubs.setRating(Double.valueOf(row.get(10)));
         clubs.setUrlBackground(row.get(11));

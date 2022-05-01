@@ -7,11 +7,14 @@ import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import io.qameta.allure.Step;
+import net.bytebuddy.asm.Advice;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class HeaderPage extends BasePage {
@@ -42,6 +45,9 @@ public class HeaderPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")
     private WebElement searchInput;
+
+    @FindBy(xpath = "//span[@aria-label='search']")
+    private WebElement search;
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -99,11 +105,18 @@ public class HeaderPage extends BasePage {
 
     @Step("Enter {keyWords} in search")
     public ClubsPage enterSearch(String keyWords){
-        searchInput.click();
-        searchInput.clear();
-        searchInput.sendKeys(keyWords);
-        searchInput.sendKeys(Keys.ENTER);
-
+        driver.findElement
+                        (By.xpath("//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']"))
+                .click();
+        driver.findElement
+                        (By.xpath("//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']"))
+                .sendKeys(keyWords);
+//        wait.until((ExpectedConditions.elementToBeClickable(driver.findElement
+//                        (By.xpath("//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']")))));
+        sleep(2000);
+        driver.findElement
+                (By.xpath("//div[@class='search']//span[@class='ant-select-selection-search']/input[@type='search']"))
+                .sendKeys(Keys.ENTER);
         return new ClubsPage(driver);
     }
 

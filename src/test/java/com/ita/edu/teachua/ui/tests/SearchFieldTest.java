@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.ui.tests;
 
+import com.ita.edu.teachua.ui.pages.clubs.ClubCardComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
@@ -22,8 +23,7 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         SoftAssert softAssert = new SoftAssert();
         String oneSymbol = RandomStringUtils.randomAlphabetic(1);
 
-        List<WebElement> clubCards = home.getHeader()
-                .clickAdvancedSearchBtn()
+        List<ClubCardComponent> clubCards = home
                 .getHeader()
                 .enterSearch(oneSymbol)
                 .getClubCards();
@@ -40,7 +40,8 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         SoftAssert softAssert = new SoftAssert();
         String fiftySymbols = RandomStringUtils.randomAlphabetic(50);
 
-        List<WebElement> clubCards = home.getHeader()
+        List<ClubCardComponent> clubCards = home
+                .getHeader()
                 .clickAdvancedSearchBtn()
                 .getHeader()
                 .enterSearch(fiftySymbols)
@@ -58,7 +59,8 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         SoftAssert softAssert = new SoftAssert();
         String fiftyOneSymbols = RandomStringUtils.randomAlphabetic(51);
 
-        List<WebElement> clubCards = home.getHeader()
+        List<ClubCardComponent> clubCards = home
+                .getHeader()
                 .clickAdvancedSearchBtn()
                 .getHeader()
                 .enterSearch(fiftyOneSymbols)
@@ -85,7 +87,8 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         SoftAssert softAssert = new SoftAssert();
         String oneSymbol = RandomStringUtils.randomAlphabetic(1);
 
-        List<WebElement> clubCards = home.getHeader()
+        List<ClubCardComponent> clubCards = home
+                .getHeader()
                 .clickAdvancedSearchBtn()
                 .getHeader()
                 .parseSearch(oneSymbol)
@@ -103,7 +106,8 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         SoftAssert softAssert = new SoftAssert();
         String fiftySymbols = RandomStringUtils.randomAlphabetic(50);
 
-        List<WebElement> clubCards = home.getHeader()
+        List<ClubCardComponent> clubCards = home
+                .getHeader()
                 .clickAdvancedSearchBtn()
                 .getHeader()
                 .parseSearch(fiftySymbols)
@@ -124,15 +128,12 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
         List<ClubsEntity> clubs = clubsService.getClubsName();
 
         String clubName = clubs.get(0).getName();
-        //System.out.println(clubName);
-       /* List<WebElement> clubCards =*/ home.getHeader()
-                .clickAdvancedSearchBtn()
+        List<ClubCardComponent> clubCards = home
                 .getHeader()
-                .enterSearch(clubName);
-                //.getClubCards();
+                .enterSearch(clubName)
+                .getClubCards();
 
-//
-//        softAssert.assertNotEquals(clubName, Integer.parseInt(valueProvider.getSizeOfSearchResult()),
-//                "The result of the search does not contain a club with the name of a club");
+        softAssert.assertEquals(clubName, clubCards.get(0).getName(),
+                "The result of the search does not contain a club with the name of a club");
     }
 }
