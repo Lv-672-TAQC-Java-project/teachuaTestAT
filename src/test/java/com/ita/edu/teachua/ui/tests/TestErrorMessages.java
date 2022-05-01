@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -11,19 +12,19 @@ import org.testng.asserts.SoftAssert;
 public class TestErrorMessages extends TestRunnerWithValueProvider {
 
     @BeforeMethod
-    public void beforeMethot ()  {
+    public void beforeMethod() {
 
-        HomePage home = new HomePage(driver);
-        home
-                .getHeader()
-                .clickUserProfile()
-                .clickLogin()
-                .setEmail(valueProvider.getAdminEmail())
-                .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .clickDropDownProfileButton()
+        HomePage homePage = new HomePage(driver);
+        homePage
+                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
+
+        MyProfilePage myProfilePage = new MyProfilePage(driver);
+        myProfilePage
+                .clickDropDownMyProfileButton()
                 .clickMyProfileButton()
+                .clickAddButton()
                 .clickAddCenter();
+
     }
 
     @Description("Verify that error messages is displayed after user leaves fields empty and clicks 'Наступний крок' button on 'Основна інформація' tab")
@@ -35,7 +36,7 @@ public class TestErrorMessages extends TestRunnerWithValueProvider {
 
         BasicInformationCenterComponent basicInformationCenterComponent = new BasicInformationCenterComponent(driver);
         softAssert.assertSame(basicInformationCenterComponent
-                .getFieldNameCenter(),"","field 'Назва центру' have to be empty");
+                .getFieldNameCenter(), "", "field 'Назва центру' have to be empty");
         basicInformationCenterComponent.clickNextButton();
         softAssert.assertEquals(basicInformationCenterComponent.getTextAfterClick(),
                 "Некоректна назва центру");
