@@ -25,6 +25,8 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
 
         List<ClubCardComponent> clubCards = home
                 .getHeader()
+                .clickAdvancedSearchBtn()
+                .getHeader()
                 .enterSearch(oneSymbol)
                 .getClubCards();
 
