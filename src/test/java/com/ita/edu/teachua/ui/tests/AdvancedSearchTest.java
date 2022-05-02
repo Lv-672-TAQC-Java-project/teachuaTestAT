@@ -97,7 +97,8 @@ public class AdvancedSearchTest extends TestRunner {
         int expectedHeight = 184;
         int expectedWidth = 944;
         HomePage home = new HomePage(driver);
-        AdvancedSearchComponent advancedSearchComponent = home.getHeader()
+        AdvancedSearchComponent advancedSearchComponent = home
+                .getHeader()
                 .clickAdvancedSearchBtn()
                 .clickOnСenterButton()
                 .clickOnListIcon();

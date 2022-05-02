@@ -125,18 +125,11 @@ public class AdvancedSearchComponent extends CommonPage {
     }
 
     public boolean isCentersDisplayedAsAList(int expectedWidth, int expectedHeight) {
-        for (WebElement numberOfPageButton : listOfPaginationButtons) {
-            for (WebElement element : centers) {
+        for (WebElement element : centers) {
                 if (!(element.getSize().height == expectedHeight && element.getSize().width == expectedWidth)) {
                     return false;
                 }
-                sleep(4000);
             }
-            if (numberOfPageButton.getAttribute("class").contains("active")) {
-                nextPageButton.click();
-                sleep(4000);
-            }
-        }
         return true;
     }
 
