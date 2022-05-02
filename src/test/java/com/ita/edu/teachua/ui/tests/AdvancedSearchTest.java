@@ -2,11 +2,17 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
+import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -97,5 +103,62 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnListIcon();
 
         assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight), "Centers is not displayed as a list");
+    }
+
+
+    @Description("Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    @Test(description = "TUA-449")
+    public void verifyThatUserCanSortResultsByRatingAfterClickingOnCenterBtn() {
+        HomePage home = new HomePage(driver);
+        AdvancedSearchComponent centers = home
+                .getHeader()
+                .clickAdvancedSearchBtn()
+                .clickOnСenterButton()
+                .clickOnClearCityNameButton()
+                .clickOnByRatingOption();
+
+        List<String> centersByRating = centers.getCenterName();
+
+        CenterService centerService = new CenterService();
+        List<CenterEntity> centersFromDB = centerService.getCentersByRating();
+
+        LinkedHashMap<Double, List<String>> centersByRatingFromDB = centersFromDB.stream()
+                .collect(Collectors.groupingBy(
+                        CenterEntity::getRating,
+                        LinkedHashMap::new, mapping(
+                                CenterEntity::getName, toList())));
+
+        checkIfDbContainsCentersName(centersByRating, centersByRatingFromDB);
+
+        List<String> centersByRatingDesc = centers
+                .clickOnPaginationButton(1)
+                .clickOnArrowUpLabel()
+                .getCenterName();
+
+        List<CenterEntity> centersFromDBByDesc = centerService.getCentersByDescendingRating();
+
+        LinkedHashMap<Double, List<String>> centersByDescRatingFromDB = centersFromDBByDesc.stream()
+                .collect(Collectors.groupingBy(
+                        CenterEntity::getRating,
+                        LinkedHashMap::new, mapping(
+                                CenterEntity::getName, toList())));
+
+        checkIfDbContainsCentersName(centersByRatingDesc, centersByDescRatingFromDB);
+    }
+
+    private void checkIfDbContainsCentersName(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
+        List<Double> keys = centersByRatingFromDB.keySet().stream().collect(toList());
+
+        for (Double key: keys) {
+            for (String str:centersByRating) {
+                if(centersByRatingFromDB.get(key).toString().contains(str)){
+                    if(centersByRatingFromDB.get(key).equals(centersByRatingFromDB.remove(key))){
+                        break;
+                    }
+                }
+             }
+        }
+        assertTrue(centersByRatingFromDB.isEmpty());
     }
 }

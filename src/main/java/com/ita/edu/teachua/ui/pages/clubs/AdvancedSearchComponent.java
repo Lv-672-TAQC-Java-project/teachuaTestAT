@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.ui.pages.clubs;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
+import com.ita.edu.teachua.utils.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -8,7 +9,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdvancedSearchComponent extends CommonPage {
@@ -51,6 +56,25 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//label[text()='Категорії']/ancestor::div[contains(@class,'club-list-row')]//input")
     private List<WebElement> categoriesCheckboxes;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='за рейтингом']")
+    private WebElement byRatingOption;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name']")
+    private List<WebElement> centersName;
+
+    @FindBy(how = How.XPATH, using = "//label[@for='basic_cityName']/following::div[1]//span[@class='ant-select-clear']")
+    private WebElement clearCityNameButton;
+
+    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name'])[1]")
+    private WebElement firstCenterName;
+
+    @FindBy(how = How.XPATH, using = "//span[@aria-label='arrow-up']")
+    private WebElement arrowUpLabel;
+
+    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+    private Waiter waiter = new Waiter(driver);
+
+    private static String firstCenterTextXpath = "(//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name'])[1]";
 
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
@@ -59,13 +83,44 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
-        sleep(3000);
+        wait.until(ExpectedConditions.visibilityOfAllElements(centers));
         return this;
     }
+
     @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
-        sleep(4000);
+        return this;
+    }
+
+    @Step("Click on clear city name button")
+    public AdvancedSearchComponent clickOnClearCityNameButton() {
+        clearCityNameButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul/li[@title='12']")));
+        return this;
+    }
+
+    @Step("Click on 'by rating' sorting option")
+    public AdvancedSearchComponent clickOnByRatingOption() {
+        String nameBeforeSorting = firstCenterName.getText();
+        byRatingOption.click();
+        waiter.waitUntilInvisibilityOfCenterWithText(nameBeforeSorting, 40, firstCenterTextXpath);
+        return this;
+    }
+
+    @Step("Click on {pageNumber} page number")
+    public AdvancedSearchComponent clickOnPaginationButton(int pageNumber) {
+        String centerName = firstCenterName.getText();
+        driver.findElement(By.xpath(String.format("//li[@title='%s']", pageNumber))).click();
+        waiter.waitUntilInvisibilityOfCenterWithText(centerName, 40, firstCenterTextXpath);
+        return this;
+    }
+
+    @Step("Click on arrow up label")
+    public AdvancedSearchComponent clickOnArrowUpLabel() {
+        String nameBeforeSorting = firstCenterName.getText();
+        arrowUpLabel.click();
+        waiter.waitUntilInvisibilityOfCenterWithText(nameBeforeSorting, 40, firstCenterTextXpath);
         return this;
     }
 
@@ -144,6 +199,25 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Verified that age field is activated")
     public boolean isAgeFieldActivated() {
         return ageField.isEnabled();
+    }
+
+    public List<String> getCenterName() {
+        List<String> listCenterName = new ArrayList<>();
+
+        for (WebElement name : centersName) {
+            listCenterName.add(name.getText());
+        }
+
+        while (nextPageButton.getAttribute("aria-disabled").contains("false")) {
+            String centerName = centersName.get(0).getText();
+            nextPageButton.click();
+            waiter.waitUntilInvisibilityOfCenterWithText(centerName, 45, firstCenterTextXpath);
+
+            for (WebElement name : centersName) {
+                listCenterName.add(name.getText());
+            }
+        }
+        return listCenterName;
     }
 }
 
