@@ -15,4 +15,8 @@ public class CenterService {
     public List<CenterEntity> getAllCenters() {
         return centerDao.selectAll();
     }
+
+    public List<CenterEntity> getCentresSortedByNameAscOrDesc(boolean isAsc) {
+        return centerDao.selectByNameSortedAscOrDesc(isAsc);
+    }
 }
