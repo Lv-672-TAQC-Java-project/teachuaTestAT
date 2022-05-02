@@ -1,7 +1,6 @@
 package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
-import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +31,6 @@ public class LoginPopUpComponent extends BasePage {
     @Step("click Login")
     public LoginPopUpComponent clickLoginButton() {
         loginButton.click();
-        sleep(2000);
         return this;
     }
 
@@ -51,20 +49,4 @@ public class LoginPopUpComponent extends BasePage {
         passwordField.sendKeys(password);
         return this;
     }
-
-    @Step("click drop down menu in My Profile")
-    public LoginPopUpComponent clickDropDownProfileButton() {
-        sleep(3000);
-        dropDownProfileButton.click();
-
-        return this;
-    }
-
-    @Step("click My Profile")
-    public MyProfilePage clickMyProfileButton() {
-        myProfileButton.click();
-        return new MyProfilePage(driver).clickAddButton();
-    }
-
-
 }
