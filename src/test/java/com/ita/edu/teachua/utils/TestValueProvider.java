@@ -24,6 +24,14 @@ public class TestValueProvider {
         return properties.getProperty("adminPassword");
     }
 
+    public String getClubLeaderEmail() {
+        return properties.getProperty("clubLeaderEmail");
+    }
+
+    public String getClubLeaderPassword() {
+        return properties.getProperty("clubLeaderPassword");
+    }
+
     public String getSizeOfSearchResult() {
         return properties.getProperty("sizeOfSearchResult");
     }

@@ -4,6 +4,7 @@ import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -81,5 +82,20 @@ public class MyProfilePage extends CommonPage {
     public EditMyProfileComponent clickEditMyProfileComponent() {
         editButton.click();
         return new EditMyProfileComponent(driver);
+    }
+
+    public String getClubInfoBoxLocator(int clubNumber) {
+        final String clubInfoBoxLocator = String.format("//*[@class = 'ant-space-item'][%s]", clubNumber);
+        return clubInfoBoxLocator;
+    }
+
+    @Step("Opened chosen club details page")
+    public ClubDetailsPage goToClubDetailsPage(int clubNumber) {
+        String clubInfoBoxLocator = getClubInfoBoxLocator(clubNumber);
+        String clubDetailsPageLocator = String.format(clubInfoBoxLocator + "//*[@type = 'button']");
+        WebElement clubDetails = driver.findElement(By.xpath(clubDetailsPageLocator));
+        clubDetails.click();
+
+        return new ClubDetailsPage(driver);
     }
 }

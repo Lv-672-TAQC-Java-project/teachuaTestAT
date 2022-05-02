@@ -15,4 +15,8 @@ public class ClubsService {
     public List<ClubsEntity> getAllClubs() {
         return clubsDao.selectAll();
     }
+
+    public List<ClubsEntity> getClubWhereName(String clubName) {
+        return clubsDao.selectWhereName(clubName);
+    }
 }

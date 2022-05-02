@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.utils.jdbc.dao;
 
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
+import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,20 @@ public class ClubsDao {
 
         try {
             ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_ALL);
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return ClubsEntity.getClubs(rows);
+    }
+
+    public List<ClubsEntity> selectWhereName(String clubName) {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(ClubsEntity.SELECT_ALL_WHERE_NAME, clubName));
             rows = ManagerDao.get().parseResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
