@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id;";
+    public static final String SELECT_All_WHERE_NAME = "select * from public.centers where name = '%s'";
 
     private Long id;
     private Long centerExternalId;

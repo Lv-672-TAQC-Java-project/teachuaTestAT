@@ -22,4 +22,18 @@ public class CenterDao {
         ManagerDao.get().closeStatement(statement);
         return CenterEntity.getCenters(rows);
     }
+
+    public List<CenterEntity> selectAllWhereName(String name) {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(CenterEntity.SELECT_All_WHERE_NAME, name));
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return CenterEntity.getCenters(rows);
+    }
 }

@@ -70,4 +70,12 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         getCreateClubBtn().click();
         return new HomePage(driver);
     }
+
+    @Step("fill description information and click finish button")
+    public HomePage fillDescriptionInfo() {
+        enterSymbols(50);
+//        getCreateClubBtn().click();
+        sleep(2000);
+        return new HomePage(driver);
+    }
 }
