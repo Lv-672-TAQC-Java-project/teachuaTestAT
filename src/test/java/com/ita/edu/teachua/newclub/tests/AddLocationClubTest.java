@@ -83,7 +83,7 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
 
         int locationSizeAfter = locationService.getAllLocationsWhereName(locationName).size();
         Assert.assertEquals(locationSizeAfter,
-                locationSizeBefore + (locationSizeAfter - locationSizeBefore));
+                locationSizeBefore + 1);
         softAssert.assertAll();
     }
 }
