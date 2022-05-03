@@ -9,6 +9,11 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+import static org.testng.Assert.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -104,6 +109,53 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnListIcon();
 
         assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight), "Centers is not displayed as a list");
+    }
+
+    @Description("This test case verifies that the user can sort the search results alphabetically after clicking on the 'Центр' radio button")
+    @Issue("TUA-440")
+    @Test(description = "TUA-440")
+    public void verifyThatUserCanSortCentersSearchResultsAlphabetically() {
+        AdvancedSearchComponent advancedSearchComponent = new HomePage(driver)
+                .getHeader()
+                .clickAdvancedSearchBtn();
+
+        boolean isAdvancedSearchModalDisplayed = advancedSearchComponent.isAdvancedSearchModalDisplayed();
+        assertTrue(isAdvancedSearchModalDisplayed, "Advanced search modal should be displayed");
+
+        advancedSearchComponent
+                .clickOnСenterButton()
+                .clickRemoveFilterButton()
+                .clickSortAlphabeticallyButton();
+
+        List<String> uiCentersNames = advancedSearchComponent.getCenterLabels();
+
+        String message = "Centers should be displayed alphabetically %s on UI";
+        List<String> dbCentersName = getFirstSixCentersNameSortedAscOrDesc(true);
+        assertEquals(uiCentersNames, dbCentersName, String.format(message, "ASC"));
+
+        advancedSearchComponent.clickArrowUpButton();
+        uiCentersNames = advancedSearchComponent.getCenterLabels();
+
+        dbCentersName = getFirstSixCentersNameSortedAscOrDesc(false);
+        assertEquals(uiCentersNames, dbCentersName, String.format(message, "DESC"));
+    }
+
+    private List<String> getFirstSixCentersNameSortedAscOrDesc(boolean isAsc) {
+        List<CenterEntity> centersFromDataBase = new CenterService().getCentresSortedByNameAscOrDesc(isAsc);
+
+        List<String> dataBaseList = new ArrayList<>();
+        for (CenterEntity center : centersFromDataBase) {
+            dataBaseList.add(center
+                    .getName()
+                    .trim()
+                    .replaceAll("  ", " ")
+            );
+        }
+
+        return dataBaseList
+                .stream()
+                .limit(6)
+                .collect(toList());
     }
 
 
