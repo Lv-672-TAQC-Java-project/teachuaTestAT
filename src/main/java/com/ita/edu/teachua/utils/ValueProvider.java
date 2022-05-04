@@ -24,5 +24,8 @@ public class ValueProvider {
     public String getJDBCTeachUAPassword() {
         return properties.getProperty("JDBCTeachUAPassword");
     }
+    public String getAPIBaseUrl() {
+        return properties.getProperty("APIBaseUrl");
+    }
 
 }
