@@ -14,10 +14,9 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.testng.Assert.*;
-import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
+import java.util.*;
+
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -176,13 +175,16 @@ public class AdvancedSearchTest extends TestRunner {
         CenterService centerService = new CenterService();
         List<CenterEntity> centersFromDB = centerService.getCentersByRating();
 
-        LinkedHashMap<Double, List<String>> centersByRatingFromDB = centersFromDB.stream()
-                .collect(Collectors.groupingBy(
-                        CenterEntity::getRating,
-                        LinkedHashMap::new, mapping(
-                                CenterEntity::getName, toList())));
+        LinkedHashMap<Double, List<String>> centersByRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDB) {
+            if (!centersByRatingFromDB.containsKey(center.getRating())) {
+                centersByRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
 
-        checkIfDbContainsCentersName(centersByRating, centersByRatingFromDB);
+        checkIfCentersTheSameWithDataBase(centersByRating, centersByRatingFromDB);
 
         List<String> centersByRatingDesc = centers
                 .clickOnPaginationButton(1)
@@ -191,27 +193,33 @@ public class AdvancedSearchTest extends TestRunner {
 
         List<CenterEntity> centersFromDBByDesc = centerService.getCentersByDescendingRating();
 
-        LinkedHashMap<Double, List<String>> centersByDescRatingFromDB = centersFromDBByDesc.stream()
-                .collect(Collectors.groupingBy(
-                        CenterEntity::getRating,
-                        LinkedHashMap::new, mapping(
-                                CenterEntity::getName, toList())));
+        LinkedHashMap<Double, List<String>> centersByDescRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDBByDesc) {
+            if (!centersByDescRatingFromDB.containsKey(center.getRating())) {
+                centersByDescRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByDescRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
 
-        checkIfDbContainsCentersName(centersByRatingDesc, centersByDescRatingFromDB);
+        checkIfCentersTheSameWithDataBase(centersByRatingDesc, centersByDescRatingFromDB);
     }
 
-    private void checkIfDbContainsCentersName(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
-        List<Double> keys = centersByRatingFromDB.keySet().stream().collect(toList());
+    private void checkIfCentersTheSameWithDataBase(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
+        List<Double> keys = centersByRatingFromDB.keySet().stream().filter(Objects::nonNull).collect(toList());
 
-        for (Double key: keys) {
-            for (String str:centersByRating) {
-                if(centersByRatingFromDB.get(key).toString().contains(str)){
-                    if(centersByRatingFromDB.get(key).equals(centersByRatingFromDB.remove(key))){
-                        break;
-                    }
-                }
-             }
+        int lastValue = 0;
+
+        for (Double key : keys) {
+            int sizeDBValue = centersByRatingFromDB.get(key).size();
+            List<String> resultList = new ArrayList<>();
+
+            for (int i = lastValue; i < sizeDBValue + lastValue; i++) {
+                resultList.add(centersByRating.get(i));
+            }
+            lastValue = sizeDBValue + lastValue;
+
+            assertTrue(resultList.containsAll(centersByRatingFromDB.get(key)));
         }
-        assertTrue(centersByRatingFromDB.isEmpty());
     }
 }

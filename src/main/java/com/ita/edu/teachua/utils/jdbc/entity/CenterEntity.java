@@ -99,8 +99,9 @@ public class CenterEntity {
         CenterEntity center = new CenterEntity();
         center.setId(Long.parseLong(row.get(0)));
         center.setName(row.get(1));
-        center.setRating(Double.parseDouble(row.get(2)));
-
+        if (row.get(2) != null) {
+            center.setRating(Double.parseDouble(row.get(2)));
+        }
         return center;
     }
 

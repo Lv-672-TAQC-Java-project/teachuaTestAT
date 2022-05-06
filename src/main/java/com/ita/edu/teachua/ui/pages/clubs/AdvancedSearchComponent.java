@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ita.edu.teachua.utils.Waiter.*;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
@@ -88,13 +89,9 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//label[@for='basic_cityName']/following::div[1]//span[@class='ant-select-clear']")
     private WebElement clearCityNameButton;
 
-    @FindBy(how = How.XPATH, using = "(//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name'])[1]")
-    private WebElement firstCenterName;
-
     @FindBy(how = How.XPATH, using = "//span[@aria-label='arrow-up']")
     private WebElement arrowUpLabel;
 
-    private WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
     private Waiter waiter = new Waiter(driver);
 
     private static String firstCenterTextXpath = "(//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name'])[1]";
@@ -106,7 +103,7 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
-        wait.until(ExpectedConditions.visibilityOfAllElements(centers));
+        waitVisibilityOfAllElements(centers, 40);
         return this;
     }
 
@@ -119,40 +116,40 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on clear city name button")
     public AdvancedSearchComponent clickOnClearCityNameButton() {
         clearCityNameButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul/li[@title='12']")));
+        waitVisibilityOfElementLocated("//ul/li[@title='13']", 40);
         return this;
     }
 
     @Step("Click on 'by rating' sorting option")
     public AdvancedSearchComponent clickOnByRatingOption() {
-        String nameBeforeSorting = firstCenterName.getText();
+        String firstCenterName = centersName.get(0).getText();
         byRatingOption.click();
-        waiter.waitUntilInvisibilityOfCenterWithText(nameBeforeSorting, 40, firstCenterTextXpath);
+        waitInvisibilityOfElementWithText(firstCenterName, 40, firstCenterTextXpath);
         return this;
     }
 
     @Step("Click on {pageNumber} page number")
     public AdvancedSearchComponent clickOnPaginationButton(int pageNumber) {
-        String centerName = firstCenterName.getText();
+        String firstCenterName = centersName.get(0).getText();
         driver.findElement(By.xpath(String.format("//li[@title='%s']", pageNumber))).click();
-        waiter.waitUntilInvisibilityOfCenterWithText(centerName, 40, firstCenterTextXpath);
+        waitInvisibilityOfElementWithText(firstCenterName, 40, firstCenterTextXpath);
         return this;
     }
 
     @Step("Click on arrow up label")
     public AdvancedSearchComponent clickOnArrowUpLabel() {
-        String nameBeforeSorting = firstCenterName.getText();
+        String firstCenterName = centersName.get(0).getText();
         arrowUpLabel.click();
-        waiter.waitUntilInvisibilityOfCenterWithText(nameBeforeSorting, 40, firstCenterTextXpath);
+        waitInvisibilityOfElementWithText(firstCenterName, 40, firstCenterTextXpath);
         return this;
     }
 
     public boolean isCentersDisplayedAsAList(int expectedWidth, int expectedHeight) {
         for (WebElement element : centers) {
-                if (!(element.getSize().height == expectedHeight && element.getSize().width == expectedWidth)) {
-                    return false;
-                }
+            if (!(element.getSize().height == expectedHeight && element.getSize().width == expectedWidth)) {
+                return false;
             }
+        }
         return true;
     }
 
@@ -170,6 +167,25 @@ public class AdvancedSearchComponent extends CommonPage {
         } catch (NoSuchElementException noSuchElementException) {
             return false;
         }
+    }
+
+    public List<String> getCenterName() {
+        List<String> listCenterName = new ArrayList<>();
+
+        for (WebElement name : centersName) {
+            listCenterName.add(name.getText());
+        }
+
+        while (nextPageButton.getAttribute("aria-disabled").contains("false")) {
+            String firstCenterName = centersName.get(0).getText();
+            nextPageButton.click();
+            waitInvisibilityOfElementWithText(firstCenterName, 45, firstCenterTextXpath);
+
+            for (WebElement name : centersName) {
+                listCenterName.add(name.getText());
+            }
+        }
+        return listCenterName;
     }
 
     @Step("Verified that advanced search modal is displayed")
@@ -254,25 +270,6 @@ public class AdvancedSearchComponent extends CommonPage {
         return centerLabelNames
                 .stream()
                 .collect(toList());
-    }
-
-    public List<String> getCenterName() {
-        List<String> listCenterName = new ArrayList<>();
-
-        for (WebElement name : centersName) {
-            listCenterName.add(name.getText());
-        }
-
-        while (nextPageButton.getAttribute("aria-disabled").contains("false")) {
-            String centerName = centersName.get(0).getText();
-            nextPageButton.click();
-            waiter.waitUntilInvisibilityOfCenterWithText(centerName, 45, firstCenterTextXpath);
-
-            for (WebElement name : centersName) {
-                listCenterName.add(name.getText());
-            }
-        }
-        return listCenterName;
     }
 }
 
