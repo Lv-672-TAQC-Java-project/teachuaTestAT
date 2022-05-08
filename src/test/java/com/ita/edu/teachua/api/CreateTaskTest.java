@@ -12,6 +12,8 @@ public class CreateTaskTest extends ApiTestRunner {
     private Task task;
     @BeforeClass
     public void setUpClass(){
+        //In Process
+
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
         task = new Task(authorization.getToken());
     }
