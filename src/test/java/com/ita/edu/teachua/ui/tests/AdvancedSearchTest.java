@@ -184,7 +184,7 @@ public class AdvancedSearchTest extends TestRunner {
                     .trim().replaceAll("  ", " "));
         }
 
-        checkIfCentersTheSameWithDataBase(centersByRating, centersByRatingFromDB);
+        checkIfCentersAreTheSameWithDataBase(centersByRating, centersByRatingFromDB);
 
         List<String> centersByRatingDesc = centers
                 .clickOnPaginationButton(1)
@@ -202,15 +202,15 @@ public class AdvancedSearchTest extends TestRunner {
                     .trim().replaceAll("  ", " "));
         }
 
-        checkIfCentersTheSameWithDataBase(centersByRatingDesc, centersByDescRatingFromDB);
+        checkIfCentersAreTheSameWithDataBase(centersByRatingDesc, centersByDescRatingFromDB);
     }
 
-    private void checkIfCentersTheSameWithDataBase(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
-        List<Double> keys = centersByRatingFromDB.keySet().stream().filter(Objects::nonNull).collect(toList());
+    private void checkIfCentersAreTheSameWithDataBase(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
+        List<Object> keys = centersByRatingFromDB.keySet().stream().collect(toList());
 
         int lastValue = 0;
 
-        for (Double key : keys) {
+        for (Object key : keys) {
             int sizeDBValue = centersByRatingFromDB.get(key).size();
             List<String> resultList = new ArrayList<>();
 
