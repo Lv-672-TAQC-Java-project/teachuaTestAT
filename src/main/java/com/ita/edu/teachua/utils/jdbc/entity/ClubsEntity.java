@@ -15,7 +15,6 @@ import java.util.List;
 public class ClubsEntity {
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id;";
     public static final String SELECT_ALL_WHERE_NAME = "SELECT * FROM clubs WHERE name = '%s';";
-    public static final String SELECT_DESCRIPTION_WHERE_NAME = "SELECT description FROM clubs WHERE name = '%s';";
 
     private Long id;
     private Integer ageFrom;

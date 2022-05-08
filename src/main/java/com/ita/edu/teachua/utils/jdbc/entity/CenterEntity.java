@@ -5,6 +5,7 @@ import java.util.List;
 
 public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id;";
+    public static final String SELECT_ID_WHERE_NAME = "SELECT id FROM centers WHERE name = '%s';";
 
     private Long id;
     private Long centerExternalId;
@@ -61,8 +62,12 @@ public class CenterEntity {
         if (row.get(8) != null) {
             center.setUserId(Long.parseLong(row.get(8)));
         }
-        center.setClubCount(Long.parseLong(row.get(9)));
-        center.setRating(Double.parseDouble(row.get(10)));
+        if (row.get(9) != null) {
+            center.setUserId(Long.parseLong(row.get(9)));
+        }
+        if (row.get(10) != null) {
+            center.setRating(Double.parseDouble(row.get(10)));
+        }
         return center;
     }
 

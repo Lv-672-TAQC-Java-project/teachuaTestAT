@@ -2,6 +2,7 @@ package com.ita.edu.teachua.utils.jdbc.services;
 
 import com.ita.edu.teachua.utils.jdbc.dao.ClubsDao;
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ClubsService {
         return clubsDao.selectAll();
     }
 
-    public List<ClubsEntity> getClubWhereName(String clubName) {
-        return clubsDao.selectWhereName(clubName);
+    public JSONObject getClubWhereName(String clubName) {
+        return clubsDao.selectAllWhereName(clubName);
     }
 }

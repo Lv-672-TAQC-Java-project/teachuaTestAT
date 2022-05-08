@@ -8,12 +8,11 @@ import com.ita.edu.teachua.ui.pages.user.addclub.BasicInformationClubComponent;
 import com.ita.edu.teachua.ui.pages.user.addclub.ContactsClubComponent;
 import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
-import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
+import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
+import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -64,29 +63,44 @@ public class TestWIP extends TestRunnerWithValueProvider {
 
         ClubDetailsPage clubDetailsPage = myProfilePage.goToClubDetailsPage(2);
 
-        String detailsPageClubName = clubDetailsPage.getClubName();
-        String detailsPageDescription = clubDetailsPage.getDescription();
         int detailsPageAgeFrom = clubDetailsPage.getAgeFrom();
         int detailsPageAgeTo = clubDetailsPage.getAgeTo();
-        String detailsPageClubCenter = clubDetailsPage.getClubCenterName();
+        String detailsPageClubName = clubDetailsPage.getClubName();
+        String detailsPageDescription = clubDetailsPage.getDescription();
         String detailsPageContacts = clubDetailsPage.getContactsInfo();
+
         String detailsPageAddress = clubDetailsPage.getAddress();
+        Boolean isOnline = detailsPageAddress.contains("Онлайн");
+
+        String detailsPageClubCenter = clubDetailsPage.getClubCenterName();
+        CenterService centerService = new CenterService();
+        int centerId = centerService.getIdWhereName(detailsPageClubCenter);
 
         assertEquals(clubName, detailsPageClubName);
         assertEquals(descriptionText, detailsPageDescription);
         assertEquals(ageFrom, detailsPageAgeFrom);
         assertEquals(ageTo, detailsPageAgeTo);
         assertTrue(detailsPageContacts.contains(phoneNumber));
+        assertTrue(isOnline);
 
 //        Don't forget to change ValueProvider() path
         ClubsService clubsService = new ClubsService();
-        List<ClubsEntity> clubInfo = clubsService.getClubWhereName(clubName);
-        String test = clubInfo.toString();
+        JSONObject clubInfo = clubsService.getClubWhereName(clubName);
 
-        assertTrue(test.contains(detailsPageClubName));
-        assertTrue(test.contains(detailsPageDescription));
-        assertTrue(test.contains(String.valueOf(detailsPageAgeFrom)));
-        assertTrue(test.contains(String.valueOf(detailsPageAgeTo)));
-        assertTrue(test.contains(detailsPageContacts.substring(4)));
+        String DBClubName = clubInfo.getString("name");
+        String DBClubDescription = clubInfo.getString("description");
+        String DBContacts = clubInfo.getString("contacts");
+        Boolean DBIsClubOnline = clubInfo.getBoolean("isOnline");
+        int DBAgeFrom = clubInfo.getInt("ageFrom");
+        int DBAgeTo = clubInfo.getInt("ageTo");
+        int DBCenterId = clubInfo.getInt("centerId");
+
+        assertEquals(DBClubName, detailsPageClubName);
+        assertEquals(DBAgeFrom, detailsPageAgeFrom);
+        assertEquals(DBAgeTo, detailsPageAgeTo);
+        assertEquals(DBCenterId, centerId);
+        assertEquals(DBIsClubOnline, isOnline);
+        assertEquals(DBClubDescription, detailsPageDescription);
+        assertEquals(DBContacts, detailsPageContacts.substring(4));
     }
 }
