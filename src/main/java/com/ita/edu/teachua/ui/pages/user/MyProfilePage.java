@@ -98,4 +98,11 @@ public class MyProfilePage extends CommonPage {
 
         return new ClubDetailsPage(driver);
     }
+
+    public MyProfilePage clickDropDownMyProfileButton() {
+        sleep(3000);
+        dropDownProfileButton.click();
+
+        return this;
+    }
 }

@@ -31,7 +31,7 @@ public class ClubsDao {
 
         try {
             ResultSet resultSet = statement.executeQuery(String.format(ClubsEntity.SELECT_ALL_WHERE_NAME, clubName));
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 JSONObject result = new JSONObject();
 
                 JSONObject description = new JSONObject(resultSet.getString("description"));
@@ -52,10 +52,24 @@ public class ClubsDao {
                 arr.put(result);
                 obj = arr.getJSONObject(0);
             }
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
         }
         ManagerDao.get().closeStatement(statement);
         return obj;
+    }
+
+    public List<ClubsEntity> selectAllNames() {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_NAME);
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return ClubsEntity.getClubsName(rows);
     }
 }

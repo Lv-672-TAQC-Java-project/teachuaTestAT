@@ -12,7 +12,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.LinkedList;
 import java.util.List;
+
+import static java.lang.String.format;
+import static java.util.stream.Collectors.toList;
 
 public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[text()='Центр']")
@@ -54,6 +58,25 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//label[text()='Категорії']/ancestor::div[contains(@class,'club-list-row')]//input")
     private List<WebElement> categoriesCheckboxes;
 
+    @FindBy(how = How.XPATH, using = "//span[text()='за алфавітом']")
+    private WebElement sortAlphabeticallyButton;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='ant-select-clear']")
+    private WebElement removeFilterButton;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='center-name']")
+    List<WebElement> centerLabels;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='anticon anticon-arrow-up control-sort-arrow']")
+    private WebElement sortArrowUpIcon;
+
+    @FindBy(how = How.XPATH, using = "//span[@title='Київ']")
+    private WebElement kyivCityFilter;
+
+    @FindBy(how = How.XPATH, using = "//a[@rel='nofollow']")
+    List<WebElement> pagesButtons;
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
@@ -62,9 +85,11 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {
         centerButton.click();
-        sleep(3000);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        wait.until(ExpectedConditions.visibilityOfAllElements(centers));
         return this;
     }
+
     @Step("Click on list icon")
     public AdvancedSearchComponent clickOnListIcon() {
         listIcon.click();
@@ -139,6 +164,45 @@ public class AdvancedSearchComponent extends CommonPage {
     @Step("Verified that age field is activated")
     public boolean isAgeFieldActivated() {
         return ageField.isEnabled();
+    }
+
+    @Step("Clicked sort alphabetically button ")
+    public AdvancedSearchComponent clickSortAlphabeticallyButton() {
+        String firstCenterName = centerLabels.get(0).getText();
+        sortAlphabeticallyButton.click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(format("//div[@class='center-name' and text()='%s']", firstCenterName))));
+
+        return this;
+    }
+
+    @Step("Clicked remove filter button")
+    public AdvancedSearchComponent clickRemoveFilterButton() {
+        removeFilterButton.click();
+        wait.until(ExpectedConditions.invisibilityOf(kyivCityFilter));
+
+        return this;
+    }
+
+    @Step("Clicked on arrow-up button")
+    public AdvancedSearchComponent clickArrowUpButton() {
+        String firstCenterName = centerLabels.get(0).getText();
+        sortArrowUpIcon.click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(format("//div[@class='center-name' and text()='%s']", firstCenterName))));
+
+        return this;
+    }
+
+    public List<String> getCenterLabels() {
+        List<String> centerLabelNames = new LinkedList<>();
+        int amountOfCenters = centerLabels.size();
+
+        for (int i = 1; i <= amountOfCenters; i++) {
+            centerLabelNames.add(driver.findElement(By.xpath(String.format("(//div[@class='center-name'])[%d]", i))).getText().trim());
+        }
+
+        return centerLabelNames
+                .stream()
+                .collect(toList());
     }
 }
 

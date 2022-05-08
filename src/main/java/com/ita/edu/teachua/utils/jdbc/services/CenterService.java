@@ -19,4 +19,8 @@ public class CenterService {
     public int getIdWhereName(String centerName) {
         return centerDao.selectIdWhereName(centerName);
     }
+
+    public List<CenterEntity> getCentresSortedByNameAscOrDesc(boolean isAsc) {
+        return centerDao.selectByNameSortedAscOrDesc(isAsc);
+    }
 }

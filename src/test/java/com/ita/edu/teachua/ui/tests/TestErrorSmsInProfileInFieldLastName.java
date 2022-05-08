@@ -2,14 +2,13 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
+import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import static java.lang.Thread.sleep;
 
 public class TestErrorSmsInProfileInFieldLastName extends TestRunnerWithValueProvider {
 
@@ -33,21 +32,16 @@ public class TestErrorSmsInProfileInFieldLastName extends TestRunnerWithValuePro
     }
 
     @BeforeMethod
-    public void beforeMethot() throws InterruptedException {
+    public void beforeMethod() {
+        HomePage homePage = new HomePage(driver);
+        homePage
+                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
 
-        HomePage home = new HomePage(driver);
-        home
-                .getHeader()
-                .clickUserProfile()
-                .clickLogin()
-                .setEmail(valueProvider.getAdminEmail())
-                .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .clickDropDownProfileButton()
+        MyProfilePage myProfilePage = new MyProfilePage(driver);
+        myProfilePage
+                .clickDropDownMyProfileButton()
                 .clickMyProfileButton()
                 .clickEditMyProfileComponent();
-        sleep(3000);
-
     }
 
     @Description("Verify that error messages are shown and 'Зберегти зміни' button becomes disabled while entering invalid data into the 'Прізвище' field")
@@ -67,6 +61,5 @@ public class TestErrorSmsInProfileInFieldLastName extends TestRunnerWithValuePro
 
         softAssert.assertAll();
         editMyProfileComponent.setLastName("Admin");
-        sleep(1000);
     }
 }

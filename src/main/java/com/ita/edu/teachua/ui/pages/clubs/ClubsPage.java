@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClubsPage extends CommonPage {
 
@@ -22,7 +23,10 @@ public class ClubsPage extends CommonPage {
         return new ClubsPage(driver);
     }
 
-    public List<WebElement> getClubCards() {
-        return clubCardsNode;
+    public List<ClubCardComponent> getClubCards() {
+        return clubCardsNode
+                .stream()
+                .map(clubCard -> new ClubCardComponent(driver, clubCard))
+                .collect(Collectors.toList());
     }
 }
