@@ -13,7 +13,7 @@ public class Club extends BaseClient {
     }
 
     public Response postClub(ClubCredentials credentials) {
-
+//In progress
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .body(credentials)

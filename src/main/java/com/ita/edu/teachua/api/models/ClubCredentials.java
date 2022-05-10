@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ClubCredentials {
+    //In progress
     private List<String> categoriesName;
     private String name;
     private int ageFrom;

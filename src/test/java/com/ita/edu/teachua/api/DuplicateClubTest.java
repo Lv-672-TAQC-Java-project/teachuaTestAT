@@ -27,6 +27,7 @@ public class DuplicateClubTest extends ApiTestRunner {
     @Issue("TUA-469")
     @Test(description = "TUA-469")
     public void verifyDuplicateClubCannotCreated() {
+        //In progress
 
         List<ClubCredentials.Locations> locations = new ArrayList<>();
 
