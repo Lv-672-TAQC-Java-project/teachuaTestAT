@@ -1,9 +1,10 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.models.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,21 +13,28 @@ public class CreateTaskTest extends ApiTestRunner {
     private Task task;
     @BeforeClass
     public void setUpClass(){
-        //In Process
 
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
         task = new Task(authorization.getToken());
     }
 
 
-    @Test
-    public void singInTest() {
-TaskCredentials taskCredentials = new TaskCredentials(" namenamename1213#$% ","stringstringstringstringstringstringstringstring",
-        " descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ","/upload/test/test.png", "2022-05-25");
-        Response response = task.post(1, taskCredentials);
-        System.out.println(response.getStatusCode());
-        TaskResponse taskResponse = response.as(TaskResponse.class);
-        System.out.println(taskResponse.getName());
+    @Description("Verify that user can create Task with valid values.")
+    @Issue("TUA-441")
+    @Test(description = "TUA-441")
+    public void verifyCreatedTaskWithValidValues() {
 
+TaskCredentials taskCredentials = new TaskCredentials(" namenamename1213#$% ",
+        "stringstringstringstringstringstringstringstring",
+        " descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ",
+        "/upload/test/test.png",
+        "2022-05-25");
+
+        Response response = task.post(169, taskCredentials);
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertAll();
     }
 }

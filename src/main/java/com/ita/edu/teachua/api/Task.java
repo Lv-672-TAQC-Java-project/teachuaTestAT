@@ -14,12 +14,11 @@ public class Task extends BaseClient{
     }
 
     public Response post(int id, TaskCredentials credentials) {
-        //In Process
+
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .body(credentials)
                 .when()
                 .post(String.format("%s/api/challenge/%s/task", baseUrl, id));
-
     }
 }
