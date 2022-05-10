@@ -7,12 +7,9 @@ import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import io.qameta.allure.Step;
-import net.bytebuddy.asm.Advice;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class HeaderPage extends BasePage {
 
@@ -79,7 +76,13 @@ public class HeaderPage extends BasePage {
 
     @Step("click Admin Profile")
     public AdminMenuDropDownComponent clickAdminProfile() {
-        adminProfileButton.click();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//        wait.until(ExpectedConditions.elementToBeClickable(adminProfileButton));
+        try {
+            adminProfileButton.click();
+        } catch (org.openqa.selenium.StaleElementReferenceException exception) {
+            adminProfileButton.click();
+        }
 
         return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
     }

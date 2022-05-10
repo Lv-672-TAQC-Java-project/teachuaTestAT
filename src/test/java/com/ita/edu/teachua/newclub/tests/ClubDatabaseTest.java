@@ -2,11 +2,7 @@ package com.ita.edu.teachua.newclub.tests;
 
 import com.ita.edu.teachua.ui.pages.header.HeaderPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
-import com.ita.edu.teachua.ui.pages.user.ClubDetailsPage;
-import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.BasicInformationClubComponent;
-import com.ita.edu.teachua.ui.pages.user.addclub.ContactsClubComponent;
-import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
@@ -14,12 +10,10 @@ import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.sql.SQLException;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class TestWIP extends TestRunnerWithValueProvider {
+public class ClubDatabaseTest extends TestRunnerWithValueProvider {
 
     @BeforeMethod
     public void loggingAsClubLeader() {
@@ -31,7 +25,7 @@ public class TestWIP extends TestRunnerWithValueProvider {
     }
 
     @Test
-    public void wipTest() {
+    public void verifyThatCreatedClubIsPresentOnTheDatabase() {
         String clubName = "Малявки";
         int ageFrom = 4;
         int ageTo = 6;
@@ -43,49 +37,48 @@ public class TestWIP extends TestRunnerWithValueProvider {
 
         HeaderPage header = new HeaderPage(driver);
 
-        BasicInformationClubComponent basicInfoComponent = new BasicInformationClubComponent(driver);
+        var basicInfoComponent = new BasicInformationClubComponent(driver);
         basicInfoComponent
                 .enterClubName(clubName)
                 .selectCheckboxes()
                 .enterAge(ageFrom, ageTo)
                 .selectCenter();
 
-        ContactsClubComponent contactsComponent = basicInfoComponent.goToContactsClubComponent();
+        var contactsComponent = basicInfoComponent.goToContactsClubComponent();
         contactsComponent
                 .fillContactPhone(phoneNumber);
 
-        DescriptionClubComponent descriptionComponent = contactsComponent.goToDescriptionClubComponent();
+        var descriptionComponent = contactsComponent.goToDescriptionClubComponent();
         descriptionComponent
                 .enterDescriptionText(descriptionText)
                 .createClub();
 
-        MyProfilePage myProfilePage = header
+        var myProfilePage = header
                 .clickAdminProfile()
                 .clickMyProfileButton();
 
-        ClubDetailsPage clubDetailsPage = myProfilePage.goToClubDetailsPage(2);
+        var clubDetailsPage = myProfilePage.goToClubDetailsPage(2);
 
         int detailsPageAgeFrom = clubDetailsPage.getAgeFrom();
         int detailsPageAgeTo = clubDetailsPage.getAgeTo();
         String detailsPageClubName = clubDetailsPage.getClubName();
         String detailsPageDescription = clubDetailsPage.getDescription();
-        String detailsPageContacts = clubDetailsPage.getContactsInfo();
+        String detailsPageContacts = clubDetailsPage.getContactsInfo().substring(3);
 
         String detailsPageAddress = clubDetailsPage.getAddress();
         Boolean isOnline = detailsPageAddress.contains("Онлайн");
 
         String detailsPageClubCenter = clubDetailsPage.getClubCenterName();
-        CenterService centerService = new CenterService();
+        var centerService = new CenterService();
         int centerId = centerService.getIdWhereName(detailsPageClubCenter);
 
         assertEquals(clubName, detailsPageClubName);
         assertEquals(descriptionText, detailsPageDescription);
         assertEquals(ageFrom, detailsPageAgeFrom);
         assertEquals(ageTo, detailsPageAgeTo);
-        assertTrue(detailsPageContacts.contains(phoneNumber));
+        assertEquals(detailsPageContacts, phoneNumber);
         assertTrue(isOnline);
-
-//        Don't forget to change ValueProvider() path
+        
         ClubsService clubsService = new ClubsService();
         JSONObject clubInfo = clubsService.getClubWhereName(clubName);
 
@@ -103,6 +96,6 @@ public class TestWIP extends TestRunnerWithValueProvider {
         assertEquals(DBCenterId, centerId);
         assertEquals(DBIsClubOnline, isOnline);
         assertEquals(DBClubDescription, detailsPageDescription);
-        assertEquals(DBContacts, detailsPageContacts.substring(4));
+        assertEquals(DBContacts, detailsPageContacts.substring(1));
     }
 }
