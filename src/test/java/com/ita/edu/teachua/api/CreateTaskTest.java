@@ -11,24 +11,24 @@ import org.testng.asserts.SoftAssert;
 public class CreateTaskTest extends ApiTestRunner {
 
     private Task task;
+
     @BeforeClass
-    public void setUpClass(){
+    public void setUpClass() {
 
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
         task = new Task(authorization.getToken());
     }
-
 
     @Description("Verify that user can create Task with valid values.")
     @Issue("TUA-441")
     @Test(description = "TUA-441")
     public void verifyCreatedTaskWithValidValues() {
 
-TaskCredentials taskCredentials = new TaskCredentials(" namenamename1213#$% ",
-        "stringstringstringstringstringstringstringstring",
-        " descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ",
-        "/upload/test/test.png",
-        "2022-05-25");
+        TaskCredentials taskCredentials = new TaskCredentials(" namenamename1213#$% ",
+                "stringstringstringstringstringstringstringstring",
+                " descriptiondescriptiondescriptiondescriptiondescription12345$%%^$# ",
+                "/upload/test/test.png",
+                "2022-05-25");
 
         Response response = task.post(169, taskCredentials);
 

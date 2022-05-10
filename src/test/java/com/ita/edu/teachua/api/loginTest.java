@@ -11,7 +11,7 @@ public class loginTest extends ApiTestRunner {
 
     @Test
     public void singInTest() {
-        UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getPassword());
+        UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getAdminPassword());
         SingInClient client = new SingInClient();
         Response response = client.successSingInRequest(credentials);
         SuccessSingInResponse singInResponse = response.as(SuccessSingInResponse.class);

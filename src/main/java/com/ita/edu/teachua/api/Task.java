@@ -1,10 +1,9 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.models.TaskCredentials;
-import com.ita.edu.teachua.api.models.UserCredentials;
 import io.restassured.response.Response;
 
-public class Task extends BaseClient{
+public class Task extends BaseClient {
 
     private final String authorizationToken;
 
