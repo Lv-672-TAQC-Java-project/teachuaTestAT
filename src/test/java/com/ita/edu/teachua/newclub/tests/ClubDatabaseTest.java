@@ -78,7 +78,7 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
         assertEquals(ageTo, detailsPageAgeTo);
         assertEquals(detailsPageContacts, phoneNumber);
         assertTrue(isOnline);
-        
+
         ClubsService clubsService = new ClubsService();
         JSONObject clubInfo = clubsService.getClubWhereName(clubName);
 
