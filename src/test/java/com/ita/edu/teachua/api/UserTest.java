@@ -14,6 +14,9 @@ public class UserTest extends ApiTestRunner{
         client = new UserClient(authorization.getToken());
     }
 
+    @Test
+    public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty(){
+    }
 
     @Test
     public void getUserByIdTest() {

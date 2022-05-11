@@ -18,4 +18,11 @@ public class UserClient extends BaseClient{
 
     }
 
+    public Response put(int id){
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .when()
+                .get(String.format("%s/api/user/%s", baseUrl, id));
+    }
+
 }
