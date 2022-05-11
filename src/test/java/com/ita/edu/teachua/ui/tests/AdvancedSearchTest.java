@@ -1,12 +1,16 @@
 package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
+import com.ita.edu.teachua.ui.pages.clubs.ClubCard;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Map;
+
+import static com.ita.edu.teachua.ui.pages.clubs.ClubSortingArrowDirection.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -98,5 +102,30 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnListIcon();
 
         assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight), "Centers is not displayed as a list");
+    }
+
+    @Description("Verify that the clubs can be sorted by rating")
+    @Issue("TUA-516")
+    @Test
+    public void verifyThatClubsSortedByRating() {
+        var advancedSearch = new HomePage(driver)
+                .getHeader()
+                .clickAdvancedSearchBtn();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(advancedSearch.isAdvancedSearchModalDisplayed(),
+                "Advanced search should be displayed");
+
+        AdvancedSearchComponent advancedSearchComponent = advancedSearch
+                .sortByRating()
+                .clickSortArrowButton(UP);
+
+        advancedSearchComponent.getClubCards();
+
+        for (ClubCard card : advancedSearchComponent.getClubCards()) {
+            System.out.println(card.getName());
+        }
+
+//        System.out.println(advancedSearchComponent);
     }
 }

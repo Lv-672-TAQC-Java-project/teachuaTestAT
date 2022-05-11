@@ -6,13 +6,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[text()='Центр']")
@@ -54,10 +58,83 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//label[text()='Категорії']/ancestor::div[contains(@class,'club-list-row')]//input")
     private List<WebElement> categoriesCheckboxes;
 
+    @FindBy(how = How.XPATH, using = "//span[@class='control-sort-option'][contains(text(), 'за рейтингом')]")
+    private WebElement sortByRatingLink;
+
+    private List<ClubCard> clubCards = new ArrayList<>();
 
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
+        initCards();
     }
+
+    @Step("Sorting by rating")
+    public AdvancedSearchComponent sortByRating() {
+        sortByRatingLink.click();
+        sleep(1000);
+        initCards();
+
+        return this;
+    }
+
+    @Step("Sorting Clubs in {clubSortingArrowDirection} direction")
+    public AdvancedSearchComponent clickSortArrowButton(ClubSortingArrowDirection clubSortingArrowDirection) {
+        driver
+                .findElement(By.xpath(clubSortingArrowDirection.getClubSortingArrowDirectionPath()))
+                .click();
+
+        sleep(1000);
+
+        initCards();
+
+        return this;
+    }
+
+    private void initCards() {
+        List<WebElement> list = driver.findElements(By.xpath("//div[@class='ant-card ant-card-bordered card']"));
+
+        clubCards.clear();
+
+        for (WebElement element : list) {
+            clubCards.add(new ClubCard(driver, element));
+        }
+    }
+
+    public List<ClubCard> getClubCards() {
+        return clubCards;
+    }
+
+    public ClubCard getClubCard(int clubCardNumber) {
+
+        return clubCards.get(clubCardNumber);
+    }
+
+    public int getClubCardsPerPageAmount() {
+        return driver
+                .findElements(By.xpath("//div[@class='ant-card ant-card-bordered card']"))
+                .size();
+    }
+
+//    public Map<String, Integer> getClubsNameToRating(WebDriver driver) {
+//        var clubNameToRatingMap = new HashMap<String, Integer>();
+//        var advancedSearchComponent = new AdvancedSearchComponent(driver);
+//
+//        do {
+//            int clubsPerPageAmount = advancedSearchComponent.getClubCardsPerPageAmount();
+//
+//            for (int i = 1; i <= clubsPerPageAmount; i++) {
+//                var clubCard = advancedSearchComponent.getClubCard(driver, i);
+//
+//                clubNameToRatingMap.put(clubCard.getName(), clubCard.getRating());
+//            }
+//
+//            if (nextPageButton.isDisplayed()) {
+//                nextPageButton.click();
+//            }
+//        } while (nextPageButton.isEnabled());
+//
+//        return clubNameToRatingMap;
+//    }
 
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {

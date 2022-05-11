@@ -14,6 +14,8 @@ import java.util.List;
 @ToString
 public class ClubsEntity {
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id;";
+    public static final String SELECT_ALL_BY_RATING_ASC = "SELECT * FROM clubs ORDER BY rating ASC;";
+    public static final String SELECT_ALL_BY_RATING_DESC = "SELECT * FROM clubs ORDER BY rating DESC;";
 
     private Long id;
     private Integer ageFrom;
