@@ -82,4 +82,18 @@ public class CredentialsValueProvider extends TestValueProvider{
     public String getCenterId() {
         return properties.getProperty("centerId");
     }
+    public String getNameChallenge() {
+        return properties.getProperty("nameChallenge");
+    }
+
+    public String getPictureChallenge() {
+        return properties.getProperty("pictureChallenge");
+    }
+    public String getDescriptionChallenge() {
+        return properties.getProperty("descriptionChallenge");
+    }
+
+    public String getStartDateChallenge() {
+        return properties.getProperty("startDateChallenge");
+    }
 }

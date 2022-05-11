@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class CreateNewClub extends ApiTestRunner {
+public class CreateNewClubTest extends ApiTestRunner {
 
     private HeadOfTheClubClient client;
 
