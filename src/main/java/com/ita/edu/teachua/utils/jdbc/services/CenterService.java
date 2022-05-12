@@ -23,4 +23,12 @@ public class CenterService {
     public List<CenterEntity> getCentresSortedByNameAscOrDesc(boolean isAsc) {
         return centerDao.selectByNameSortedAscOrDesc(isAsc);
     }
+
+    public List<CenterEntity> getCentersByRating() {
+        return centerDao.selectByRating();
+    }
+
+    public List<CenterEntity> getCentersByDescendingRating() {
+        return centerDao.selectByDescendingRating();
+    }
 }
