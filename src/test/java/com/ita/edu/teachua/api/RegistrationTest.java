@@ -4,6 +4,8 @@ import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.models.RegistrationCredentials;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -12,7 +14,9 @@ import java.util.List;
 
 public class RegistrationTest extends ApiTestRunner{
 
-    @Test
+    @Description("This test case verifies that a user can't be created with invalid data in 'Email' field.")
+    @Issue("TUA-499")
+    @Test(description = "TUA-499")
     public void VerifyThatUserWithInvalidDataCanNotBeCreated() {
         RegistrationCredentials credentials = new RegistrationCredentials(provider.getFirstName(),
                 provider.getLastName(),
