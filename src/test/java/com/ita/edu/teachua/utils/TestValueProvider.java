@@ -1,7 +1,5 @@
 package com.ita.edu.teachua.utils;
 
-import com.ita.edu.teachua.api.models.clubs.Locations;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -56,5 +54,13 @@ public class TestValueProvider {
 
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
+    }
+
+    public String getTestTeachEmail() {
+        return properties.getProperty("TestTeachEmail");
+    }
+
+    public String getTestTeachPassword() {
+        return properties.getProperty("TestTeachPassword");
     }
 }
