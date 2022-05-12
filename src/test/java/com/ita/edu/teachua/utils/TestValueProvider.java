@@ -55,4 +55,28 @@ public class TestValueProvider {
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
     }
+
+    public String getNameChallenge() {
+        return properties.getProperty("nameChallenge");
+    }
+
+    public String getHeaderTextChallenge() {
+        return properties.getProperty("headerTextChallenge");
+    }
+
+    public String getDescriptionChallenge() {
+        return properties.getProperty("descriptionChallenge");
+    }
+
+    public String getPictureChallenge() {
+        return properties.getProperty("pictureChallenge");
+    }
+
+    public String getStartDateChallenge() {
+        return properties.getProperty("startDateChallenge");
+    }
+
+    public String getChallengeId() {
+        return properties.getProperty("challengeId");
+    }
 }
