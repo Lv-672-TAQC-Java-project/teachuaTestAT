@@ -52,6 +52,10 @@ public class TestValueProvider {
         return properties.getProperty("password");
     }
 
+    public String getRoleName() {
+        return properties.getProperty("roleName");
+    }
+
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
     }
