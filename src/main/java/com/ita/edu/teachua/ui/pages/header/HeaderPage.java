@@ -78,8 +78,6 @@ public class HeaderPage extends BasePage {
 
     @Step("click Admin Profile")
     public AdminMenuDropDownComponent clickAdminProfile() {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//        wait.until(ExpectedConditions.elementToBeClickable(adminProfileButton));
         try {
             adminProfileButton.click();
         } catch (org.openqa.selenium.StaleElementReferenceException exception) {

@@ -6,6 +6,8 @@ import com.ita.edu.teachua.ui.pages.user.addclub.BasicInformationClubComponent;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
+import io.qameta.allure.Issue;
+import jdk.jfr.Description;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,7 +26,10 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
                 .clickOnAddNewClubBtn();
     }
 
-    @Test
+    @Description("Verify that user as 'Керiвник гуртка' after creating club " +
+            "can find all information about it on the website and database.")
+    @Issue("TUA-506")
+    @Test(description = "TUA-506")
     public void verifyThatCreatedClubIsPresentOnTheDatabase() {
         String clubName = "Малявки";
         int ageFrom = 4;
@@ -57,7 +62,7 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
                 .clickAdminProfile()
                 .clickMyProfileButton();
 
-        var clubDetailsPage = myProfilePage.goToClubDetailsPage(2);
+        var clubDetailsPage = myProfilePage.goToClubDetailsPage(clubName);
 
         int detailsPageAgeFrom = clubDetailsPage.getAgeFrom();
         int detailsPageAgeTo = clubDetailsPage.getAgeTo();
@@ -70,7 +75,7 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
 
         String detailsPageClubCenter = clubDetailsPage.getClubCenterName();
         var centerService = new CenterService();
-        int centerId = centerService.getIdWhereName(detailsPageClubCenter);
+        int centerId = centerService.getCenterIdWhereName(detailsPageClubCenter);
 
         assertEquals(clubName, detailsPageClubName);
         assertEquals(descriptionText, detailsPageDescription);

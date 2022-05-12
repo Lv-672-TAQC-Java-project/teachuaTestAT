@@ -4,7 +4,6 @@ import com.ita.edu.teachua.utils.jdbc.dao.ClubsDao;
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
 import org.json.JSONObject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class ClubsService {
@@ -24,6 +23,5 @@ public class ClubsService {
 
     public List<ClubsEntity> getClubsName() {
         return clubsDao.selectAllNames();
-
     }
 }

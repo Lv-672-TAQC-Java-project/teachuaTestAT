@@ -64,7 +64,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     public boolean isCreateClubButtonEnabled() {
         return getCreateClubBtn().isEnabled();
     }
-//    possible conflict
+
     @Step("Create Club")
     public HomePage createClub() {
         getCreateClubBtn().click();

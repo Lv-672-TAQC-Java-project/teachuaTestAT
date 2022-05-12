@@ -16,7 +16,7 @@ public class CenterService {
         return centerDao.selectAll();
     }
 
-    public int getIdWhereName(String centerName) {
+    public int getCenterIdWhereName(String centerName) {
         return centerDao.selectIdWhereName(centerName);
     }
 

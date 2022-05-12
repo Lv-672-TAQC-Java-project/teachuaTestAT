@@ -84,15 +84,15 @@ public class MyProfilePage extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
-    public String getClubInfoBoxLocator(int clubNumber) {
-        final String clubInfoBoxLocator = String.format("//*[@class = 'ant-space-item'][%s]", clubNumber);
+    public String getClubInfoBoxLocator(String clubName) {
+        final String clubInfoBoxLocator = String.format("//*[@class = 'title-name' and contains(text(), '%s')]", clubName);
         return clubInfoBoxLocator;
     }
 
     @Step("Opened chosen club details page")
-    public ClubDetailsPage goToClubDetailsPage(int clubNumber) {
-        String clubInfoBoxLocator = getClubInfoBoxLocator(clubNumber);
-        String clubDetailsPageLocator = String.format(clubInfoBoxLocator + "//*[@type = 'button']");
+    public ClubDetailsPage goToClubDetailsPage(String clubName) {
+        String clubInfoBoxLocator = getClubInfoBoxLocator(clubName);
+        String clubDetailsPageLocator = String.format(clubInfoBoxLocator + "//following-sibling::button");
         WebElement clubDetails = driver.findElement(By.xpath(clubDetailsPageLocator));
         clubDetails.click();
 
