@@ -15,7 +15,7 @@ public class ClubTest extends ApiTestRunner {
 
     @BeforeClass
     public void setUpClass() {
-        Authorization authorization = new Authorization(provider.getTestTeachEmail(), provider.getTestTeachPassword());
+        Authorization authorization = new Authorization(provider.getClubHeadEmail(), provider.getClubHeadPassword());
         client = new ClubClient(authorization.getToken());
     }
 

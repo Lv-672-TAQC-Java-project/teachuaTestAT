@@ -56,11 +56,11 @@ public class TestValueProvider {
         return properties.getProperty("confirmPassword");
     }
 
-    public String getTestTeachEmail() {
-        return properties.getProperty("TestTeachEmail");
+    public String getClubHeadEmail() {
+        return properties.getProperty("clubHeadEmail");
     }
 
-    public String getTestTeachPassword() {
-        return properties.getProperty("TestTeachPassword");
+    public String getClubHeadPassword() {
+        return properties.getProperty("clubHeadPassword");
     }
 }
