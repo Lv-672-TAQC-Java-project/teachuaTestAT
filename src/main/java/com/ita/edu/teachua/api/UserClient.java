@@ -1,5 +1,7 @@
 package com.ita.edu.teachua.api;
 
+import com.ita.edu.teachua.api.models.LoginCredentials;
+import com.ita.edu.teachua.api.models.UserCredentials;
 import io.restassured.response.Response;
 
 public class UserClient extends BaseClient{
@@ -18,11 +20,12 @@ public class UserClient extends BaseClient{
 
     }
 
-    public Response put(int id){
+    public Response put(int id, UserCredentials credentials){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .body(credentials)
                 .when()
-                .get(String.format("%s/api/user/%s", baseUrl, id));
+                .put(String.format("%s/api/user/%s", baseUrl, id));
     }
 
 }

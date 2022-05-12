@@ -1,21 +1,57 @@
 package com.ita.edu.teachua.api;
 
+import com.ita.edu.teachua.api.models.ErrorResponse;
+import com.ita.edu.teachua.api.models.UserCredentials;
 import com.ita.edu.teachua.api.models.UserResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UserTest extends ApiTestRunner{
+public class UserTest extends ApiTestRunner {
     private UserClient client;
+
     @BeforeClass
-    public void setUpClass(){
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
+    public void setUpClass() {
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
         client = new UserClient(authorization.getToken());
     }
 
-    @Test
-    public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty(){
+    @Description("This test case verifies that user can not save changes where mandatory fields are empty")
+    @Issue("TUA-411")
+    @Test(description = "TUA-411")
+    public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty() {
+        UserCredentials userCredentials = new UserCredentials("Nastia",
+                "Kukh",
+                "999999922",
+                "soyec48727@busantei.com",
+                "null",
+                "true",
+                "ROLE_MANAGER");
+        SoftAssert softAssert = new SoftAssert();
+
+        userCredentials.deleteFirstName();
+        Response response = client.put(203, userCredentials);
+        ErrorResponse userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
+
+        userCredentials.deleteLastName();
+        response = client.put(203, userCredentials);
+        userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
+
+        userCredentials.deletePhone();
+        response = client.put(203, userCredentials);
+        userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"phone\" can`t be null");
     }
 
     @Test
