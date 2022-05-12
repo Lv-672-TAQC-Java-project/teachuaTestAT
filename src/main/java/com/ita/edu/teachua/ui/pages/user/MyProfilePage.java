@@ -82,4 +82,11 @@ public class MyProfilePage extends CommonPage {
         editButton.click();
         return new EditMyProfileComponent(driver);
     }
+
+    public MyProfilePage clickDropDownMyProfileButton() {
+        sleep(3000);
+        dropDownProfileButton.click();
+
+        return this;
+    }
 }
