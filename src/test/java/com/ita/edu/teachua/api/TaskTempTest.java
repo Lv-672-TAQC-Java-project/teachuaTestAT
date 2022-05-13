@@ -19,9 +19,9 @@ public class TaskTempTest extends ApiTestRunner{
         client = new TaskClient(authorization.getToken());
     }
 
-    @Description("Verify that User as 'Керiвник гуртка' can create new club is in a center if 'Назва' field consists of a word length of 5 characters")
-    @Issue("TUA-504")
-    @Test(description = "TUA-504")
+    @Description("Verify that user can not edit Task using null, spaces as values")
+    @Issue("TUA-446")
+    @Test(description = "TUA-446")
     public void verifyThatUserCanCreateNewClub() {
         TaskCredentials credentials = new TaskCredentials(null, provider.getHeaderTextChallenge(),
                 null, provider.getPictureChallenge(), provider.getStartDateChallenge(),
@@ -29,38 +29,25 @@ public class TaskTempTest extends ApiTestRunner{
         Response response = client.put(22, credentials);
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 //        {
-//            "name": " ",
-//                "description": "
+//  "name": " ",
+//  "headerText": "stringstringstringstringstringstringstri",
+//  "description": " ",
+//  "picture": "/upload/test/test.png",
+//  "startDate": "2022-11-13",
+//  "challengeId": 0
+//}
 //
-//            ",
-//            "picture": "/upload/test/test.png",
-//                "startDate": "2021-11-03"
-//        }
-//
-//        JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 10)):
-//                has to be escaped using backslash to be included in string value;
-//                nested exception is com.fasterxml.jackson.databind.JsonMappingException:
-//                Illegal unquoted character ((CTRL-CHAR, code 10)): has to be escaped using backslash to be
-//                included in string value\n at [Source: (PushbackInputStream); line: 3, column: 18]
-//                (through reference chain: com.softserve.teachua.dto.task.UpdateTask[\"description\"])
+//        name не може бути пустим and name must contain a minimum of 5 and a maximum of 255
+//        letters and description can't contain russian letters and name can't contain russian letters
+
 //        {
 //            "name": " namenamena ",
 //                "description": " descriptiondescriptiondescriptiondescriptiondescription ",
 //                "picture": "/upload/test/test.png",
 //                "startDate": "2021-11-03"
 //        }
-//        startDate має бути в майбутньому and headerText не може бути пустим and challengeId не може бути відсутнім, має бути задано
-//        {
-//            "name": null,
-//                "description": null,
-//                "picture": "/upload/test/test.png",
-//                "startDate": "2021-11-03"
-//        }
-//        {
-//            "status": 400,
-//                "message": "headerText не може бути пустим and name не може бути пустим and challengeId
-//                не може бути відсутнім, має бути задано and startDate має бути в майбутньому"
-//        }
+//        startDate має бути в майбутньому and headerText не може бути пустим and challengeId не може бути відсутнім,
+//        має бути задано
         var softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "name must not be blank");
