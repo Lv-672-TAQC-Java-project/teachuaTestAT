@@ -29,6 +29,6 @@ public class ChallengeTest extends ApiTestRunner {
         int sortNumber = random.nextInt(200);
         Response response = client.post(sortNumber);
 
-        assertEquals(response.getStatusCode(), 200,"Challenge is successfully created");
+        assertEquals(response.getStatusCode(), 200, "Challenge is successfully created");
     }
 }
