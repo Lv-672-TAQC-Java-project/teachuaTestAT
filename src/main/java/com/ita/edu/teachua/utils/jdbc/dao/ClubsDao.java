@@ -46,7 +46,7 @@ public class ClubsDao {
                 result.put("ageFrom", resultSet.getInt("age_from"));
                 result.put("ageTo", resultSet.getInt("age_to"));
                 result.put("description", descriptionText);
-                result.put("contacts", contactsValue);
+                result.put("contacts", String.format("+380" + contactsValue));
                 result.put("isOnline", resultSet.getBoolean("is_online"));
                 result.put("centerId", resultSet.getInt("center_id"));
                 arr.put(result);

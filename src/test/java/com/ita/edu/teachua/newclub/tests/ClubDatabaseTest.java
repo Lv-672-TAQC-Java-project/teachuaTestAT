@@ -68,7 +68,7 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
         int detailsPageAgeTo = clubDetailsPage.getAgeTo();
         String detailsPageClubName = clubDetailsPage.getClubName();
         String detailsPageDescription = clubDetailsPage.getDescription();
-        String detailsPageContacts = clubDetailsPage.getContactsInfo().substring(3);
+        String detailsPageContacts = clubDetailsPage.getContactsInfo();
 
         String detailsPageAddress = clubDetailsPage.getAddress();
         Boolean isOnline = detailsPageAddress.contains("Онлайн");
@@ -81,7 +81,7 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
         assertEquals(descriptionText, detailsPageDescription);
         assertEquals(ageFrom, detailsPageAgeFrom);
         assertEquals(ageTo, detailsPageAgeTo);
-        assertEquals(detailsPageContacts, phoneNumber);
+        assertEquals(detailsPageContacts, String.format("+38" + phoneNumber));
         assertTrue(isOnline);
 
         ClubsService clubsService = new ClubsService();
@@ -101,6 +101,6 @@ public class ClubDatabaseTest extends TestRunnerWithValueProvider {
         assertEquals(DBCenterId, centerId);
         assertEquals(DBIsClubOnline, isOnline);
         assertEquals(DBClubDescription, detailsPageDescription);
-        assertEquals(DBContacts, detailsPageContacts.substring(1));
+        assertEquals(DBContacts, detailsPageContacts);
     }
 }

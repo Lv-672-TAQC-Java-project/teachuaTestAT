@@ -22,7 +22,7 @@ public class BasicInformationClubComponent extends AddClubPage {
     private WebElement maximumAgeField;
     @FindBy(how = How.ID, using = "basic_centerId")
     private WebElement openCentersMenu;
-    @FindBy(how = How.CLASS_NAME, using = "rc-virtual-list")
+    @FindBy(how = How.XPATH, using = "//*[@class = 'rc-virtual-list-holder-inner']//following-sibling::div")
     private List<WebElement> centerOptions;
 
     public BasicInformationClubComponent(WebDriver driver) {
