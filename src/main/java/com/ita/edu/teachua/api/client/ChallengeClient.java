@@ -1,6 +1,6 @@
 package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.BaseClient;
+import com.ita.edu.teachua.api.models.credenntials.ChallengeCredentials;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -25,6 +25,15 @@ public class ChallengeClient extends BaseClient {
                 .body(setFieldsToJsonBodyByJsonPath(CHALLENGE_INPUT_BODY, Map.of(
                         "$..sortNumber", sortNumber
                 )))
+                .post(String.format("%s/api/challenge", baseUrl));
+    }
+
+    public Response postChallenge(ChallengeCredentials credentials) {
+
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .body(credentials)
+                .when()
                 .post(String.format("%s/api/challenge", baseUrl));
     }
 }
