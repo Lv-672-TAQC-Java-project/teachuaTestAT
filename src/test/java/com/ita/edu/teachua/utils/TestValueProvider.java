@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class TestValueProvider {
-    protected final Properties properties;
+    private final Properties properties;
 
     public TestValueProvider() throws IOException {
         FileInputStream fileInputStream = new FileInputStream("src/test/resources/data.properties");

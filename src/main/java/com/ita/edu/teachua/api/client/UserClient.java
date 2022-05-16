@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.models.challenge.ChallengeCredentials;
 import io.restassured.response.Response;
 
 public class UserClient extends BaseClient {
@@ -18,14 +17,4 @@ public class UserClient extends BaseClient {
                 .get(String.format("%s/api/user/%s", baseUrl, id));
 
     }
-
-    public Response put(int id, ChallengeCredentials credentials) {
-        return prepareRequest()
-                .header("Authorization", String.format("Bearer %s", authorizationToken))
-                .body(credentials)
-                .when()
-                .put(String.format("%s/api/challenge/task/%s", baseUrl, id));
-
-    }
-
 }
