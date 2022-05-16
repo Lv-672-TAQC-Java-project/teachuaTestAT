@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.api;
 
+import com.ita.edu.teachua.api.client.TaskClient;
 import com.ita.edu.teachua.api.models.credenntials.TaskCredentials;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -10,16 +11,16 @@ import org.testng.asserts.SoftAssert;
 
 public class TaskTest extends ApiTestRunner {
     // to be extended
-    private Task task;
+    private TaskClient task;
 
     @BeforeClass
     public void setUpClass() {
 
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
-        task = new Task(authorization.getToken());
+        task = new TaskClient(authorization.getToken());
     }
 
-    @Description("Verify that user can create Task with valid values.")
+    @Description("Verify that user can create TaskClient with valid values.")
     @Issue("TUA-441")
     @Test(description = "TUA-441")
     public void verifyCreatedTaskWithValidValues() {

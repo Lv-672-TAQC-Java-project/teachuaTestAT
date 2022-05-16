@@ -1,14 +1,13 @@
-package com.ita.edu.teachua.api;
+package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.client.BaseClient;
 import com.ita.edu.teachua.api.models.credenntials.TaskCredentials;
 import io.restassured.response.Response;
 
-public class Task extends BaseClient {
+public class TaskClient extends BaseClient {
 
     private final String authorizationToken;
 
-    public Task(String authorizationToken) {
+    public TaskClient(String authorizationToken) {
         super();
         this.authorizationToken = authorizationToken;
     }
