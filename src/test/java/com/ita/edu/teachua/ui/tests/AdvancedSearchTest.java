@@ -15,6 +15,11 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 import static org.testng.Assert.*;
 
+import java.util.*;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 public class AdvancedSearchTest extends TestRunner {
 
     @Description("Verify that 'Доступний онлайн', 'Категорії', 'Вік дитини' parameters are deactivated after selecting 'Центр' radio button")
@@ -150,5 +155,71 @@ public class AdvancedSearchTest extends TestRunner {
                 .stream()
                 .limit(6)
                 .collect(toList());
+    }
+
+
+    @Description("Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    @Test(description = "TUA-449")
+    public void verifyThatUserCanSortResultsByRatingAfterClickingOnCenterBtn() {
+        HomePage home = new HomePage(driver);
+        AdvancedSearchComponent centers = home
+                .getHeader()
+                .clickAdvancedSearchBtn()
+                .clickOnСenterButton()
+                .clickOnClearCityNameButton()
+                .clickOnByRatingOption();
+
+        List<String> centersByRating = centers.getCenterName();
+
+        CenterService centerService = new CenterService();
+        List<CenterEntity> centersFromDB = centerService.getCentersByRating();
+
+        LinkedHashMap<Double, List<String>> centersByRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDB) {
+            if (!centersByRatingFromDB.containsKey(center.getRating())) {
+                centersByRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
+
+        checkIfCentersAreTheSameWithDataBase(centersByRating, centersByRatingFromDB);
+
+        List<String> centersByRatingDesc = centers
+                .clickOnPaginationButton(1)
+                .clickOnArrowUpLabel()
+                .getCenterName();
+
+        List<CenterEntity> centersFromDBByDesc = centerService.getCentersByDescendingRating();
+
+        LinkedHashMap<Double, List<String>> centersByDescRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDBByDesc) {
+            if (!centersByDescRatingFromDB.containsKey(center.getRating())) {
+                centersByDescRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByDescRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
+
+        checkIfCentersAreTheSameWithDataBase(centersByRatingDesc, centersByDescRatingFromDB);
+    }
+
+    private void checkIfCentersAreTheSameWithDataBase(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
+        List<Object> keys = centersByRatingFromDB.keySet().stream().collect(toList());
+
+        int lastValue = 0;
+
+        for (Object key : keys) {
+            int sizeDBValue = centersByRatingFromDB.get(key).size();
+            List<String> resultList = new ArrayList<>();
+
+            for (int i = lastValue; i < sizeDBValue + lastValue; i++) {
+                resultList.add(centersByRating.get(i));
+            }
+            lastValue = sizeDBValue + lastValue;
+
+            assertTrue(resultList.containsAll(centersByRatingFromDB.get(key)));
+        }
     }
 }
