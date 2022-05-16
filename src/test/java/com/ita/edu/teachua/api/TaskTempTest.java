@@ -46,48 +46,10 @@ public class TaskTempTest extends ApiTestRunner {
 
         var softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
-        softAssert.assertEquals(errorResponse.getMessage(), "name must not be blank and name can't contain russian " +
-                "letters and description can't contain russian letters and name must contain a minimum of " +
-                "5 and a maximum of 255 letters");
-        softAssert.assertAll();
-    }
-
-    @Description("Verify that user can not edit Task using spaces as values")
-    @Issue("TUA-446")
-    @Test(description = "TUA-446", enabled = false)
-    public void verifyThatUserCanCreateNewClubUsingSpaces() {
-        TaskCredentials credentials = new TaskCredentials(" ", provider.getHeaderTextChallenge(),
-                " ", provider.getPictureChallenge(), provider.getStartDateChallenge(),
-                Long.parseLong(provider.getChallengeId()));
-        Response response = client.put(22, credentials);
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
-//        {
-//              "name": " namenamena ",
-//              "headerText": "stringstringstringstringstringstringstri",
-//              "description": " descriptiondescriptiondescriptiondescriptiondescription ",
-//              "picture": "/upload/test/test.png",
-//              "startDate": "2022-06-14",
-//              "challengeId": 169
-//         }
-//          Code	200
-//         {
-//              "id": 303,
-//              "name": "namenamena",
-//              "headerText": "stringstringstringstringstringstringstri",
-//              "description": "descriptiondescriptiondescriptiondescriptiondescription",
-//              "picture": "/upload/test/test.png",
-//              "startDate": [
-//                  2022,
-//                  6,
-//                  14
-//              ],
-//          "challengeId": 169
-//      }
-        var softAssert = new SoftAssert();
-        softAssert.assertEquals(response.getStatusCode(), 400);
-        softAssert.assertEquals(errorResponse.getMessage(), "name must not be blank and name can't contain russian " +
-                "letters and description can't contain russian letters and name must contain a minimum of " +
-                "5 and a maximum of 255 letters");
+        softAssert.assertEquals(errorResponse.getMessage(), "name must not be blank " +
+                "and name can't contain russian letters and " +
+                "description can't contain russian letters and " +
+                "name must contain a minimum of 5 and a maximum of 255 letters");
         softAssert.assertAll();
     }
 }
