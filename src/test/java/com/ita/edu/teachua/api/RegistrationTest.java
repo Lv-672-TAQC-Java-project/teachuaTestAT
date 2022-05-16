@@ -20,7 +20,7 @@ public class RegistrationTest extends ApiTestRunner{
     public void VerifyThatUserWithInvalidDataCanNotBeCreated() {
         RegistrationCredentials credentials = new RegistrationCredentials(provider.getFirstName(),
                 provider.getLastName(),
-                provider.getEmail(),
+                provider.getWrongEmail(),
                 provider.getPassword(),
                 provider.getPhone(),
                 provider.getRoleName());
@@ -31,7 +31,7 @@ public class RegistrationTest extends ApiTestRunner{
         softAssert.assertEquals(registrationResponse.getStatus(), 400);
         softAssert.assertEquals(registrationResponse.getMessage(), "email is not valid");
 
-        List<UserEntity> usersWithExpectedEmail = new UserService().getAllUsersWhereEmail(provider.getEmail());
+        List<UserEntity> usersWithExpectedEmail = new UserService().getAllUsersWhereEmail(provider.getWrongEmail());
         softAssert.assertTrue(usersWithExpectedEmail.isEmpty(), "This user should not be created");
 
         softAssert.assertAll();
