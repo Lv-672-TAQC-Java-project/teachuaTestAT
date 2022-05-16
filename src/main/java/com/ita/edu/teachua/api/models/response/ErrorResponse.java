@@ -1,4 +1,4 @@
-package com.ita.edu.teachua.api.models;
+package com.ita.edu.teachua.api.models.response;
 
 import lombok.Data;
 

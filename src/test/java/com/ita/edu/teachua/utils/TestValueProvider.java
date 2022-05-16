@@ -48,8 +48,16 @@ public class TestValueProvider {
         return properties.getProperty("email");
     }
 
+    public String getWrongEmail() {
+        return properties.getProperty("wrongEmail");
+    }
+
     public String getPassword() {
         return properties.getProperty("password");
+    }
+
+    public String getRoleName() {
+        return properties.getProperty("roleName");
     }
 
     public String getConfirmPassword() {

@@ -1,4 +1,4 @@
-package com.ita.edu.teachua.api;
+package com.ita.edu.teachua.api.client;
 
 import io.restassured.response.Response;
 
@@ -24,7 +24,7 @@ public class ClubClient extends BaseClient {
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .when()
                 .body(setFieldsToJsonBodyByJsonPath(CLUB_INPUT_BODY, Map.of(
-                      "$..name",name
+                        "$..name", name
                 )))
                 .post(String.format("%s/api/club", baseUrl));
     }

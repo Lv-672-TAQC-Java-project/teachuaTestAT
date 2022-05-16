@@ -1,7 +1,8 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.models.ErrorResponse;
-import com.ita.edu.teachua.api.models.club_response.ClubResponse;
+import com.ita.edu.teachua.api.client.ClubClient;
+import com.ita.edu.teachua.api.models.response.club.ClubResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
