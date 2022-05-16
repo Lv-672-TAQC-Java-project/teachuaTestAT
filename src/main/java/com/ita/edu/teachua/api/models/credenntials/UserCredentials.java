@@ -1,5 +1,4 @@
-package com.ita.edu.teachua.api.models;
-
+package com.ita.edu.teachua.api.models.credenntials;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
