@@ -23,13 +23,13 @@ public class UserTest extends ApiTestRunner {
     @Issue("TUA-411")
     @Test(description = "TUA-411")
     public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty() {
-        UserCredentials userCredentials = new UserCredentials("Nastia",
-                "Kukh",
-                "999999922",
-                "soyec48727@busantei.com",
-                "null",
-                "true",
-                "ROLE_MANAGER");
+        UserCredentials userCredentials = new UserCredentials(provider.getFirstName(),
+                provider.getLastName(),
+                provider.getPhone(),
+                provider.getEmail(),
+                provider.getUrlLogo(),
+                provider.getStatus(),
+                provider.getRoleName());
         SoftAssert softAssert = new SoftAssert();
 
         userCredentials.deleteFirstName();

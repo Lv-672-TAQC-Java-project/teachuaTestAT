@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginCredentials {
+public class SighInCredentials {
     private String email;
     private String password;
 }

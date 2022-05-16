@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.api;
 
-import com.ita.edu.teachua.api.models.LoginCredentials;
 import com.ita.edu.teachua.api.models.UserCredentials;
 import io.restassured.response.Response;
 

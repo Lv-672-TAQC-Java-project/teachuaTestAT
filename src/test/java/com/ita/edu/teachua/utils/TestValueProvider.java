@@ -52,7 +52,21 @@ public class TestValueProvider {
         return properties.getProperty("password");
     }
 
+    public String getRoleName() {
+        return properties.getProperty("roleName");
+    }
+
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
     }
+
+    public String getStatus() {
+        return properties.getProperty("status");
+    }
+
+    public String getUrlLogo() {
+        return properties.getProperty("urlLogo");
+    }
+
+
 }
