@@ -1,5 +1,4 @@
-package com.ita.edu.teachua.api;
-
+package com.ita.edu.teachua.api.client;
 
 import com.ita.edu.teachua.utils.ValueProvider;
 import io.restassured.http.ContentType;
@@ -9,12 +8,10 @@ import java.io.IOException;
 
 import static io.restassured.RestAssured.given;
 
-
 public class BaseClient {
     protected String baseUrl;
     protected ContentType contentType;
     protected ValueProvider valueProvider;
-
 
     public BaseClient() {
         if (valueProvider == null) {
