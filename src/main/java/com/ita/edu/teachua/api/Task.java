@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.api;
 
-import com.ita.edu.teachua.api.models.TaskCredentials;
+import com.ita.edu.teachua.api.client.BaseClient;
+import com.ita.edu.teachua.api.models.credenntials.TaskCredentials;
 import io.restassured.response.Response;
 
 public class Task extends BaseClient {
