@@ -2,15 +2,16 @@ package com.ita.edu.teachua.api.client;
 
 import com.ita.edu.teachua.api.models.credenntials.ChallengeCredentials;
 import io.restassured.response.Response;
+
 import java.util.Map;
 
 import static com.ita.edu.teachua.utils.FileReader.getFileAsString;
 import static com.ita.edu.teachua.utils.JsonUtils.setFieldsToJsonBodyByJsonPath;
 
 public class ChallengeClient extends BaseClient {
-    private final String authorizationToken;
     public static final String CHALLENGE_JSON = "src/test/resources/json/Challenge.json";
     public static final String CHALLENGE_INPUT_BODY = getFileAsString(CHALLENGE_JSON);
+    private final String authorizationToken;
 
     public ChallengeClient(String authorizationToken) {
         super();
@@ -35,7 +36,7 @@ public class ChallengeClient extends BaseClient {
                 .when()
                 .post(String.format("%s/api/challenge", baseUrl));
     }
-  
+
     public Response delete(int id) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))

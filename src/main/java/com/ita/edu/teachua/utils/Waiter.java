@@ -14,7 +14,7 @@ public class Waiter {
     protected static WebDriver driver;
 
     public Waiter(WebDriver driver) {
-        this.driver = driver;
+        Waiter.driver = driver;
     }
 
     public static void waitInvisibilityOfElementWithText(String text, int time, String locator) {
@@ -22,12 +22,12 @@ public class Waiter {
         wait.until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(locator), text));
     }
 
-    public static void waitVisibilityOfAllElements(List<WebElement> webElements, int time){
+    public static void waitVisibilityOfAllElements(List<WebElement> webElements, int time) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfAllElements(webElements));
     }
 
-    public static void waitVisibilityOfElementLocated(String locator, int time){
+    public static void waitVisibilityOfElementLocated(String locator, int time) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }

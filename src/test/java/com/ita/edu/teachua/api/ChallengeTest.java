@@ -40,11 +40,11 @@ public class ChallengeTest extends ApiTestRunner {
     @DataProvider
     public Object[][] inputDate() {
         ChallengeCredentials challengeCredentialsNull = new ChallengeCredentials
-                (null,null, null, null, null, null);
+                (null, null, null, null, null, null);
         ChallengeCredentials challengeCredentialsSpaces = new ChallengeCredentials
-                (" "," ", " ", " ", " ", " ");
+                (" ", " ", " ", " ", " ", " ");
         ChallengeCredentials challengeCredentialsSymbols = new ChallengeCredentials
-                ("","", "", "", "", "");
+                ("", "", "", "", "", "");
 
         return new Object[][]{
 

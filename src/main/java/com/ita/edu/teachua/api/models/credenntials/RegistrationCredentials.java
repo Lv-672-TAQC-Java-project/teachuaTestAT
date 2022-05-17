@@ -17,7 +17,7 @@ public class RegistrationCredentials {
     String urlLogo;
     String status;
 
-    public RegistrationCredentials(String firstName, String lastName,String email, String password, String phone, String roleName) {
+    public RegistrationCredentials(String firstName, String lastName, String email, String password, String phone, String roleName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -39,7 +39,7 @@ public class MyProfilePage extends CommonPage {
         super(driver);
     }
 
-    public boolean isContentTitleDisplayed(){
+    public boolean isContentTitleDisplayed() {
         return contentTitle.isDisplayed();
     }
 

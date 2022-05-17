@@ -18,11 +18,11 @@ public class LocationComponent extends BaseComponent {
         super(driver, root);
     }
 
-    public String getName(){
+    public String getName() {
         return name.getText();
     }
 
-    public String getAddress(){
+    public String getAddress() {
         return address.getText();
     }
 

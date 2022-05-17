@@ -8,27 +8,22 @@ import org.openqa.selenium.support.How;
 
 public class ClubDetailsPage extends CommonPage {
 
+    @FindBy(how = How.CLASS_NAME, using = "club-name")
+    private WebElement clubName;
+    @FindBy(how = How.CLASS_NAME, using = "years")
+    private WebElement ageRange;
+    @FindBy(how = How.XPATH, using = "//*[@class = 'center'] //*[@class = 'name']")
+    private WebElement clubCenterName;
+    @FindBy(how = How.XPATH, using = "//*[@class = 'contact-name']")
+    private WebElement contactsInfo;
+    @FindBy(how = How.XPATH, using = "//div[@class = 'content']")
+    private WebElement description;
+    @FindBy(how = How.XPATH, using = "//div[@class = 'address']")
+    private WebElement address;
+
     public ClubDetailsPage(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(how = How.CLASS_NAME, using = "club-name")
-    private WebElement clubName;
-
-    @FindBy(how = How.CLASS_NAME, using = "years")
-    private WebElement ageRange;
-
-    @FindBy(how = How.XPATH, using = "//*[@class = 'center'] //*[@class = 'name']")
-    private WebElement clubCenterName;
-
-    @FindBy(how = How.XPATH, using = "//*[@class = 'contact-name']")
-    private WebElement contactsInfo;
-
-    @FindBy(how = How.XPATH, using = "//div[@class = 'content']")
-    private WebElement description;
-
-    @FindBy(how = How.XPATH, using = "//div[@class = 'address']")
-    private WebElement address;
 
     public String getClubName() {
         return clubName.getText();
@@ -39,13 +34,13 @@ public class ClubDetailsPage extends CommonPage {
     }
 
     public int getAgeFrom() {
-        String age = String.valueOf(getAgeRange().substring(4,5));
+        String age = getAgeRange().substring(4, 5);
         int ageFrom = Integer.valueOf(age);
         return ageFrom;
     }
 
     public int getAgeTo() {
-        String age = String.valueOf(getAgeRange().substring(9,10));
+        String age = getAgeRange().substring(9, 10);
         int ageTo = Integer.valueOf(age);
         return ageTo;
     }

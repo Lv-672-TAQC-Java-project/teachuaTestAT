@@ -17,7 +17,7 @@ public class DescriptionCenterComponent extends BasePage {
     private WebElement previousButton;
     @FindBy(how = How.XPATH, using = "(//div[@class = 'ant-steps-item-title' and text() = 'Опис']//ancestor::div[contains(@class, 'ant-steps-item ant-steps-item')])[1]")
     private WebElement DescriptionTab;
-    private String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
+    private final String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
 
     public DescriptionCenterComponent(WebDriver driver) {
         super(driver);
@@ -31,7 +31,7 @@ public class DescriptionCenterComponent extends BasePage {
     }
 
     @Step("check that description tab is activated")
-    public boolean isDescriptionTabActivated(){
+    public boolean isDescriptionTabActivated() {
         return DescriptionTab.getAttribute("class")
                 .contains("active");
     }

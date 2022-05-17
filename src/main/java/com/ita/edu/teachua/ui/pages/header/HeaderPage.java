@@ -7,11 +7,11 @@ import com.ita.edu.teachua.ui.pages.clubs.ClubsPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.AddClubPage;
 import io.qameta.allure.Step;
-import net.bytebuddy.asm.Advice;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HeaderPage extends BasePage {
 
@@ -58,12 +58,13 @@ public class HeaderPage extends BasePage {
         aboutButton.click();
         return new AboutPage(driver);
     }
-  
+
     @Step("Click advanced search button and show advanced search block")
     public AdvancedSearchComponent clickAdvancedSearchBtn() {
         advancedSearchButton.click();
         return new AdvancedSearchComponent(driver);
     }
+
     @Step("click User Profile")
     public GuestMenuDropDownComponent clickUserProfile() {
         userProfileButton.click();
@@ -104,7 +105,7 @@ public class HeaderPage extends BasePage {
     }
 
     @Step("Enter {keyWords} in search")
-    public ClubsPage enterSearch(String keyWords){
+    public ClubsPage enterSearch(String keyWords) {
         searchInput.click();
         searchInput.sendKeys(keyWords);
         sleep(500);
@@ -114,7 +115,7 @@ public class HeaderPage extends BasePage {
     }
 
     @Step("Parse {keyWords} in search")
-    public ClubsPage parseSearch(String keyWords){
+    public ClubsPage parseSearch(String keyWords) {
         searchInput.click();
         searchInput.clear();
         searchInput.sendKeys(keyWords);
@@ -122,7 +123,7 @@ public class HeaderPage extends BasePage {
         return new ClubsPage(driver);
     }
 
-    public String getSearchValue(){
+    public String getSearchValue() {
 
         return searchInput.getAttribute("value");
     }

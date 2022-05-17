@@ -52,7 +52,7 @@ public class ClubsDao {
                 arr.put(result);
                 obj = arr.getJSONObject(0);
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         ManagerDao.get().closeStatement(statement);

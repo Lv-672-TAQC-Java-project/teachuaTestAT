@@ -1,9 +1,7 @@
 package com.ita.edu.teachua.ui.tests;
 
 
-import com.ita.edu.teachua.utils.jdbc.entity.FeedbackEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
-import com.ita.edu.teachua.utils.jdbc.services.FeedbackService;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import org.testng.annotations.Test;
 
