@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.BaseClient;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -26,5 +25,13 @@ public class ChallengeClient extends BaseClient {
                         "$..sortNumber", sortNumber
                 )))
                 .post(String.format("%s/api/challenge", baseUrl));
+    }
+
+    public Response delete(int id) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .when()
+                .delete(String.format("%s/api/challenge/%s", baseUrl, id));
+
     }
 }
