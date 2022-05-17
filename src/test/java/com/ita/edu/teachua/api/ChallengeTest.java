@@ -2,6 +2,7 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.ChallengeClient;
 import com.ita.edu.teachua.api.models.credenntials.ChallengeCredentials;
+import com.ita.edu.teachua.api.models.ErrorResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
@@ -20,7 +21,6 @@ public class ChallengeTest extends ApiTestRunner {
 
     @BeforeClass
     public void setUpClass() {
-
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
         client = new ChallengeClient(authorization.getToken());
 //        challengeCreate = new ChallengeCreate(authorization.getToken());
@@ -64,6 +64,23 @@ public class ChallengeTest extends ApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertEquals(response.getStatusCode(), expect);
+        softAssert.assertAll();
+    }
+
+    @Description("Verify that user is not able to delete Challenge using non-administrator rights")
+    @Issue("TUA-436")
+    @Test(description = "TUA-436")
+    public void verifyThatUserIsNotAbleToDeleteChallengeUsingNonAdministratorRights() {
+        Authorization authorization = new Authorization(provider.getUserWithNonAdministratorRightsEmail(),
+                provider.getUserWithNonAdministratorRightsPassword());
+        client = new ChallengeClient(authorization.getToken());
+        Response response = client.delete(147);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), 401);
+        softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
         softAssert.assertAll();
     }
 }
