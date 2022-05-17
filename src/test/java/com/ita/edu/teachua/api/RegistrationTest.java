@@ -1,7 +1,8 @@
 package com.ita.edu.teachua.api;
 
-import com.ita.edu.teachua.api.models.ErrorResponse;
-import com.ita.edu.teachua.api.models.RegistrationCredentials;
+import com.ita.edu.teachua.api.client.RegistrationClient;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
+import com.ita.edu.teachua.api.models.credenntials.RegistrationCredentials;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import io.qameta.allure.Description;
