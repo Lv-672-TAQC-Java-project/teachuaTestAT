@@ -9,6 +9,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import static org.apache.commons.lang.RandomStringUtils.random;
+
 public class ClubTest extends ApiTestRunner {
 
     private ClubClient client;
@@ -35,5 +37,19 @@ public class ClubTest extends ApiTestRunner {
 
         softAssert.assertAll();
 
+    }
+
+    @Description("Verify that User as 'Керiвник гуртка' can create new club is in a center if 'Назва' field consists of a word length of 100 characters")
+    @Issue("TUA-505")
+    @Test(description = "TUA-505")
+    public void verifyThatUserCanCreateClubNameWith100Characters() {
+        String name = random(100, true, false);
+        Response response = client.post(name);
+        ClubResponse clubResponse = response.as(ClubResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubResponse.getName(), name);
+        softAssert.assertAll();
     }
 }
