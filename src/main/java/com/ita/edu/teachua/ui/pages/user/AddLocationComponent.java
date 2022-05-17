@@ -2,9 +2,10 @@ package com.ita.edu.teachua.ui.pages.user;
 
 import com.ita.edu.teachua.ui.pages.base.BasePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
+import com.ita.edu.teachua.ui.pages.user.addclub.ContactsClubComponent;
+import com.ita.edu.teachua.ui.pages.user.models.City;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,141 +14,136 @@ import org.openqa.selenium.support.How;
 public class AddLocationComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "/html/body/div[6]/div/div[2]/div/div[2]/div/main/div[2]/form/div[6]/button")
     private WebElement addButton;
-
     @FindBy(how = How.XPATH, using = "//div[contains(@class, 'add-location-button')]//button[@type = 'submit']")
     private WebElement addLocationButton;
-
     @FindBy(how = How.ID, using = "name")
     private WebElement locationNameField;
-
     @FindBy(how = How.ID, using = "address")
     private WebElement addressField;
-
     @FindBy(how = How.ID, using = "coordinates")
     private WebElement coordinatesField;
-
     @FindBy(how = How.ID, using = "phone")
     private WebElement phoneField;
-
     @FindBy(how = How.ID, using = "cityName")
-    private WebElement cityListButton;
-
+    private WebElement cityNameListButton;
     @FindBy(how = How.ID, using = "districtName")
     private WebElement districtListButton;
-
     @FindBy(how = How.ID, using = "stationName")
     private WebElement stationListButton;
-
-    @FindBy(how = How.XPATH, using = "//div[@class = 'rc-virtual-list-holder-inner']//div")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'rc-virtual-list-holder-inner']/div")
     private WebElement locationList;
-
-    private String checkCirclePath = "./..//*[@aria-label ='check-circle']";
+    @FindBy(how = How.XPATH, using = "(//*[@class='ant-modal modal-add-club']//*[@data-icon = 'close'])[3]")
+    private WebElement closeButton;
+    @FindBy(how = How.XPATH, using = "//main[@class = 'ant-layout-content add-club-container']")
+    private WebElement addLocationPopUp;
+    private String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
 
     public AddLocationComponent(WebDriver driver) {
         super(driver);
     }
 
+    @Step("Check that add location pop up is displayed")
+    public boolean isAddLocationPopUpDisplayed() {
+        return addLocationPopUp.isDisplayed();
+    }
 
     @Step("input location name {locationName}")
     public AddLocationComponent inputLocationNameField(String locationName) {
         locationNameField.sendKeys(locationName);
-        return new AddLocationComponent(driver);
+
+        return this;
     }
 
-    @Step("Check if Data in name field is displayed")
-    public boolean isCheckCircleOfLocationNameFieldDisplayed() {
-        return locationNameField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    @Step("check that Data in name field is accepted")
+    public boolean isSuccessNameCircleDisplayed() {
+        return locationNameField.findElement(By.xpath(checkCirclePath))
+                .getAttribute("class")
+                .contains("success");
     }
 
     @Step("input address {address}")
     public AddLocationComponent inputAddressField(String address) {
         addressField.sendKeys(address);
-        return new AddLocationComponent(driver);
+        return this;
     }
 
-    @Step("Check if address is displayed")
-    public boolean isCheckCircleOfLocationAddressFieldDisplayed() {
-        return addressField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    @Step("check that Data in address field is accepted")
+    public boolean isSuccessAddressCircleDisplayed() {
+        return addressField.findElement(By.xpath(checkCirclePath))
+                .getAttribute("class")
+                .contains("success");
     }
 
     @Step("input coordinates {coordinates}")
     public AddLocationComponent inputCoordinatesField(String coordinates) {
         coordinatesField.sendKeys(coordinates);
-        return new AddLocationComponent(driver);
+        return this;
     }
 
-    @Step("Check if coordinates is displayed")
-    public boolean isCheckCircleOfLocationCoordinatesFieldDisplayed() {
-        return coordinatesField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    @Step("check that Data in coordinates field is accepted")
+    public boolean isSuccessCoordinatesCircleDisplayed() {
+        return coordinatesField.findElement(By.xpath(checkCirclePath))
+                .getAttribute("class")
+                .contains("success");
     }
 
     @Step("input phone {phone}")
     public AddLocationComponent inputPhoneField(String phone) {
         phoneField.sendKeys(phone);
-        return new AddLocationComponent(driver);
+        return this;
     }
 
-    @Step("Check if phone number is displayed")
-    public boolean isCheckCircleOfLocationPhoneFieldDisplayed() {
-        return phoneField.findElement(By.xpath(checkCirclePath)).isDisplayed();
+    @Step("check that Data in phone number field is accepted")
+    public boolean isSuccessPhoneNumberCircleDisplayed() {
+        return phoneField.findElement(By.xpath(checkCirclePath))
+                .getAttribute("class")
+                .contains("success");
     }
 
-    public AddLocationComponent clickCityListButton() {
-        cityListButton.click();
+    public AddLocationComponent clickCityNameListButton() {
+        cityNameListButton.click();
         sleep(1000);
-        return new AddLocationComponent(driver);
+        return this;
     }
 
-    public AddLocationComponent clickDistrictListButton() {
-        districtListButton.click();
-        sleep(1000);
-        return new AddLocationComponent(driver);
+    @Step("Verify that city dropdown list contain {city}")
+    public boolean isDropDownListContainCity(City cityName) {
+        return locationList
+                .getAttribute("title")
+                .contains(cityName.getName());
     }
 
-    public AddLocationComponent clickStationListButton() {
-        stationListButton.click();
-        sleep(1000);
-        return new AddLocationComponent(driver);
-    }
-
-    @Step("Verify that listBox contain {location}")
-    public boolean isElementFromDropDownListDisplayed(String location) {
-        String str = String.format(".//div[text() = '%s']", location);
-        try {
-            boolean isContainsLocation = locationList.findElement(By.xpath(str)).isDisplayed();
-            return isContainsLocation;
-        } catch (NoSuchElementException ex) {
-            return false;
-        }
-
-    }
-
-    @Step("select {location} element from the drop-down list")
-    public AddLocationComponent clickElementFromDropDownList(String location) {
-
-        String str = String.format(".//div[text() = '%s']", location);
+    @Step("select {location} element from the dropdown list")
+    public AddLocationComponent clickCityFromDropDownList(City location) {
+        String str = String.format(".//div[text() = '%s']", location.getName());
         locationList.findElement(By.xpath(str)).click();
 
         return new AddLocationComponent(driver);
     }
 
-    @Step("check is Add Button Enable ")
-    public boolean isAddLocationButtonEnable() {
-        return addLocationButton.isEnabled();
+    @Step("check if Data in phone number field is accepted")
+    public boolean isSuccessCityCircleDisplayed() {
+        return cityNameListButton.findElement(By.xpath(checkCirclePath))
+                .getAttribute("class")
+                .contains("success");
     }
 
-    @Step("add location")
-    public BasicInformationCenterComponent clickAddLocationButton() {
+    @Step("add location in club")
+    public ContactsClubComponent clickAddClubLocationButton() {
         addLocationButton.click();
-        sleep(2000);
+
+
+        return new ContactsClubComponent(driver);
+    }
+
+    @Step("add location in center")
+    public BasicInformationCenterComponent clickAddCenterLocationButton() {
+        addLocationButton.click();
+
         return new BasicInformationCenterComponent(driver);
     }
 
-    public boolean isAddLocationButtonEnabled() {
-        return addLocationButton.isEnabled();
-    }
-
-    @Step("check is Add Button Enable ")
+    @Step("check that add button is enabled ")
     public boolean isAddButtonEnable() {
         return addButton.isEnabled();
     }
