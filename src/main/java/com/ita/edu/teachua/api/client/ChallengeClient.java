@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.BaseClient;
 import io.restassured.response.Response;
 
 import java.util.Map;
