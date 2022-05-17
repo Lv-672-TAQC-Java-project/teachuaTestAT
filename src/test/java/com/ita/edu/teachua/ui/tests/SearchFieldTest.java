@@ -7,7 +7,6 @@ import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 

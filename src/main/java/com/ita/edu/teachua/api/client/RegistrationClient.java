@@ -1,7 +1,6 @@
-package com.ita.edu.teachua.api;
+package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.client.BaseClient;
-import com.ita.edu.teachua.api.models.RegistrationCredentials;
+import com.ita.edu.teachua.api.models.credenntials.RegistrationCredentials;
 import io.restassured.response.Response;
 
 public class RegistrationClient extends BaseClient {

@@ -2,7 +2,6 @@ package com.ita.edu.teachua.ui.pages.header;
 
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
-import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -83,32 +82,32 @@ public class SingUpPopUpComponent extends CommonPage {
         return new HomePage(driver);
     }
 
-    public String getLastNameFieldValue(){
+    public String getLastNameFieldValue() {
 
         return lastNameField.getAttribute("value");
     }
 
-    public String getFirstNameFieldValue(){
+    public String getFirstNameFieldValue() {
 
         return firstNameField.getAttribute("value");
     }
 
-    public String getPhoneFieldValue(){
+    public String getPhoneFieldValue() {
 
         return phoneField.getAttribute("value");
     }
 
-    public String getEmailFieldValue(){
+    public String getEmailFieldValue() {
 
         return emailField.getAttribute("value");
     }
 
-    public String getPasswordFieldValue(){
+    public String getPasswordFieldValue() {
 
         return passwordField.getAttribute("value");
     }
 
-    public String getConfirmPasswordFieldValue(){
+    public String getConfirmPasswordFieldValue() {
 
         return confirmPasswordField.getAttribute("value");
     }

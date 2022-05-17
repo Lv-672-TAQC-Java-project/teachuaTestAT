@@ -21,12 +21,12 @@ enum FeedbackFeelds {
 
     private final int number;
 
-    public int getNumber() {
-        return number;
-    }
-
     FeedbackFeelds(int number) {
         this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 }
 
@@ -53,20 +53,7 @@ public class FeedbackEntity {
         this.userName = null;
     }
 
-    @Override
-    public String toString() {
-        return "FeedbackEntity{" +
-                "clubId=" + clubId +
-                ", date=" + date +
-                ", id=" + id +
-                ", rate=" + rate +
-                ", text='" + text + '\'' +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                '}';
-    }
-
-    public static FeedbackEntity getFeedback (List<String> row) {
+    public static FeedbackEntity getFeedback(List<String> row) {
         FeedbackEntity feedbackEntity = new FeedbackEntity();
 
         feedbackEntity.setClubId(Long.parseLong(row.get(FeedbackFeelds.CLUB_ID.getNumber())));
@@ -74,8 +61,8 @@ public class FeedbackEntity {
 
         try {
             if (row.get(FeedbackFeelds.DATE.getNumber()) != null) {
-            Date date = dateFormat.parse(row.get(FeedbackFeelds.DATE.getNumber()));
-            feedbackEntity.setDate(new Timestamp(date.getTime()));
+                Date date = dateFormat.parse(row.get(FeedbackFeelds.DATE.getNumber()));
+                feedbackEntity.setDate(new Timestamp(date.getTime()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,10 +84,23 @@ public class FeedbackEntity {
     public static List<FeedbackEntity> getFeedbacks(List<List<String>> rows) {
         List<FeedbackEntity> feedbacks = new ArrayList<>();
 
-        for(List<String> row : rows) {
+        for (List<String> row : rows) {
             feedbacks.add(getFeedback(row));
         }
 
         return feedbacks;
+    }
+
+    @Override
+    public String toString() {
+        return "FeedbackEntity{" +
+                "clubId=" + clubId +
+                ", date=" + date +
+                ", id=" + id +
+                ", rate=" + rate +
+                ", text='" + text + '\'' +
+                ", userId=" + userId +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }

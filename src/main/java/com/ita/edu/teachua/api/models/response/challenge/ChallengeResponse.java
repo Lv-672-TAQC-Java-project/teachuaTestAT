@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChallengeResponse {
+    User user;
     private int id;
     private String name;
     private String title;
@@ -12,5 +13,4 @@ public class ChallengeResponse {
     private String picture;
     private int sortNumber;
     private Boolean isActive;
-    User user;
 }

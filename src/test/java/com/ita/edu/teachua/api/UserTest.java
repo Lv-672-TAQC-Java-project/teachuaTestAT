@@ -7,10 +7,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UserTest extends ApiTestRunner{
+public class UserTest extends ApiTestRunner {
     private UserClient client;
+
     @BeforeClass
-    public void setUpClass(){
+    public void setUpClass() {
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
         client = new UserClient(authorization.getToken());
     }

@@ -4,6 +4,7 @@ import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
 import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,19 +32,23 @@ public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "/html/body/div[5]/div/div/ul/li[2]/span/div")
     private WebElement addCenterButton;
 
+    @FindBy(how = How.XPATH, using = "//div[@class = 'content-title']")
+    private WebElement contentTitle;
+
     public MyProfilePage(WebDriver driver) {
         super(driver);
     }
 
-    @Step("Click on add center button in drop down list")
-    public BasicInformationCenterComponent clickAddCenterInDropDownButton() {
-        addCenterButton.click();
-        sleep(2000);
-        return new BasicInformationCenterComponent(driver);
+    public boolean isContentTitleDisplayed() {
+        return contentTitle.isDisplayed();
     }
 
-    public boolean addCenterButtonIsEnabled() {
-        return addCenterButton.isEnabled();
+    @Step("Click on add center button and open add center pop up")
+    public BasicInformationCenterComponent clickAddCenterInDropDownButton() {
+        addCenterButton.click();
+        //need
+        sleep(2000);
+        return new BasicInformationCenterComponent(driver);
     }
 
     public MyProfilePage clickDropDownProfileButton() {
@@ -58,10 +63,19 @@ public class MyProfilePage extends CommonPage {
         return new MyProfilePage(driver);
     }
 
+    @Step("Open drop down list")
     public MyProfilePage clickAddButton() {
         addButton.click();
+        //need
+        sleep(1000);
+        return this;
+    }
 
-        return new MyProfilePage(driver);
+    @Step("Check that drop down list is displayed")
+    public boolean isDropDownListDisplayed() {
+        return addButton
+                .findElement(By.xpath(".//ancestor::body//ul[@classname ='menu']"))
+                .isDisplayed();
     }
 
     public MyProfilePage clickAddWorkshop() {
@@ -80,7 +94,23 @@ public class MyProfilePage extends CommonPage {
     @Step("click button edit profile")
     public EditMyProfileComponent clickEditMyProfileComponent() {
         editButton.click();
+
         return new EditMyProfileComponent(driver);
+    }
+
+    public String getClubInfoBoxLocator(String clubName) {
+        final String clubInfoBoxLocator = String.format("//*[@class = 'title-name' and contains(text(), '%s')]", clubName);
+        return clubInfoBoxLocator;
+    }
+
+    @Step("Opened chosen club details page")
+    public ClubDetailsPage goToClubDetailsPage(String clubName) {
+        String clubInfoBoxLocator = getClubInfoBoxLocator(clubName);
+        String clubDetailsPageLocator = String.format(clubInfoBoxLocator + "//following-sibling::button");
+        WebElement clubDetails = driver.findElement(By.xpath(clubDetailsPageLocator));
+        clubDetails.click();
+
+        return new ClubDetailsPage(driver);
     }
 
     public MyProfilePage clickDropDownMyProfileButton() {
