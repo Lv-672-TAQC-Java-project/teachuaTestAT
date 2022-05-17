@@ -16,7 +16,7 @@ public class TaskTest extends ApiTestRunner {
     @BeforeClass
     public void setUpClass() {
 
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
         task = new TaskClient(authorization.getToken());
     }
 
@@ -48,11 +48,14 @@ public class TaskTest extends ApiTestRunner {
                 "descriptiondescriptiondescriptiondescriptiondescription",
                 "/upload/test/test.png",
                 "2022-05-30");
-        SoftAssert softAssert = new SoftAssert();
+
         Response response = task.post(168, credentials);
         ErrorResponse taskResponse = response.as(ErrorResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(taskResponse.getStatus(), 400);
         softAssert.assertTrue(!taskResponse.getMessage().isEmpty());
+
         softAssert.assertAll();
     }
 }
