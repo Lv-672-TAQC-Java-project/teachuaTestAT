@@ -34,5 +34,4 @@ public class TaskTest extends ApiTestRunner{
         softAssert.assertTrue(!taskResponse.getMessage().isEmpty());
         softAssert.assertAll();
     }
-
 }
