@@ -24,6 +24,14 @@ public class TestValueProvider {
         return properties.getProperty("adminPassword");
     }
 
+    public String getClubLeaderEmail() {
+        return properties.getProperty("clubLeaderEmail");
+    }
+
+    public String getClubLeaderPassword() {
+        return properties.getProperty("clubLeaderPassword");
+    }
+
     public String getSizeOfSearchResult() {
         return properties.getProperty("sizeOfSearchResult");
     }
@@ -70,5 +78,12 @@ public class TestValueProvider {
 
     public String getUserWithNonAdministratorRightsEmail() {
         return properties.getProperty("userWithNonAdministratorEmail");
+
+    public String getClubHeadEmail() {
+        return properties.getProperty("clubHeadEmail");
+    }
+
+    public String getClubHeadPassword() {
+        return properties.getProperty("clubHeadPassword");
     }
 }
