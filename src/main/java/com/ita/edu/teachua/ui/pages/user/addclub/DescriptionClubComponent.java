@@ -65,6 +65,13 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return getCreateClubBtn().isEnabled();
     }
 
+
+    @Step("Create Club")
+    public HomePage createClub() {
+        getCreateClubBtn().click();
+        return new HomePage(driver);
+    }
+
     @Step("Create new club")
     public HomePage clickCreateClubButton() {
         getCreateClubBtn().click();
@@ -79,3 +86,4 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return new HomePage(driver);
     }
 }
+

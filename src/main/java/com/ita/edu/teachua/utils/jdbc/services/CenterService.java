@@ -16,6 +16,11 @@ public class CenterService {
         return centerDao.selectAll();
     }
 
+
+    public int getCenterIdWhereName(String centerName) {
+        return centerDao.selectIdWhereName(centerName);
+    }
+  
     public List<CenterEntity> getAllCentersWhereName(String name) {
         return centerDao.selectAllWhereName(name);
     }

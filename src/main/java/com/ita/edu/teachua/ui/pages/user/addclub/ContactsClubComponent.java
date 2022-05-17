@@ -30,9 +30,21 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
     }
 
     @Step("Fill contact phone")
+    public ContactsClubComponent fillContactPhone(String phoneNumber) {
+        contactPhone.sendKeys(phoneNumber);
+        return this;
+    }
+
+    @Step("Fill contact phone")
     public ContactsClubComponent fillContactPhone() {
         contactPhone.sendKeys("0" + RandomStringUtils.randomNumeric(9));
         return this;
+    }
+
+    @Step("Click 'next step' button")
+    public DescriptionClubComponent goToDescriptionClubComponent() {
+        getNextStepBtn().click();
+        return new DescriptionClubComponent(driver);
     }
 
     @Step("Fill contacts information and click next step button")

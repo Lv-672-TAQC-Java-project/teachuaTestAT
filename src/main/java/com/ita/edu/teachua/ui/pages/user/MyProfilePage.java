@@ -98,6 +98,21 @@ public class MyProfilePage extends CommonPage {
         return new EditMyProfileComponent(driver);
     }
 
+    public String getClubInfoBoxLocator(String clubName) {
+        final String clubInfoBoxLocator = String.format("//*[@class = 'title-name' and contains(text(), '%s')]", clubName);
+        return clubInfoBoxLocator;
+    }
+
+    @Step("Opened chosen club details page")
+    public ClubDetailsPage goToClubDetailsPage(String clubName) {
+        String clubInfoBoxLocator = getClubInfoBoxLocator(clubName);
+        String clubDetailsPageLocator = String.format(clubInfoBoxLocator + "//following-sibling::button");
+        WebElement clubDetails = driver.findElement(By.xpath(clubDetailsPageLocator));
+        clubDetails.click();
+
+        return new ClubDetailsPage(driver);
+    }
+
     public MyProfilePage clickDropDownMyProfileButton() {
         sleep(3000);
         dropDownProfileButton.click();

@@ -20,6 +20,10 @@ public class BasicInformationClubComponent extends AddClubPage {
     private WebElement minimumAgeField;
     @FindBy(how = How.ID, using = "basic_ageTo")
     private WebElement maximumAgeField;
+    @FindBy(how = How.ID, using = "basic_centerId")
+    private WebElement openCentersMenu;
+    @FindBy(how = How.XPATH, using = "//*[@class = 'rc-virtual-list-holder-inner']//following-sibling::div")
+    private List<WebElement> centerOptions;
 
     public BasicInformationClubComponent(WebDriver driver) {
         super(driver);
@@ -28,6 +32,12 @@ public class BasicInformationClubComponent extends AddClubPage {
     @Step("Enter club name")
     public BasicInformationClubComponent enterClubName() {
         fieldName.sendKeys(RandomStringUtils.randomAlphabetic(8));
+        return this;
+    }
+
+    @Step("Enter club name")
+    public BasicInformationClubComponent enterClubName(String clubName) {
+        fieldName.sendKeys(clubName);
         return this;
     }
 
@@ -45,6 +55,28 @@ public class BasicInformationClubComponent extends AddClubPage {
         maximumAgeField.clear();
         maximumAgeField.sendKeys("16");
         return this;
+    }
+
+    @Step("Enter age")
+    public BasicInformationClubComponent enterAge(int ageFrom, int ageTo) {
+        minimumAgeField.clear();
+        minimumAgeField.sendKeys(String.valueOf(ageFrom));
+        maximumAgeField.clear();
+        maximumAgeField.sendKeys(String.valueOf(ageTo));
+        return this;
+    }
+
+    @Step("Select center")
+    public BasicInformationClubComponent selectCenter() {
+        openCentersMenu.click();
+        centerOptions.get(new Random().nextInt(centerOptions.size())).click();
+        return this;
+    }
+
+    @Step("Press 'next step' button")
+    public ContactsClubComponent goToContactsClubComponent() {
+        getNextStepBtn().click();
+        return new DescriptionClubComponent(driver);
     }
 
     @Step("Fill basic information and click next step button")
