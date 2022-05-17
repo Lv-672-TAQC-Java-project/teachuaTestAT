@@ -2,7 +2,6 @@ package com.ita.edu.teachua.api.client;
 
 import com.ita.edu.teachua.api.models.credenntials.ChallengeCredentials;
 import io.restassured.response.Response;
-
 import java.util.Map;
 
 import static com.ita.edu.teachua.utils.FileReader.getFileAsString;

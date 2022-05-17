@@ -78,6 +78,7 @@ public class TestValueProvider {
 
     public String getUserWithNonAdministratorRightsEmail() {
         return properties.getProperty("userWithNonAdministratorEmail");
+    }
 
     public String getClubHeadEmail() {
         return properties.getProperty("clubHeadEmail");
