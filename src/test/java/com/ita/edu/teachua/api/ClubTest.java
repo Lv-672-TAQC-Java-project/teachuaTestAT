@@ -4,6 +4,7 @@ import com.ita.edu.teachua.api.models.club_response.ClubResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
+import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -23,7 +24,7 @@ public class ClubTest extends ApiTestRunner {
     @Issue("TUA-504")
     @Test(description = "TUA-504")
     public void verifyThatUserCanCreateNewClub() {
-        String name = "qrtqt";
+        String name = RandomStringUtils.randomAlphabetic(5);
         Response response = client.post(name);
         ClubResponse clubResponse = response.as(ClubResponse.class);
 
@@ -33,6 +34,20 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertEquals(clubResponse.getName(), name);
 
         softAssert.assertAll();
+    }
 
+    @Description("Verify that User as 'Керiвник гуртка' can create new club, which will registered on him")
+    @Issue("TUA-463")
+    @Test(description = "TUA-463")
+    public void verifyThatUserAsClubHeaderCanCreateNewClub() {
+        String name = RandomStringUtils.randomAlphabetic(8);
+        Response response = client.post(name);
+        ClubResponse clubResponse = response.as(ClubResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubResponse.getName(), name);
+        softAssert.assertEquals(clubResponse.getUser().getId(), 264);
     }
 }
