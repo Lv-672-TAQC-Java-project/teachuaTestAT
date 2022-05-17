@@ -51,52 +51,52 @@ public class BannerItemsEntity {
         return bannerItems;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
-    public void setSequenceNumber(Integer sequenceNumber) {
-        this.sequenceNumber = sequenceNumber;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLink() {
         return link;
     }
 
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     public String getPicture() {
         return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public Integer getSequenceNumber() {
         return sequenceNumber;
     }
 
+    public void setSequenceNumber(Integer sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
     public String getSubtitle() {
         return subtitle;
     }
 
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
