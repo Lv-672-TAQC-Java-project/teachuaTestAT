@@ -2,9 +2,9 @@ package com.ita.edu.teachua.api;
 
 
 import com.ita.edu.teachua.api.client.Club;
-import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import com.ita.edu.teachua.api.models.response.club.ClubResponse;
 import com.ita.edu.teachua.api.models.response.club.Location;
 import io.qameta.allure.Description;
