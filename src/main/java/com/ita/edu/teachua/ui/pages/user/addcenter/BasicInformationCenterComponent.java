@@ -10,42 +10,36 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 public class BasicInformationCenterComponent extends BasePage {
-    @FindBy(how = How.XPATH, using = "//span[@class='ant-input-affix-wrapper']/input")
+    @FindBy(how = How.XPATH, using = "//input[@id ='basic_name']")
     private WebElement fieldNameCenter;
     @FindBy(how = How.XPATH, using = "//button[@class='ant-btn ant-btn-default next-btn']")
     private WebElement clickToNextButton;
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Некоректна назва центру')]")
     private WebElement textAfterClick;
     @FindBy(how = How.ID, using = "basic_locations")
-    private WebElement checkBoxLocation;
-    @FindBy(how = How.XPATH, using = "//*[@id = 'basic']//button[contains(@class, 'add-location')]")
+    private WebElement locationList;
+    @FindBy(how = How.XPATH, using = "//*[@class = 'add-club-location']//button")
     private WebElement addLocationButton;
+    @FindBy(how = How.XPATH, using = "//main[@class = 'ant-layout-content add-center-container']")
+    private WebElement addCenterPopUp;
 
     public BasicInformationCenterComponent(WebDriver driver) {
         super(driver);
     }
 
-    @Step("Click on {nameLocations} elements in checkbox")
-    public BasicInformationCenterComponent clickSelectedLocations(String[] nameLocations) {
-
-        for(String location: nameLocations) {
-            String nameLocationPath = String.format(".//label//span[text() = '%s']", location);
-            checkBoxLocation.findElement(By.xpath(nameLocationPath)).click();
-            sleep(1000);
-        }
-
-        return new BasicInformationCenterComponent(driver);
+    @Step("check that add center pop up is displayed")
+    public boolean isAddCenterPopUpDisplayed() {
+        return addCenterPopUp.isDisplayed();
     }
 
-    @Step("Check if {nameLocations} are selected")
-    public boolean isCheckBoxLocationSelected(String[] nameLocations) {
-        boolean checkList = false;
-        for (String location : nameLocations) {
-            String nameLocationPath = String.format(".//label//input", location);
-            checkList = checkBoxLocation.findElement(By.xpath(nameLocationPath)).isSelected();
-            sleep(1000);
-        }
-        return checkList;
+    @Step("get added location")
+    public LocationCheckBoxComponent getAddedLocation() {
+        return new LocationCheckBoxComponent(driver, locationList.findElement(By.xpath("./div[last()]")));
+    }
+
+    @Step("check that added location are selected")
+    public boolean isAddedLocationSelected() {
+        return locationList.findElement(By.xpath(".//div[last()]/label//input")).isSelected();
     }
 
     @Step("get input field in 'Назва центру'")
@@ -56,13 +50,14 @@ public class BasicInformationCenterComponent extends BasePage {
     @Step("click Next button")
     public BasicInformationCenterComponent clickNextButton() {
         clickToNextButton.click();
+
         return this;
     }
 
     @Step("click on next step button")
     public ContactsCenterComponent clickNextStepButton() {
         clickToNextButton.click();
-        sleep(2000);
+
         return new ContactsCenterComponent(driver);
     }
 
@@ -74,13 +69,19 @@ public class BasicInformationCenterComponent extends BasePage {
     @Step("input {name} in 'Назва центру'")
     public BasicInformationCenterComponent inputNameCenterField(String name) {
         fieldNameCenter.sendKeys(name);
-        sleep(2000);
-        return new BasicInformationCenterComponent(driver);
+
+        return this;
     }
 
+    @Step("get name text")
+    public String getCenterName() {
+        return fieldNameCenter.getAttribute("value");
+    }
+
+    @Step("click on added location button")
     public AddLocationComponent clickAddLocationButton() {
         addLocationButton.click();
-        sleep(2000);
+
         return new AddLocationComponent(driver);
     }
 }
