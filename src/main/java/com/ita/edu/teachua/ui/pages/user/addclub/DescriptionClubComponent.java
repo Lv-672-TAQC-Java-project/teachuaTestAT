@@ -65,9 +65,25 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return getCreateClubBtn().isEnabled();
     }
 
+
     @Step("Create Club")
     public HomePage createClub() {
         getCreateClubBtn().click();
         return new HomePage(driver);
     }
+
+    @Step("Create new club")
+    public HomePage clickCreateClubButton() {
+        getCreateClubBtn().click();
+        return new HomePage(driver);
+    }
+
+    @Step("fill description information and click finish button")
+    public HomePage fillDescriptionInfo() {
+        enterSymbols(50);
+//        getCreateClubBtn().click();
+        sleep(2000);
+        return new HomePage(driver);
+    }
 }
+

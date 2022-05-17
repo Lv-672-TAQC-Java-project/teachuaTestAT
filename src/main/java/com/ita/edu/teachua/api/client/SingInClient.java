@@ -1,14 +1,13 @@
-package com.ita.edu.teachua.api;
+package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.models.UserCredentials;
+import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
 import io.restassured.response.Response;
 
-import java.io.IOException;
-
-public class SingInClient extends BaseClient{
+public class SingInClient extends BaseClient {
     public SingInClient() {
         super();
     }
+
     public Response successSingInRequest(UserCredentials credentials) {
         return prepareRequest()
                 .body(credentials)
