@@ -2,14 +2,13 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
+import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import static java.lang.Thread.sleep;
 
 public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValueProvider {
 
@@ -33,22 +32,17 @@ public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValuePr
     }
 
     @BeforeMethod
-    public void beforeMethot() throws InterruptedException {
+    public void beforeMethod() {
+        HomePage homePage = new HomePage(driver);
+        homePage
+                .login(valueProvider.getAdminEmail(), valueProvider.getAdminPassword());
 
-        HomePage home = new HomePage(driver);
-        home
-                .getHeader()
-                .clickUserProfile()
-                .clickLogin()
-                .setEmail(valueProvider.getAdminEmail())
-                .setPassword(valueProvider.getAdminPassword())
-                .clickLoginButton()
-                .clickDropDownProfileButton()
+        MyProfilePage myProfilePage = new MyProfilePage(driver);
+        myProfilePage
+                .clickDropDownMyProfileButton()
                 .clickMyProfileButton()
                 .clickEditMyProfileComponent();
-        sleep(3000);
     }
-
 
     @Description("Verify that error messages are shown and 'Зберегти зміни' button becomes disabled while entering invalid data into the 'Ім'я' field")
     @Issue("TUA-328")
@@ -62,12 +56,11 @@ public class TestErrorSmsInProfileInFieldFirstName extends TestRunnerWithValuePr
         softAssert.assertEquals(editMyProfileComponent
                         .setFirstName(input)
                         .getErrorTextAfterInput(), expected,
-                         String.format("In field should be text %s", expected));
+                String.format("In field should be text %s", expected));
         softAssert.assertTrue(editMyProfileComponent.isButtonSaveChangedDisabled(),
                 "button 'Save Changes' should be disabled");
         softAssert.assertAll();
 
         editMyProfileComponent.setFirstName("admin");
-        sleep(1000);
     }
 }

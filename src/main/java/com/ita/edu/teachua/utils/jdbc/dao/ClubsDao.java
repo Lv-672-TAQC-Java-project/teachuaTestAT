@@ -21,4 +21,18 @@ public class ClubsDao {
         ManagerDao.get().closeStatement(statement);
         return ClubsEntity.getClubs(rows);
     }
+
+    public List<ClubsEntity> selectAllNames() {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(ClubsEntity.SELECT_NAME);
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return ClubsEntity.getClubsName(rows);
+    }
 }

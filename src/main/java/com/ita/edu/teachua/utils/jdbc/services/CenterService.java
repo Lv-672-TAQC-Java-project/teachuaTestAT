@@ -2,7 +2,6 @@ package com.ita.edu.teachua.utils.jdbc.services;
 
 import com.ita.edu.teachua.utils.jdbc.dao.CenterDao;
 import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
-import com.ita.edu.teachua.utils.jdbc.entity.LocationEntity;
 
 import java.util.List;
 
@@ -19,5 +18,17 @@ public class CenterService {
 
     public List<CenterEntity> getAllCentersWhereName(String name) {
         return centerDao.selectAllWhereName(name);
+    }
+
+    public List<CenterEntity> getCentresSortedByNameAscOrDesc(boolean isAsc) {
+        return centerDao.selectByNameSortedAscOrDesc(isAsc);
+    }
+
+    public List<CenterEntity> getCentersByRating() {
+        return centerDao.selectByRating();
+    }
+
+    public List<CenterEntity> getCentersByDescendingRating() {
+        return centerDao.selectByDescendingRating();
     }
 }

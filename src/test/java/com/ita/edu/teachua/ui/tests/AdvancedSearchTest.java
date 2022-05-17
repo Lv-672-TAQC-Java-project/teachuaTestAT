@@ -2,10 +2,20 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
+import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+import static org.testng.Assert.*;
+
+import java.util.*;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -98,5 +108,118 @@ public class AdvancedSearchTest extends TestRunner {
                 .clickOnListIcon();
 
         assertTrue(advancedSearchComponent.isCentersDisplayedAsAList(expectedWidth, expectedHeight), "Centers is not displayed as a list");
+    }
+
+    @Description("This test case verifies that the user can sort the search results alphabetically after clicking on the 'Центр' radio button")
+    @Issue("TUA-440")
+    @Test(description = "TUA-440")
+    public void verifyThatUserCanSortCentersSearchResultsAlphabetically() {
+        AdvancedSearchComponent advancedSearchComponent = new HomePage(driver)
+                .getHeader()
+                .clickAdvancedSearchBtn();
+
+        boolean isAdvancedSearchModalDisplayed = advancedSearchComponent.isAdvancedSearchModalDisplayed();
+        assertTrue(isAdvancedSearchModalDisplayed, "Advanced search modal should be displayed");
+
+        advancedSearchComponent
+                .clickOnСenterButton()
+                .clickRemoveFilterButton()
+                .clickSortAlphabeticallyButton();
+
+        List<String> uiCentersNames = advancedSearchComponent.getCenterLabels();
+
+        String message = "Centers should be displayed alphabetically %s on UI";
+        List<String> dbCentersName = getFirstSixCentersNameSortedAscOrDesc(true);
+        assertEquals(uiCentersNames, dbCentersName, String.format(message, "ASC"));
+
+        advancedSearchComponent.clickArrowUpButton();
+        uiCentersNames = advancedSearchComponent.getCenterLabels();
+
+        dbCentersName = getFirstSixCentersNameSortedAscOrDesc(false);
+        assertEquals(uiCentersNames, dbCentersName, String.format(message, "DESC"));
+    }
+
+    private List<String> getFirstSixCentersNameSortedAscOrDesc(boolean isAsc) {
+        List<CenterEntity> centersFromDataBase = new CenterService().getCentresSortedByNameAscOrDesc(isAsc);
+
+        List<String> dataBaseList = new ArrayList<>();
+        for (CenterEntity center : centersFromDataBase) {
+            dataBaseList.add(center
+                    .getName()
+                    .trim()
+                    .replaceAll("  ", " ")
+            );
+        }
+
+        return dataBaseList
+                .stream()
+                .limit(6)
+                .collect(toList());
+    }
+
+
+    @Description("Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
+    @Issue("TUA-449")
+    @Test(description = "TUA-449")
+    public void verifyThatUserCanSortResultsByRatingAfterClickingOnCenterBtn() {
+        HomePage home = new HomePage(driver);
+        AdvancedSearchComponent centers = home
+                .getHeader()
+                .clickAdvancedSearchBtn()
+                .clickOnСenterButton()
+                .clickOnClearCityNameButton()
+                .clickOnByRatingOption();
+
+        List<String> centersByRating = centers.getCenterName();
+
+        CenterService centerService = new CenterService();
+        List<CenterEntity> centersFromDB = centerService.getCentersByRating();
+
+        LinkedHashMap<Double, List<String>> centersByRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDB) {
+            if (!centersByRatingFromDB.containsKey(center.getRating())) {
+                centersByRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
+
+        checkIfCentersAreTheSameWithDataBase(centersByRating, centersByRatingFromDB);
+
+        List<String> centersByRatingDesc = centers
+                .clickOnPaginationButton(1)
+                .clickOnArrowUpLabel()
+                .getCenterName();
+
+        List<CenterEntity> centersFromDBByDesc = centerService.getCentersByDescendingRating();
+
+        LinkedHashMap<Double, List<String>> centersByDescRatingFromDB = new LinkedHashMap<>();
+        for (CenterEntity center : centersFromDBByDesc) {
+            if (!centersByDescRatingFromDB.containsKey(center.getRating())) {
+                centersByDescRatingFromDB.put(center.getRating(), new ArrayList<>());
+            }
+            centersByDescRatingFromDB.get(center.getRating()).add(center.getName()
+                    .trim().replaceAll("  ", " "));
+        }
+
+        checkIfCentersAreTheSameWithDataBase(centersByRatingDesc, centersByDescRatingFromDB);
+    }
+
+    private void checkIfCentersAreTheSameWithDataBase(List<String> centersByRating, LinkedHashMap<Double, List<String>> centersByRatingFromDB) {
+        List<Object> keys = centersByRatingFromDB.keySet().stream().collect(toList());
+
+        int lastValue = 0;
+
+        for (Object key : keys) {
+            int sizeDBValue = centersByRatingFromDB.get(key).size();
+            List<String> resultList = new ArrayList<>();
+
+            for (int i = lastValue; i < sizeDBValue + lastValue; i++) {
+                resultList.add(centersByRating.get(i));
+            }
+            lastValue = sizeDBValue + lastValue;
+
+            assertTrue(resultList.containsAll(centersByRatingFromDB.get(key)));
+        }
     }
 }

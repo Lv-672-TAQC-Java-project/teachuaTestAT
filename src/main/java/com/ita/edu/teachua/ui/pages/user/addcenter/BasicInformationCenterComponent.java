@@ -12,7 +12,7 @@ import org.openqa.selenium.support.How;
 public class BasicInformationCenterComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@id ='basic_name']")
     private WebElement fieldNameCenter;
-    @FindBy(how = How.XPATH, using = "//button[@class='ant-btn ant-btn-default next-btn']/span")
+    @FindBy(how = How.XPATH, using = "//button[@class='ant-btn ant-btn-default next-btn']")
     private WebElement clickToNextButton;
     @FindBy(how = How.XPATH, using = "//div[contains(text(),'Некоректна назва центру')]")
     private WebElement textAfterClick;
