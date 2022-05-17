@@ -2,7 +2,7 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.SingInClient;
 import com.ita.edu.teachua.api.client.UserClient;
-import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
+import com.ita.edu.teachua.api.models.credenntials.SignInCredentials;
 import com.ita.edu.teachua.api.models.response.user.SuccessSingInResponse;
 import com.ita.edu.teachua.api.models.response.user.UserResponse;
 import io.restassured.response.Response;
@@ -13,7 +13,7 @@ public class loginTest extends ApiTestRunner {
 
     @Test
     public void singInTest() {
-        UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getAdminPassword());
+        SignInCredentials credentials = new SignInCredentials(provider.getAdminEmail(), provider.getAdminPassword());
         SingInClient client = new SingInClient();
         Response response = client.successSingInRequest(credentials);
         SuccessSingInResponse singInResponse = response.as(SuccessSingInResponse.class);

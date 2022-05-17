@@ -2,8 +2,8 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.UserClient;
 import com.ita.edu.teachua.api.models.response.user.UserResponse;
-import com.ita.edu.teachua.api.models.ErrorResponse;
-import com.ita.edu.teachua.api.models.User1Credentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
+import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
@@ -24,7 +24,7 @@ public class UserTest extends ApiTestRunner {
     @Issue("TUA-411")
     @Test(description = "TUA-411")
     public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty() {
-        User1Credentials userCredentials = new User1Credentials(provider.getFirstName(),
+        UserCredentials userCredentials = new UserCredentials(provider.getFirstName(),
                 provider.getLastName(),
                 provider.getPhone(),
                 provider.getEmail(),

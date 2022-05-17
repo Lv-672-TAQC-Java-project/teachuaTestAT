@@ -1,6 +1,6 @@
 package com.ita.edu.teachua.api.client;
 
-import com.ita.edu.teachua.api.models.User1Credentials;
+import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
 import io.restassured.response.Response;
 
 public class UserClient extends BaseClient {
@@ -19,7 +19,7 @@ public class UserClient extends BaseClient {
 
     }
 
-    public Response put(int id, User1Credentials credentials){
+    public Response put(int id, UserCredentials credentials){
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .body(credentials)
