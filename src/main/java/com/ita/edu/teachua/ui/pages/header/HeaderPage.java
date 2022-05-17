@@ -13,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
 public class HeaderPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//*[@id='root']/section/header/div[1]/a/div")
@@ -79,7 +78,11 @@ public class HeaderPage extends BasePage {
 
     @Step("click Admin Profile")
     public AdminMenuDropDownComponent clickAdminProfile() {
-        adminProfileButton.click();
+        try {
+            adminProfileButton.click();
+        } catch (org.openqa.selenium.StaleElementReferenceException exception) {
+            adminProfileButton.click();
+        }
 
         return new AdminMenuDropDownComponent(driver, dropDownMenuNode);
     }

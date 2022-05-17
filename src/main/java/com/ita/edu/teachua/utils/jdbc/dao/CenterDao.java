@@ -26,6 +26,22 @@ public class CenterDao {
         return CenterEntity.getCenters(rows);
     }
 
+    public int selectIdWhereName(String centerName) {
+        Statement statement = ManagerDao.get().getStatement();
+        int result = 0;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(CenterEntity.SELECT_ID_WHERE_NAME, centerName));
+            while (resultSet.next()) {
+                result = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return result;
+    }
+
     public List<CenterEntity> selectByNameSortedAscOrDesc(boolean isAsc) {
         Statement statement = ManagerDao.get().getStatement();
 
@@ -72,5 +88,19 @@ public class CenterDao {
         }
         ManagerDao.get().closeStatement(statement);
         return CenterEntity.getCentersByRating(rows);
+    }
+
+    public List<CenterEntity> selectAllWhereName(String name) {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(String.format(CenterEntity.SELECT_All_WHERE_NAME, name));
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return CenterEntity.getCenters(rows);
     }
 }

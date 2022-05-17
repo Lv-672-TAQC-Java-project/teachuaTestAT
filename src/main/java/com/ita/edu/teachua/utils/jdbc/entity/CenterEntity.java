@@ -5,6 +5,8 @@ import java.util.List;
 
 public class CenterEntity {
     public static final String SELECT_ALL = "SELECT * FROM centers ORDER BY id;";
+    public static final String SELECT_ID_WHERE_NAME = "SELECT id FROM centers WHERE name = '%s';";
+    public static final String SELECT_All_WHERE_NAME = "select * from public.centers where name = '%s'";
     public static final String SELECT_ID_NAME_ASC = "SELECT id, name FROM centers ORDER BY name ASC;";
     public static final String SELECT_ID_NAME_DESC = "SELECT id, name FROM centers ORDER BY name DESC;";
     public static final String SELECT_BY_RATING = "SELECT id, name, rating FROM centers ORDER BY rating ASC;";
@@ -65,8 +67,12 @@ public class CenterEntity {
         if (row.get(8) != null) {
             center.setUserId(Long.parseLong(row.get(8)));
         }
-        center.setClubCount(Long.parseLong(row.get(9)));
-        center.setRating(Double.parseDouble(row.get(10)));
+        if (row.get(9) != null) {
+            center.setUserId(Long.parseLong(row.get(9)));
+        }
+        if (row.get(10) != null) {
+            center.setRating(Double.parseDouble(row.get(10)));
+        }
         return center;
     }
 
