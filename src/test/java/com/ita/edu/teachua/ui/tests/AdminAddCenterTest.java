@@ -5,7 +5,6 @@ import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.*;
 import com.ita.edu.teachua.ui.pages.user.models.City;
-import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -13,8 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.List;
 
 public class AdminAddCenterTest extends TestRunnerWithValueProvider {
     @BeforeMethod
@@ -47,6 +44,10 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
 
         BasicInformationCenterComponent basicInformationCenterComponent = new BasicInformationCenterComponent(driver);
         String centerName = "Ccccc1";
+
+        CenterService centerService = new CenterService();
+        int centerNumberBeforeAdded = centerService.getAllCentersWhereName(centerName).size();
+
         softAssert.assertTrue(basicInformationCenterComponent
                         .inputNameCenterField(centerName)
                         .getCenterName()
@@ -136,11 +137,8 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
                         .isContentTitleDisplayed(),
                 "Pop up should be closed");
 
-        CenterService centerService = new CenterService();
-        List<CenterEntity> centers = centerService.getAllCentersWhereName("Center#1");
-        for (CenterEntity centerEntity : centers) {
-            System.out.println(centerEntity);
-        }
+        int centerNumberAfterAdded = centerService.getAllCentersWhereName(centerName).size();
+        softAssert.assertEquals(centerNumberBeforeAdded, centerNumberAfterAdded + 1);
 
         softAssert.assertAll();
     }

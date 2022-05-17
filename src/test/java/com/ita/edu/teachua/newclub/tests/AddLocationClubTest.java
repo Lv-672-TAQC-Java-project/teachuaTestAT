@@ -8,7 +8,6 @@ import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.LocationService;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -82,8 +81,8 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
                 .fillDescriptionInfo();
 
         int locationSizeAfter = locationService.getAllLocationsWhereName(locationName).size();
-        Assert.assertEquals(locationSizeAfter,
-                locationSizeBefore + 1);
+        softAssert.assertEquals(locationSizeAfter, locationSizeBefore + 1);
+
         softAssert.assertAll();
     }
 }
