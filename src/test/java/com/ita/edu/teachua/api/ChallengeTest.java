@@ -83,4 +83,50 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
         softAssert.assertAll();
     }
+
+    @Description("This test case verifies that user is not able to create Challenge using invalid values")
+    @Issue("TUA-430")
+    @Test(description = "TUA-430")
+    public void verifyThatUserIsNotAbleToCreateChallengeUsingInvalidValues() {
+        ChallengeCredentials challengeCredentials = new ChallengeCredentials("nam",
+                "tit",
+                "des",
+                "",
+                "/upload/test/test.png",
+                "1");
+
+        Response response = client.postChallenge(challengeCredentials);
+        ErrorResponse challengeErrorResponse = response.as(ErrorResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(challengeErrorResponse.getStatus(), 400);
+        softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
+
+        challengeCredentials = new ChallengeCredentials("Lorem ipsum dolor sit amet, consect",
+                "Lorem ipsum dolor sit amet, consect",
+                "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eu",
+                "",
+                "/upload/test/test.png",
+                "1");
+
+        response = client.postChallenge(challengeCredentials);
+        challengeErrorResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(challengeErrorResponse.getStatus(), 400);
+        softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
+
+        challengeCredentials = new ChallengeCredentials("эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ",
+                "",
+                "/upload/test/test.png",
+                "1");
+
+        response = client.postChallenge(challengeCredentials);
+        challengeErrorResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(challengeErrorResponse.getStatus(), 400);
+        softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
+        softAssert.assertAll();
+    }
 }
