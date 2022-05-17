@@ -17,5 +17,4 @@ public class UserClient extends BaseClient {
                 .get(String.format("%s/api/user/%s", baseUrl, id));
 
     }
-
 }

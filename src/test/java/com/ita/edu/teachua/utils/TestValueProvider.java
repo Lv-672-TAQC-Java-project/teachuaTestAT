@@ -71,4 +71,12 @@ public class TestValueProvider {
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
     }
+
+    public String getClubHeadEmail() {
+        return properties.getProperty("clubHeadEmail");
+    }
+
+    public String getClubHeadPassword() {
+        return properties.getProperty("clubHeadPassword");
+    }
 }

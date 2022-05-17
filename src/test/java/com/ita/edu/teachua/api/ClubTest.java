@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.api;
 
+import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.response.club.ClubResponse;
 import io.qameta.allure.Description;
@@ -15,8 +16,7 @@ public class ClubTest extends ApiTestRunner {
 
     @BeforeClass
     public void setUpClass() {
-
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
+        Authorization authorization = new Authorization(provider.getClubHeadEmail(), provider.getClubHeadPassword());
         client = new ClubClient(authorization.getToken());
     }
 
@@ -35,5 +35,18 @@ public class ClubTest extends ApiTestRunner {
 
         softAssert.assertAll();
 
+    }
+
+    @Description("Verify that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain more than 100 characters")
+    @Issue("TUA-503")
+    @Test(description = "TUA-503")
+    public void verifyThatUserCannotCreateNewClubIsInACenterIfNameFieldContainMoreThan100Characters() {
+        var response = client.post();
+        var errorResponse = response.as(ErrorResponse.class);
+        var softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), 400);
+        softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
+        softAssert.assertAll();
     }
 }
