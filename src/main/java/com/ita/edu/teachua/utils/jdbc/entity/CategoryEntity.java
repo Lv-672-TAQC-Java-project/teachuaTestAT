@@ -32,20 +32,6 @@ public class CategoryEntity {
         this.urlLogo = null;
     }
 
-    @Override
-    public String toString() {
-        return "CategoryEntity{" +
-                "backgroundColor='" + backgroundColor + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", sortBy=" + sortBy +
-                ", tagBackgroundColor='" + tagBackgroundColor + '\'' +
-                ", tagTextColor='" + tagTextColor + '\'' +
-                ", urlLogo='" + urlLogo + '\'' +
-                '}';
-    }
-
     public static CategoryEntity getCategory(List<String> row) {
         CategoryEntity categoryEntity = new CategoryEntity();
 
@@ -64,10 +50,24 @@ public class CategoryEntity {
     public static List<CategoryEntity> getCategories(List<List<String>> rows) {
         List<CategoryEntity> categories = new ArrayList<>();
 
-        for(List<String> row : rows) {
+        for (List<String> row : rows) {
             categories.add(getCategory(row));
         }
 
         return categories;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryEntity{" +
+                "backgroundColor='" + backgroundColor + '\'' +
+                ", description='" + description + '\'' +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", sortBy=" + sortBy +
+                ", tagBackgroundColor='" + tagBackgroundColor + '\'' +
+                ", tagTextColor='" + tagTextColor + '\'' +
+                ", urlLogo='" + urlLogo + '\'' +
+                '}';
     }
 }

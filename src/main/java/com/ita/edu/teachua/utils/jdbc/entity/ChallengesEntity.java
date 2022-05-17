@@ -45,12 +45,7 @@ public class ChallengesEntity {
         challenge.setId(Long.parseLong(row.get(0)));
         challenge.setDescription(row.get(1));
 
-        if (row.get(2).equals("t")) {
-            challenge.setIsActive(true);
-        }
-        else {
-            challenge.setIsActive(false);
-        }
+        challenge.setIsActive(row.get(2).equals("t"));
 
         challenge.setName(row.get(3));
         challenge.setPicture(row.get(4));

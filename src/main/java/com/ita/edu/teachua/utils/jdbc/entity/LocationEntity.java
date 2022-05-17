@@ -90,84 +90,84 @@ public class LocationEntity {
         return id;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Long getCenterId() {
-        return centerId;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public Long getDistrictId() {
-        return districtId;
-    }
-
-    public Long getStationId() {
-        return stationId;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public Double getLatitude() {
+        return latitude;
+    }
+
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
     }
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getCenterId() {
+        return centerId;
     }
 
     public void setCenterId(Long centerId) {
         this.centerId = centerId;
     }
 
+    public Long getCityId() {
+        return cityId;
+    }
+
     public void setCityId(Long cityId) {
         this.cityId = cityId;
+    }
+
+    public Long getClubId() {
+        return clubId;
     }
 
     public void setClubId(Long clubId) {
         this.clubId = clubId;
     }
 
+    public Long getDistrictId() {
+        return districtId;
+    }
+
     public void setDistrictId(Long districtId) {
         this.districtId = districtId;
     }
 
+    public Long getStationId() {
+        return stationId;
+    }
+
     public void setStationId(Long stationId) {
         this.stationId = stationId;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {

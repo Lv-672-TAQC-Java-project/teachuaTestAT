@@ -119,92 +119,92 @@ public class CenterEntity {
         return centers;
     }
 
-    public void setCenterExternalId(Long centerExternalId) {
-        this.centerExternalId = centerExternalId;
-    }
-
-    public void setClubCount(Long clubCount) {
-        this.clubCount = clubCount;
-    }
-
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    public void setUrlBackgroundPicture(String urlBackgroundPicture) {
-        this.urlBackgroundPicture = urlBackgroundPicture;
-    }
-
-    public void setUrlLogo(String urlLogo) {
-        this.urlLogo = urlLogo;
-    }
-
-    public void setUrlWeb(String urlWeb) {
-        this.urlWeb = urlWeb;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getCenterExternalId() {
         return centerExternalId;
+    }
+
+    public void setCenterExternalId(Long centerExternalId) {
+        this.centerExternalId = centerExternalId;
     }
 
     public Long getClubCount() {
         return clubCount;
     }
 
+    public void setClubCount(Long clubCount) {
+        this.clubCount = clubCount;
+    }
+
     public String getContacts() {
         return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Double getRating() {
         return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public String getUrlBackgroundPicture() {
         return urlBackgroundPicture;
     }
 
+    public void setUrlBackgroundPicture(String urlBackgroundPicture) {
+        this.urlBackgroundPicture = urlBackgroundPicture;
+    }
+
     public String getUrlLogo() {
         return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo) {
+        this.urlLogo = urlLogo;
     }
 
     public String getUrlWeb() {
         return urlWeb;
     }
 
+    public void setUrlWeb(String urlWeb) {
+        this.urlWeb = urlWeb;
+    }
+
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

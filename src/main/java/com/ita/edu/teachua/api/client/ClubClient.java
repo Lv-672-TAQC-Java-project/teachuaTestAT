@@ -8,11 +8,11 @@ import static com.ita.edu.teachua.utils.FileReader.getFileAsString;
 import static com.ita.edu.teachua.utils.JsonUtils.setFieldsToJsonBodyByJsonPath;
 
 public class ClubClient extends BaseClient {
-    private final String authorizationToken;
     public static final String CLUB_JSON = "src/test/resources/json/Club.json";
     public static final String CLUB_INVALID_JSON = "src/test/resources/json/ClubInvalid.json";
     public static final String CLUB_INPUT_BODY = getFileAsString(CLUB_JSON);
     public static final String CLUB_INVALID_INPUT_BODY = getFileAsString(CLUB_INVALID_JSON);
+    private final String authorizationToken;
 
     public ClubClient(String authorizationToken) {
         super();

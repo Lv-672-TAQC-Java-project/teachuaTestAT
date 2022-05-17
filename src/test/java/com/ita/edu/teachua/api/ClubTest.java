@@ -2,9 +2,9 @@ package com.ita.edu.teachua.api;
 
 
 import com.ita.edu.teachua.api.client.Club;
-import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import com.ita.edu.teachua.api.models.response.club.ClubResponse;
 import com.ita.edu.teachua.api.models.response.club.Location;
 import io.qameta.allure.Description;
@@ -14,6 +14,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

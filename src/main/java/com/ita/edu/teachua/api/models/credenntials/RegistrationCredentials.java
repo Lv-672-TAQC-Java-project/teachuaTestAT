@@ -1,4 +1,4 @@
-package com.ita.edu.teachua.api.models;
+package com.ita.edu.teachua.api.models.credenntials;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ public class RegistrationCredentials {
     String urlLogo;
     String status;
 
-    public RegistrationCredentials(String firstName, String lastName,String email, String password, String phone, String roleName) {
+    public RegistrationCredentials(String firstName, String lastName, String email, String password, String phone, String roleName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

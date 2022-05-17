@@ -17,20 +17,20 @@ public class ContactsCenterComponent extends BasePage {
     private WebElement previousButton;
     @FindBy(how = How.XPATH, using = "(//div[@class = 'ant-steps-item-title' and text() = 'Контакти']//ancestor::div[contains(@class, 'ant-steps-item ant-steps-item')])[1]")
     private WebElement contactsTab;
-    private String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
+    private final String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
 
     public ContactsCenterComponent(WebDriver driver) {
         super(driver);
     }
 
     @Step("check that contact tab is activated")
-    public boolean isContactTabActivated(){
+    public boolean isContactTabActivated() {
         return contactsTab.getAttribute("class")
                 .contains("active");
     }
 
     @Step("input phone number {phoneNumber}")
-    public ContactsCenterComponent inputPhoneField(String phoneNumber){
+    public ContactsCenterComponent inputPhoneField(String phoneNumber) {
         phoneNumberField.sendKeys(phoneNumber);
 
         return this;

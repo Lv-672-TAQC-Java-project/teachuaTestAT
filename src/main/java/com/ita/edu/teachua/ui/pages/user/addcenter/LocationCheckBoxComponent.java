@@ -16,12 +16,12 @@ public class LocationCheckBoxComponent extends BaseComponent {
         super(driver, root);
     }
 
-    public BasicInformationCenterComponent clickCheckBox(){
+    public BasicInformationCenterComponent clickCheckBox() {
         checkBox.click();
         return new BasicInformationCenterComponent(driver);
     }
 
-    public String getName(){
+    public String getName() {
         return name.getText();
     }
 

@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.utils.jdbc.dao;
 
-import com.ita.edu.teachua.utils.jdbc.entity.CategoryEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.FeedbackEntity;
 
 import java.sql.ResultSet;

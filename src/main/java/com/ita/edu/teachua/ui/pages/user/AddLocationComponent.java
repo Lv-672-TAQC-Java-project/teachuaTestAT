@@ -36,7 +36,7 @@ public class AddLocationComponent extends BasePage {
     private WebElement closeButton;
     @FindBy(how = How.XPATH, using = "//main[@class = 'ant-layout-content add-club-container']")
     private WebElement addLocationPopUp;
-    private String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
+    private final String checkCirclePath = "./ancestor::div[@class = 'ant-form-item-control-input-content']//span[contains(@class, 'feedback-icon')]";
 
     public AddLocationComponent(WebDriver driver) {
         super(driver);
