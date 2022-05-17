@@ -5,6 +5,8 @@ import java.util.List;
 
 public class LocationEntity {
     public static final String SELECT_ALL = "SELECT * FROM locations ORDER BY id;";
+    public static final String SELECT_All_WHERE_NAME = "select * from public.locations where name = '%s'";
+
     private Long id;
     private String address;
     private Double latitude;
@@ -16,7 +18,6 @@ public class LocationEntity {
     private Long districtId;
     private Long stationId;
     private String phone;
-
 
     public LocationEntity(Long id, String address, Double latitude, Double longitude, String name, Long centerId, Long cityId, Long clubId, Long districtId, Long stationId, String phone) {
         this.id = id;
@@ -33,17 +34,17 @@ public class LocationEntity {
     }
 
     public LocationEntity() {
+        this.id = null;
         this.address = null;
-        this.centerId = 0l;
-        this.cityId = 0l;
-        this.clubId = 0l;
-        this.districtId = 0l;
-        this.id = 0l;
         this.latitude = null;
         this.longitude = null;
         this.name = null;
+        this.centerId = null;
+        this.cityId = null;
+        this.clubId = null;
+        this.districtId = null;
+        this.stationId = null;
         this.phone = null;
-        this.stationId = 0l;
     }
 
     public static LocationEntity getLocation(List<String> row) {
@@ -85,8 +86,24 @@ public class LocationEntity {
         return locations;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getAddress() {
         return address;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Long getCenterId() {
@@ -105,32 +122,32 @@ public class LocationEntity {
         return districtId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public String getName() {
-        return name;
+    public Long getStationId() {
+        return stationId;
     }
 
     public String getPhone() {
         return phone;
     }
 
-    public Long getStationId() {
-        return stationId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setCenterId(Long centerId) {
@@ -149,28 +166,12 @@ public class LocationEntity {
         this.districtId = districtId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setStationId(Long stationId) {
+        this.stationId = stationId;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public void setStationId(Long stationId) {
-        this.stationId = stationId;
     }
 
     @Override

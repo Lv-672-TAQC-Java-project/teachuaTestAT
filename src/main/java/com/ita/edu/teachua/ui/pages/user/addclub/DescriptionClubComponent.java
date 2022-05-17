@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
+import com.ita.edu.teachua.ui.pages.home.HomePage;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
@@ -62,5 +63,19 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     @Step("Verify that create club button is enabled")
     public boolean isCreateClubButtonEnabled() {
         return getCreateClubBtn().isEnabled();
+    }
+
+    @Step("Create new club")
+    public HomePage clickCreateClubButton() {
+        getCreateClubBtn().click();
+        return new HomePage(driver);
+    }
+
+    @Step("fill description information and click finish button")
+    public HomePage fillDescriptionInfo() {
+        enterSymbols(50);
+//        getCreateClubBtn().click();
+        sleep(2000);
+        return new HomePage(driver);
     }
 }
