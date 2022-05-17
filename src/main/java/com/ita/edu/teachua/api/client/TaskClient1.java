@@ -4,10 +4,10 @@ import com.ita.edu.teachua.api.client.BaseClient;
 import com.ita.edu.teachua.api.models.TaskCredentials;
 import io.restassured.response.Response;
 
-public class TaskClient extends BaseClient {
+public class TaskClient1 extends BaseClient {
     private final String authorizationToken;
 
-    public TaskClient(String authorizationToken) {
+    public TaskClient1(String authorizationToken) {
         super();
         this.authorizationToken = authorizationToken;
     }

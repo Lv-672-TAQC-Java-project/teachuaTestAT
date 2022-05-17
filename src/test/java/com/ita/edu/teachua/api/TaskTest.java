@@ -2,7 +2,6 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.models.TaskCredentials;
-import com.ita.edu.teachua.api.models.UserResponse;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import jdk.jfr.Description;
@@ -11,11 +10,11 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class TaskTest extends ApiTestRunner{
-    private TaskClient client;
+    private com.ita.edu.teachua.api.TaskClient1 client;
     @BeforeClass
     public void setUpClass(){
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
-        client = new TaskClient(authorization.getToken());
+        client = new com.ita.edu.teachua.api.TaskClient1(authorization.getToken());
     }
 
     @Description("This test case verifies that the user can not create Task, use invalid data")
