@@ -1,7 +1,7 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.models.SuccessSingInResponse;
-import com.ita.edu.teachua.api.models.SighInCredentials;
+import com.ita.edu.teachua.api.models.UserCredentials;
 import com.ita.edu.teachua.api.models.UserResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -11,7 +11,7 @@ public class loginTest extends ApiTestRunner {
 
     @Test
     public void singInTest() {
-        SighInCredentials credentials = new SighInCredentials(provider.getAdminEmail(), provider.getPassword());
+        UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getPassword());
         SingInClient client = new SingInClient();
         Response response = client.successSingInRequest(credentials);
         SuccessSingInResponse singInResponse = response.as(SuccessSingInResponse.class);
