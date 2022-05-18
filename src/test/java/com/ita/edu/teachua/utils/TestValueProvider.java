@@ -63,4 +63,12 @@ public class TestValueProvider {
     public String getConfirmPassword() {
         return properties.getProperty("confirmPassword");
     }
+
+    public String getNonAdminEmail() {
+        return properties.getProperty("nonAdminEmail");
+    }
+
+    public String getNonAdminPassword() {
+        return properties.getProperty("nonAdminPassword");
+    }
 }
