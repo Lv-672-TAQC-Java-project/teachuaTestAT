@@ -38,4 +38,18 @@ public class UserDao {
         ManagerDao.get().closeStatement(statement);
         return UserEntity.getUsers(rows);
     }
+
+    public List<UserEntity> selectWhereEmailLike(String email) {
+        Statement statement = ManagerDao.get().getStatement();
+        List<List<String>> rows = null;
+
+        try {
+            ResultSet resultSet = statement.executeQuery(format(UserEntity.SELECT_ALL_WHERE_EMAIL, email));
+            rows = ManagerDao.get().parseResultSet(resultSet);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ManagerDao.get().closeStatement(statement);
+        return UserEntity.getUsers(rows);
+    }
 }

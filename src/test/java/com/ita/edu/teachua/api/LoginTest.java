@@ -9,7 +9,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class loginTest extends ApiTestRunner {
+public class LoginTest extends ApiTestRunner {
 
     @Test
     public void singInTest() {
