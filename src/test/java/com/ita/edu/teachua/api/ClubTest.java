@@ -121,4 +121,19 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
         softAssert.assertAll();
     }
+
+    @Description("Verify that user as 'Керiвник гуртка' can delete club registered by him.")
+    @Issue("TUA-468")
+    @Test(description = "TUA-468")
+    public void verifyThatAdminCanDeleteClub(){
+        String name = "London";
+        Response response = client.post(name);
+        int id = response.as(ClubResponse.class).getId();
+
+        response = client.delete(id);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertAll();
+    }
 }
