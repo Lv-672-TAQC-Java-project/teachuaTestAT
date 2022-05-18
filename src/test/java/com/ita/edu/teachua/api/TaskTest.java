@@ -1,8 +1,8 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.TaskClient;
-import com.ita.edu.teachua.api.models.ErrorResponse;
 import com.ita.edu.teachua.api.models.credenntials.TaskCredentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
@@ -42,7 +42,7 @@ public class TaskTest extends ApiTestRunner {
     @Issue("TUA-446")
     @Test(description = "TUA-446")
     public void verifyThatUserCanCreateNewClubUsingNullAsValues() {
-        com.ita.edu.teachua.api.models.TaskCredentials credentials = new com.ita.edu.teachua.api.models.TaskCredentials(null, provider.getHeaderTextChallenge(),
+       TaskCredentials credentials = new TaskCredentials(null, provider.getHeaderTextChallenge(),
                 null, provider.getPictureChallenge(), provider.getStartDateChallenge(),
                 Long.parseLong(provider.getChallengeId()));
         Response response = task.put(22, credentials);
@@ -58,7 +58,7 @@ public class TaskTest extends ApiTestRunner {
     @Issue("TUA-446")
     @Test(description = "TUA-446")
     public void verifyThatUserCanCreateNewClubUsingSpacesAsValues() {
-        com.ita.edu.teachua.api.models.TaskCredentials credentials = new com.ita.edu.teachua.api.models.TaskCredentials(" ", provider.getHeaderTextChallenge(),
+        TaskCredentials credentials = new TaskCredentials(" ", provider.getHeaderTextChallenge(),
                 " ", provider.getPictureChallenge(), provider.getStartDateChallenge(),
                 Long.parseLong(provider.getChallengeId()));
         Response response = task.put(22, credentials);
