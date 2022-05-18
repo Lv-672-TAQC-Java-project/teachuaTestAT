@@ -121,4 +121,18 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
         softAssert.assertAll();
     }
+
+    @Description("Verify that User as 'Керiвник гуртка' cannot create new club is in a center with Russian alphabet for 'Назва' field")
+    @Issue("TUA-501")
+    @Test(description = "TUA-501")
+    public void verifyThatUserCannotCreateNewClubWithRussianAlphabetInNameField() {
+        var name = "Э э ъ Ъ Ы ы";
+        var response = client.post(name);
+        var errorResponse = response.as(ErrorResponse.class);
+
+        var softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 400);
+        softAssert.assertTrue(errorResponse.getMessage().contains("name can't contain russian letters"));
+        softAssert.assertAll();
+    }
 }
