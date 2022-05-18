@@ -68,7 +68,6 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[@class='control-sort-option'][contains(text(), 'за рейтингом')]")
     private WebElement sortByRatingLink;
 
-    private List<ClubCard> clubCards = new ArrayList<>();
     @FindBy(how = How.XPATH, using = "//span[text()='за алфавітом']")
     private WebElement sortAlphabeticallyButton;
 
@@ -100,6 +99,8 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[@aria-label='arrow-up']")
     private WebElement arrowUpLabel;
 
+    private final List<ClubCard> clubCards = new ArrayList<>();
+
     private Waiter waiter = new Waiter(driver);
 
     private static String firstCenterTextXpath = "(//div[contains(@class,'content-center-list')]/child::div//following::div[@class='center-name'])[1]";
@@ -107,6 +108,10 @@ public class AdvancedSearchComponent extends CommonPage {
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
         initCards();
+    }
+
+    public WebElement getNextPageButton() {
+        return nextPageButton;
     }
 
     @Step("Sorting by rating")
@@ -146,7 +151,6 @@ public class AdvancedSearchComponent extends CommonPage {
     }
 
     public ClubCard getClubCard(int clubCardNumber) {
-
         return clubCards.get(clubCardNumber);
     }
 
@@ -155,27 +159,6 @@ public class AdvancedSearchComponent extends CommonPage {
                 .findElements(By.xpath("//div[@class='ant-card ant-card-bordered card']"))
                 .size();
     }
-
-//    public Map<String, Integer> getClubsNameToRating(WebDriver driver) {
-//        var clubNameToRatingMap = new HashMap<String, Integer>();
-//        var advancedSearchComponent = new AdvancedSearchComponent(driver);
-//
-//        do {
-//            int clubsPerPageAmount = advancedSearchComponent.getClubCardsPerPageAmount();
-//
-//            for (int i = 1; i <= clubsPerPageAmount; i++) {
-//                var clubCard = advancedSearchComponent.getClubCard(driver, i);
-//
-//                clubNameToRatingMap.put(clubCard.getName(), clubCard.getRating());
-//            }
-//
-//            if (nextPageButton.isDisplayed()) {
-//                nextPageButton.click();
-//            }
-//        } while (nextPageButton.isEnabled());
-//
-//        return clubNameToRatingMap;
-//    }
 
     @Step("Click on center button")
     public AdvancedSearchComponent clickOnСenterButton() {

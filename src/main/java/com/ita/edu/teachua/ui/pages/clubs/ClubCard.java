@@ -1,17 +1,10 @@
 package com.ita.edu.teachua.ui.pages.clubs;
 
 import com.ita.edu.teachua.ui.pages.base.BaseComponent;
-import com.ita.edu.teachua.ui.pages.base.BasePage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
 
 public class ClubCard extends BaseComponent {
@@ -34,7 +27,7 @@ public class ClubCard extends BaseComponent {
     }
 
     public int getRating() {
-        return rating.size();
+        return (rating.isEmpty() ? 0 : rating.size());
     }
 
     public String getName() {

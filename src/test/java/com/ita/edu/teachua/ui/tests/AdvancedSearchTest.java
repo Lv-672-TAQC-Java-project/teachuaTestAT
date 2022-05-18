@@ -7,6 +7,7 @@ import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -231,24 +232,69 @@ public class AdvancedSearchTest extends TestRunner {
     @Issue("TUA-516")
     @Test
     public void verifyThatClubsSortedByRating() {
-        var advancedSearch = new HomePage(driver)
+        var advancedSearchComponent = new HomePage(driver)
                 .getHeader()
                 .clickAdvancedSearchBtn();
 
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(advancedSearch.isAdvancedSearchModalDisplayed(),
+        softAssert.assertTrue(advancedSearchComponent.isAdvancedSearchModalDisplayed(),
                 "Advanced search should be displayed");
 
-        AdvancedSearchComponent advancedSearchComponent = advancedSearch
-                .sortByRating()
-                .clickSortArrowButton(UP);
+        advancedSearchComponent
+                .sortByRating();
+//                .clickSortArrowButton(UP);
 
-        advancedSearchComponent.getClubCards();
+        AdvancedSearchComponent searchComponent = new AdvancedSearchComponent(driver);
 
-        for (ClubCard card : advancedSearchComponent.getClubCards()) {
-            System.out.println(card.getName());
+        List<ClubCard> clubCards = advancedSearchComponent.getClubCards();
+
+        Map<String, Integer> uiClubNameToRatingMap = new HashMap<>();
+
+        var nextPageButton = advancedSearchComponent.getNextPageButton();
+
+        for (ClubCard clubCard : clubCards) {
+            uiClubNameToRatingMap.put(clubCard.getName(), clubCard.getRating());
         }
 
-//        System.out.println(advancedSearchComponent);
+        System.out.println(uiClubNameToRatingMap);
+
+        System.out.println(advancedSearchComponent.getClubCard(0).getName());
+        System.out.println(advancedSearchComponent.getClubCard(1).getName());
+        System.out.println(advancedSearchComponent.getClubCard(2).getName());
+        System.out.println(advancedSearchComponent.getClubCard(3).getName());
+        System.out.println(advancedSearchComponent.getClubCard(4).getName());
+        System.out.println(advancedSearchComponent.getClubCard(5).getName());
+
+//        do {
+//            for (ClubCard clubCard : clubCards) {
+//                uiClubNameToRatingMap.put(clubCard.getName(), clubCard.getRating());
+//            }
+//
+//            if (nextPageButton.isDisplayed()) {
+//                nextPageButton.click();
+//            }
+//        } while (nextPageButton.isEnabled());
+
+
+//        public Map<String, Integer> getClubsNameToRating(WebDriver driver) {
+//        var clubNameToRatingMap = new HashMap<String, Integer>();
+//        var advancedSearchComponent = new AdvancedSearchComponent(driver);
+//
+//        do {
+//            int clubsPerPageAmount = advancedSearchComponent.getClubCardsPerPageAmount();
+//
+//            for (int i = 1; i <= clubsPerPageAmount; i++) {
+//                var clubCard = advancedSearchComponent.getClubCard(driver, i);
+//
+//                clubNameToRatingMap.put(clubCard.getName(), clubCard.getRating());
+//            }
+//
+//            if (nextPageButton.isDisplayed()) {
+//                nextPageButton.click();
+//            }
+//        } while (nextPageButton.isEnabled());
+//
+//        return clubNameToRatingMap;
+//    }
     }
 }
