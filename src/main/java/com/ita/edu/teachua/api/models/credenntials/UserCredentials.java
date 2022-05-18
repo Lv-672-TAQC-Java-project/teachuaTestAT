@@ -14,16 +14,4 @@ public class UserCredentials {
     private String urlLogo;
     private String status;
     private String roleName;
-
-    public void deleteFirstName(){
-        this.firstName = null;
-    }
-
-    public void deleteLastName(){
-        this.lastName = null;
-    }
-
-    public void deletePhone(){
-        this.phone = null;
-    }
 }

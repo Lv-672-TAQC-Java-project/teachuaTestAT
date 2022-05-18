@@ -33,21 +33,21 @@ public class UserTest extends ApiTestRunner {
                 provider.getRoleName());
         SoftAssert softAssert = new SoftAssert();
 
-        userCredentials.deleteFirstName();
+        userCredentials.setFirstName(null);
         Response response = client.put(203, userCredentials);
         ErrorResponse userResponse = response.as(ErrorResponse.class);
 
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
 
-        userCredentials.deleteLastName();
+        userCredentials.setLastName(null);
         response = client.put(203, userCredentials);
         userResponse = response.as(ErrorResponse.class);
 
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
 
-        userCredentials.deletePhone();
+        userCredentials.setPhone(null);
         response = client.put(203, userCredentials);
         userResponse = response.as(ErrorResponse.class);
 
