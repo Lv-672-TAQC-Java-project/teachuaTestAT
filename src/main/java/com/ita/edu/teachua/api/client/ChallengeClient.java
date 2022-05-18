@@ -43,4 +43,12 @@ public class ChallengeClient extends BaseClient {
                 .when()
                 .delete(String.format("%s/api/challenge/%s", baseUrl, id));
     }
+
+    public Response putChallenge(int id, ChallengeCredentials credentials) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .body(credentials)
+                .when()
+                .put(String.format("%s/api/challenge/%s", baseUrl, id));
+    }
 }

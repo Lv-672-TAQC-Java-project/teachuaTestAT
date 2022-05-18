@@ -83,4 +83,15 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
         softAssert.assertAll();
     }
+
+    @Description("Verify that user is not able to edit information about Challenge using null, spaces or absence of symbols as values")
+    @Issue("TUA-434")
+    @Test(description = "TUA-434", dataProvider = "inputDate")
+    public void verifyThatUserIsNotAbleToEditInformationUsingNullSpaceSymbols(ChallengeCredentials inputDate, int expect) {
+        var response = client.putChallenge(143, inputDate);
+
+        var softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), expect);
+        softAssert.assertAll();
+    }
 }
