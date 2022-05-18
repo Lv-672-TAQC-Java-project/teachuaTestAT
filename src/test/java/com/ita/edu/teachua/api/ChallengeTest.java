@@ -7,7 +7,6 @@ import com.ita.edu.teachua.api.models.response.challenge.ChallengeResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -17,6 +16,8 @@ import java.util.Random;
 import static org.testng.Assert.assertEquals;
 
 public class ChallengeTest extends ApiTestRunner {
+
+    private ChallengeClient client;
 
     @DataProvider(name = "credentials")
     public Object[][] credentials() {
@@ -94,7 +95,7 @@ public class ChallengeTest extends ApiTestRunner {
     public void verifyThatUserWithAnyRightsCanViewInfoAboutSpecificChallenge(String email, String password) {
 
         Authorization authorization = new Authorization(email, password);
-        ChallengeClient client = new ChallengeClient(authorization.getToken());
+        client = new ChallengeClient(authorization.getToken());
         Response response = client.get(196);
         ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
 
