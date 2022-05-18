@@ -3,7 +3,9 @@ package com.ita.edu.teachua.newclub.tests;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
+import com.ita.edu.teachua.ui.pages.user.models.City;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
+import com.ita.edu.teachua.utils.jdbc.services.LocationService;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
 import org.testng.annotations.BeforeMethod;
@@ -20,41 +22,6 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
                 .clickOnAddNewClubBtn();
     }
 
-    final String CITY = "Київ";
-    final String DISTRICT = "Деснянський";
-    final String STATION = "Академістечко";
-
-    @Description("Verify optional fields are displayed")
-    @Issue("TUA-237")
-    @Test(description = "TUA-237")
-    public void verifyThatOptionalFieldsAreDisplayed() {
-
-        DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
-        descriptionClub
-                .fillBasicInfo()
-                .clickAddLocationButton();
-
-        SoftAssert softAssert = new SoftAssert();
-
-        AddLocationComponent addLocationComponent = new AddLocationComponent(driver);
-        softAssert.assertTrue(addLocationComponent
-                .clickCityListButton()
-                .isElementFromDropDownListDisplayed(CITY), CITY + " should be displayed in drop down list");
-        addLocationComponent.clickElementFromDropDownList(CITY);
-
-        softAssert.assertTrue(addLocationComponent
-                .clickDistrictListButton()
-                .isElementFromDropDownListDisplayed(DISTRICT), DISTRICT + " should be displayed in drop down list");
-        addLocationComponent.clickElementFromDropDownList(DISTRICT);
-
-        softAssert.assertTrue(addLocationComponent
-                .clickStationListButton()
-                .isElementFromDropDownListDisplayed(STATION),STATION + " should be displayed in drop down list" );
-        addLocationComponent.clickElementFromDropDownList(STATION);
-
-        softAssert.assertAll();
-    }
-
     @Description("Verify that a 'Керівник' can add a location of a club")
     @Issue("TUA-237")
     @Test(description = "TUA-237")
@@ -63,42 +30,59 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
         descriptionClub
                 .fillBasicInfo()
                 .clickAddLocationButton();
+        String locationName = "Club11";
 
-        SoftAssert softAssert = new SoftAssert();
+        LocationService locationService = new LocationService();
+        int locationSizeBefore = locationService.getAllLocationsWhereName(locationName).size();
 
         AddLocationComponent addLocationComponent = new AddLocationComponent(driver);
-        addLocationComponent
-                .inputLocationNameField("Club1");
+        SoftAssert softAssert = new SoftAssert();
 
         softAssert.assertTrue(addLocationComponent
-                .clickCityListButton()
-                .isElementFromDropDownListDisplayed(CITY), CITY + " should be displayed in drop down list");
+                        .inputLocationNameField(locationName)
+                        .isSuccessNameCircleDisplayed(),
+                "The location name should be entered correctly");
 
-        addLocationComponent.clickElementFromDropDownList(CITY);
-
-        addLocationComponent
-                .inputAddressField("Мазепа 55")
-                .inputCoordinatesField("49.829104498711104, 24.005058710351314")
-                .inputPhoneField("0938784576");
+        City locationCity = City.KYIV;
+        softAssert.assertTrue(addLocationComponent
+                        .clickCityNameListButton()
+                        .isDropDownListContainCity(locationCity),
+                "The dropdown list should contain " + locationCity);
 
         softAssert.assertTrue(addLocationComponent
-                        .isAddLocationButtonEnable(), "All fields should be filled");
-        addLocationComponent
-                .clickAddLocationButton();
+                        .clickCityFromDropDownList(locationCity)
+                        .isSuccessCityCircleDisplayed(),
+                "The city should be chosen");
 
-        String descriptionText = "An English Club is a place for language learners to use English in a casual setting." +
-                " In the classroom, you often focus on one skill and one item (for example: grammar - future tense)." +
-                " Розмовний клуб пишається тим, що об'єднує дітей  з усього світу. Наша пошта - englishclub@gmail.com";
+        softAssert.assertTrue(addLocationComponent
+                        .inputAddressField("Мазепа 55")
+                        .isSuccessAddressCircleDisplayed(),
+                "The address should be entered correctly");
 
-        softAssert.assertTrue(descriptionClub
+        softAssert.assertTrue(addLocationComponent
+                        .inputCoordinatesField("49.829104498711104, 24.005058710351314")
+                        .isSuccessCoordinatesCircleDisplayed(),
+                "The coordinates should be entered correctly");
+
+        softAssert.assertTrue(addLocationComponent
+                        .inputPhoneField("0938784576")
+                        .isSuccessPhoneNumberCircleDisplayed(),
+                "The phone number should be entered correctly");
+
+        softAssert.assertTrue(addLocationComponent
+                        .clickAddClubLocationButton()
+                        .getAddedLocation()
+                        .getName()
+                        .contains(locationName),
+                "The location should be added to a list with locations");
+
+        descriptionClub
                 .fillContactsInfo()
-                .enterDescriptionText(descriptionText)
-                .isSuccessCheckCircleVisible(), "The description should have valid data");
-        softAssert.assertTrue(descriptionClub
-                .isCreateClubButtonEnabled(), "Finish button should be enabled");
+                .fillDescriptionInfo();
+
+        int locationSizeAfter = locationService.getAllLocationsWhereName(locationName).size();
+        softAssert.assertEquals(locationSizeAfter, locationSizeBefore + 1);
 
         softAssert.assertAll();
     }
-
-
 }

@@ -15,4 +15,8 @@ public class LocationService {
     public List<LocationEntity> getAllLocations() {
         return locationDao.selectAll();
     }
+
+    public List<LocationEntity> getAllLocationsWhereName(String name) {
+        return locationDao.selectAllWhereName(name);
+    }
 }

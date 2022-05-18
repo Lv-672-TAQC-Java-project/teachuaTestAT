@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 public class ClubsEntity {
     public static final String SELECT_ALL = "SELECT * FROM clubs ORDER BY id;";
+    public static final String SELECT_ALL_WHERE_NAME = "SELECT * FROM clubs WHERE name = '%s';";
     public static final String SELECT_NAME = "SELECT name FROM public.clubs ORDER BY id;";
     public static final String SELECT_ALL_BY_RATING_ASC = "SELECT * FROM clubs ORDER BY rating ASC;";
     public static final String SELECT_ALL_BY_RATING_DESC = "SELECT * FROM clubs ORDER BY rating DESC;";

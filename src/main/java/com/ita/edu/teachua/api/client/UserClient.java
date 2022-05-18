@@ -1,8 +1,8 @@
-package com.ita.edu.teachua.api;
+package com.ita.edu.teachua.api.client;
 
 import io.restassured.response.Response;
 
-public class UserClient extends BaseClient{
+public class UserClient extends BaseClient {
     private final String authorizationToken;
 
     public UserClient(String authorizationToken) {
@@ -17,5 +17,4 @@ public class UserClient extends BaseClient{
                 .get(String.format("%s/api/user/%s", baseUrl, id));
 
     }
-
 }

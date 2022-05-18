@@ -1,10 +1,10 @@
-package com.ita.edu.teachua.api.models.club_response;
+package com.ita.edu.teachua.api.models.response.club;
 
 import lombok.Data;
 
 @Data
 public class User {
-    private Integer id;
+    private int id;
     private String email;
     private String password;
     private String firstName;

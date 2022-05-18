@@ -20,8 +20,8 @@ public class StationsEntity {
 
     public StationsEntity() {
         this.id = 0L;
-        this.cityId =  0L;
-        this.districtId =  0L;
+        this.cityId = 0L;
+        this.districtId = 0L;
         this.name = null;
     }
 
@@ -49,28 +49,28 @@ public class StationsEntity {
         return id;
     }
 
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public Long getDistrictId() {
-        return districtId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCityId() {
+        return cityId;
     }
 
     public void setCityId(Long cityId) {
         this.cityId = cityId;
     }
 
+    public Long getDistrictId() {
+        return districtId;
+    }
+
     public void setDistrictId(Long districtId) {
         this.districtId = districtId;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
