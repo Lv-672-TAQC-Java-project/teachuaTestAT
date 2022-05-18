@@ -1,9 +1,9 @@
 package com.ita.edu.teachua.utils.jdbc.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class NewsEntity {
@@ -52,12 +52,7 @@ public class NewsEntity {
 
         newsItem.setDescription(row.get(2));
 
-        if (row.get(3).equals("t")) {
-            newsItem.setIsActive(true);
-        }
-        else {
-            newsItem.setIsActive(false);
-        }
+        newsItem.setIsActive(row.get(3).equals("t"));
 
         newsItem.setTitle(row.get(4));
         newsItem.setUrlTitleLogo(row.get(5));

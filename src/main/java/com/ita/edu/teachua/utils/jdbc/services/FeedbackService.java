@@ -1,8 +1,6 @@
 package com.ita.edu.teachua.utils.jdbc.services;
 
-import com.ita.edu.teachua.utils.jdbc.dao.CategoryDao;
 import com.ita.edu.teachua.utils.jdbc.dao.FeedbackDao;
-import com.ita.edu.teachua.utils.jdbc.entity.CategoryEntity;
 import com.ita.edu.teachua.utils.jdbc.entity.FeedbackEntity;
 
 import java.util.List;
