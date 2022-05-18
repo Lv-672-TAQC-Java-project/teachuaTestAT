@@ -5,6 +5,7 @@ import java.util.List;
 
 public class UserEntity {
     public static final String SELECT_ALL = "SELECT * FROM users ORDER BY id;";
+    public static final String SELECT_ALL_WHERE_NAME = "SELECT * FROM users WHERE email = '%s';";
 
     private Long id;
     private String email;

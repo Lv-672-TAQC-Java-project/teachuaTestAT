@@ -41,7 +41,7 @@ public class ComplaintEntity {
                 Date date = dateFormat.parse(row.get(1));
                 complaint.setDate(date);
             }
-        }catch (ParseException e){
+        } catch (ParseException e) {
             e.printStackTrace();
             Date date = exceptionDateFormat.parse(row.get(1));
             complaint.setDate(date);
@@ -60,44 +60,44 @@ public class ComplaintEntity {
         return complaints;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getDate() {
         return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getText() {
         return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Long getClubId() {
         return clubId;
     }
 
+    public void setClubId(Long clubId) {
+        this.clubId = clubId;
+    }
+
     public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

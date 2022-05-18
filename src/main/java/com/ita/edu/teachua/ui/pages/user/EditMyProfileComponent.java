@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.util.Collections;
-import java.util.List;
-
 public class EditMyProfileComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//*[@id='basic_name']")
     private WebElement workshopNameField;
