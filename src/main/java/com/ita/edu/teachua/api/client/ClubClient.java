@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.api.client;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -35,5 +36,13 @@ public class ClubClient extends BaseClient {
                 .when()
                 .body(CLUB_INVALID_INPUT_BODY)
                 .post(String.format("%s/api/club", baseUrl));
+    }
+
+    @Step("Deleted response by id")
+    public Response delete(int id) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .when()
+                .delete(String.format("%s/api/club/%s", baseUrl, id));
     }
 }
