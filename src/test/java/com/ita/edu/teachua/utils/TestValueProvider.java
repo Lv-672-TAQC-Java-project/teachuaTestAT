@@ -111,4 +111,12 @@ public class TestValueProvider {
     public String getChallengeId() {
         return properties.getProperty("challengeId");
     }
+
+    public String getNonAdminEmail() {
+        return properties.getProperty("nonAdminEmail");
+    }
+
+    public String getNonAdminPassword() {
+        return properties.getProperty("nonAdminPassword");
+    }
 }
