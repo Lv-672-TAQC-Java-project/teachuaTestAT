@@ -87,4 +87,12 @@ public class TestValueProvider {
     public String getClubHeadPassword() {
         return properties.getProperty("clubHeadPassword");
     }
+
+    public String getNonAdminEmail() {
+        return properties.getProperty("nonAdminEmail");
+    }
+
+    public String getNonAdminPassword() {
+        return properties.getProperty("nonAdminPassword");
+    }
 }

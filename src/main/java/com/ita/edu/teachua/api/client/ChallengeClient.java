@@ -9,13 +9,17 @@ import static com.ita.edu.teachua.utils.FileReader.getFileAsString;
 import static com.ita.edu.teachua.utils.JsonUtils.setFieldsToJsonBodyByJsonPath;
 
 public class ChallengeClient extends BaseClient {
+    private String authorizationToken;
     public static final String CHALLENGE_JSON = "src/test/resources/json/Challenge.json";
     public static final String CHALLENGE_INPUT_BODY = getFileAsString(CHALLENGE_JSON);
-    private final String authorizationToken;
 
     public ChallengeClient(String authorizationToken) {
         super();
         this.authorizationToken = authorizationToken;
+    }
+
+    public ChallengeClient() {
+
     }
 
     public Response post(int sortNumber) {
@@ -42,5 +46,19 @@ public class ChallengeClient extends BaseClient {
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .when()
                 .delete(String.format("%s/api/challenge/%s", baseUrl, id));
+    }
+
+    public Response get(int id) {
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .when()
+                .get(String.format("%s/api/challenge/%s", baseUrl, id));
+
+    }
+
+    public Response getWithoutAuthorization(int id) {
+        return prepareRequest()
+                .when()
+                .get(String.format("%s/api/challenge/%s", baseUrl, id));
     }
 }
