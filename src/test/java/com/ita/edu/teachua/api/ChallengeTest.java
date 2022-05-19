@@ -64,6 +64,9 @@ public class ChallengeTest extends ApiTestRunner {
     @Test(dataProvider = "inputDate")
     public void verifyCreateChallengeUsingNullSpaceSymbols(ChallengeCredentials inputDate, int expect) {
 
+        var authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        var client = new ChallengeClient(authorization.getToken());
+
         Response response = client.postChallenge(inputDate);
 
         SoftAssert softAssert = new SoftAssert();

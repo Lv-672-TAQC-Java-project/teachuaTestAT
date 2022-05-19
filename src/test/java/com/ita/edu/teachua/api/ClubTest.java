@@ -1,7 +1,6 @@
 package com.ita.edu.teachua.api;
 
 
-import com.ita.edu.teachua.api.client.Club;
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
 import com.ita.edu.teachua.api.models.response.ErrorResponse;
@@ -25,13 +24,11 @@ import static org.apache.commons.lang.RandomStringUtils.random;
 public class ClubTest extends ApiTestRunner {
 
     private ClubClient client;
-    private Club club;
 
     @BeforeClass
     public void setUpClass() {
         Authorization authorization = new Authorization(provider.getClubHeadEmail(), provider.getClubHeadPassword());
         client = new ClubClient(authorization.getToken());
-        club = new Club(authorization.getToken());
     }
 
     @Description("Verify that User as 'Керiвник гуртка' can create new club is in a center if 'Назва' field consists of a word length of 5 characters")
@@ -97,7 +94,7 @@ public class ClubTest extends ApiTestRunner {
                 locations,
                 272);
 
-        Response response = club.postClub(clubCredentials);
+        Response response = client.postClub(clubCredentials);
 
         SoftAssert softAssert = new SoftAssert();
 

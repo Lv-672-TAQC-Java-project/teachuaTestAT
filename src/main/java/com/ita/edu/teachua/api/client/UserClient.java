@@ -20,11 +20,11 @@ public class UserClient extends BaseClient {
     }
 
     public Response putUser(int id, UserCredentialsPut putCredentials) {
+
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .body(putCredentials)
                 .when()
                 .put(String.format("%s/api/user/%s", baseUrl, id));
-
     }
 }

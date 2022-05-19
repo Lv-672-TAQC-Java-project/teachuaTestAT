@@ -45,6 +45,9 @@ public class EditMyProfileComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//input[@id='edit_lastName']")
     private WebElement fieldLastName;
 
+    @FindBy(how = How.XPATH, using = "//input[@id = 'edit_phone']")
+    private WebElement fieldPhone;
+
     public EditMyProfileComponent(WebDriver driver) {
         super(driver);
     }
@@ -134,5 +137,18 @@ public class EditMyProfileComponent extends CommonPage {
         return buttonSaveChanges.isDisplayed();
     }
 
+    public String getLastNameProfile() {
 
+        return fieldLastName.getAttribute("value");
+    }
+
+    public String getFirstNameProfile() {
+
+        return fieldFirstName.getAttribute("value");
+    }
+
+    public String getPhoneProfile() {
+
+        return fieldPhone.getAttribute("value");
+    }
 }
