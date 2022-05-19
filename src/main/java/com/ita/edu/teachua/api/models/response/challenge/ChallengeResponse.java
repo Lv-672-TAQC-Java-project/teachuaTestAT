@@ -2,9 +2,10 @@ package com.ita.edu.teachua.api.models.response.challenge;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ChallengeResponse {
-    User user;
     private int id;
     private String name;
     private String title;
@@ -13,4 +14,6 @@ public class ChallengeResponse {
     private String picture;
     private int sortNumber;
     private Boolean isActive;
+    private List<Task> tasks;
+    User user;
 }

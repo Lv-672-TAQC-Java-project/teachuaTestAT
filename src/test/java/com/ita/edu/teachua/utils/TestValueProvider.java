@@ -88,6 +88,38 @@ public class TestValueProvider {
         return properties.getProperty("clubHeadPassword");
     }
 
+    public String getNameChallenge() {
+        return properties.getProperty("nameChallenge");
+    }
+
+    public String getHeaderTextChallenge() {
+        return properties.getProperty("headerTextChallenge");
+    }
+
+    public String getDescriptionChallenge() {
+        return properties.getProperty("descriptionChallenge");
+    }
+
+    public String getPictureChallenge() {
+        return properties.getProperty("pictureChallenge");
+    }
+
+    public String getStartDateChallenge() {
+        return properties.getProperty("startDateChallenge");
+    }
+
+    public String getChallengeId() {
+        return properties.getProperty("challengeId");
+    }
+
+    public String getNonAdminEmail() {
+        return properties.getProperty("nonAdminEmail");
+    }
+
+    public String getNonAdminPassword() {
+        return properties.getProperty("nonAdminPassword");
+    }
+
     public String getUserEmail() {
         return properties.getProperty("userEmail");
     }
