@@ -88,6 +88,8 @@ public class ChallengeTest extends ApiTestRunner {
     @Issue("TUA-430")
     @Test(description = "TUA-430")
     public void verifyThatUserIsNotAbleToCreateChallengeUsingInvalidValues() {
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        client = new ChallengeClient(authorization.getToken());
         ChallengeCredentials challengeCredentials = new ChallengeCredentials("nam",
                 "tit",
                 "des",
