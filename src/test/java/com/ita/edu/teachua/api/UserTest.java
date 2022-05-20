@@ -40,6 +40,7 @@ public class UserTest extends ApiTestRunner {
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
 
+        userCredentials.setFirstName(provider.getFirstName());
         userCredentials.setLastName(null);
         response = client.put(203, userCredentials);
         userResponse = response.as(ErrorResponse.class);
@@ -47,12 +48,15 @@ public class UserTest extends ApiTestRunner {
         softAssert.assertEquals(userResponse.getStatus(), 400);
         softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
 
+        userCredentials.setLastName(provider.getLastName());
         userCredentials.setPhone(null);
         response = client.put(203, userCredentials);
         userResponse = response.as(ErrorResponse.class);
 
         softAssert.assertEquals(userResponse.getStatus(), 400);
-        softAssert.assertEquals(userResponse.getMessage(), "\"phone\" can`t be null");
+        softAssert.assertEquals(userResponse.getMessage(), "phone must not be blank");
+
+        softAssert.assertAll();
     }
 
     @Test
