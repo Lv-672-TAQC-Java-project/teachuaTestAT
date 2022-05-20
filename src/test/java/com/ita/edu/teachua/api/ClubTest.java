@@ -150,4 +150,16 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertTrue(errorResponse.getMessage().contains("name can't contain russian letters"));
         softAssert.assertAll();
     }
+
+    @Test(description = "TUA-500")
+    public void verifyThatClubLeaderCanCreateNewClubUsingValidCharacters() {
+        String clubName = "Джмелик&company =,/ , , *, (, ), _, :, ;, #, %, ^, ?, [, ]";
+        Response response = client.post(clubName);
+        ClubResponse clubResponse = response.as(ClubResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubResponse.getName(), clubName);
+        softAssert.assertAll();
+    }
 }
