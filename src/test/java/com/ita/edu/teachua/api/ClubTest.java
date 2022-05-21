@@ -151,6 +151,8 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("Verify that User as \"Керiвник гуртка\" can create new club is in a center using valid characters for \"Назва\" field")
+    @Issue("TUA-500")
     @Test(description = "TUA-500")
     public void verifyThatClubLeaderCanCreateNewClubUsingValidCharacters() {
         String clubName = "Джмелик&company =,/ , , *, (, ), _, :, ;, #, %, ^, ?, [, ]";
