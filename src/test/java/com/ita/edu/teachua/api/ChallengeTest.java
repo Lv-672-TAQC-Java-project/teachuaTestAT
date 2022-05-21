@@ -7,6 +7,8 @@ import com.ita.edu.teachua.api.models.response.challenge.ChallengeResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -178,5 +180,60 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertEquals(challengeErrorResponse.getStatus(), 400);
         softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
         softAssert.assertAll();
+    }
+    @Test(description = "TUA-433")
+    public void verifyUserCannotChangeChallengeInformationUsingInvalidValues() {
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        ChallengeClient client = new ChallengeClient(authorization.getToken());
+
+        ChallengeCredentials challengeCredentials = new ChallengeCredentials("nam",
+                "tit",
+                "des",
+                "",
+                "abc",
+                "abc");
+
+        Response firstResponse = client.putChallenge(145, challengeCredentials);
+        ErrorResponse firstErrorResponse = firstResponse.as(ErrorResponse.class);
+        String firstErrorMessage = firstErrorResponse.getMessage();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(firstErrorResponse.getStatus(), 400);
+        softAssert.assertTrue(firstErrorMessage.contains("JSON parse error: Cannot deserialize value of type `long` from String \"abc\""));
+
+        String description = RandomStringUtils.randomAlphabetic(3005);
+
+        ChallengeCredentials secondChallengeCredentials = new ChallengeCredentials("Lorem ipsum dolor sit amet, consect",
+                "Lorem ipsum dolor sit amet, consect",
+                description,
+                "",
+                "/upload/test/test.png",
+                "4");
+
+        Response secondResponse = client.putChallenge(145, secondChallengeCredentials);
+        ErrorResponse secondErrorResponse = secondResponse.as(ErrorResponse.class);
+        String secondErrorMessage = secondErrorResponse.getMessage();
+
+        softAssert.assertEquals(secondResponse.getStatusCode(), 400);
+        softAssert.assertTrue(secondErrorMessage.contains("Name must contain a minimum of 5 and a maximum of 30 letters"));
+
+        ChallengeCredentials thirdChallengeCredentials = new ChallengeCredentials("эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ",
+                "",
+                "эЭъЪыЫёЁ",
+                "2");
+
+        Response thirdResponse = client.putChallenge(145, thirdChallengeCredentials);
+        ErrorResponse thirdErrorResponse = thirdResponse.as(ErrorResponse.class);
+        String thirdErrorMessage = thirdErrorResponse.getMessage();
+
+        softAssert.assertEquals(thirdErrorResponse.getStatus(), 400);
+        softAssert.assertTrue(thirdErrorMessage.contains("name can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("title can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("description can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("picture Incorrect file path"));
+        softAssert.assertAll();
+
     }
 }
