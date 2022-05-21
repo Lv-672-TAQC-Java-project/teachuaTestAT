@@ -8,7 +8,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -181,6 +180,9 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
         softAssert.assertAll();
     }
+
+    @Description("Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
     @Test(description = "TUA-433")
     public void verifyUserCannotChangeChallengeInformationUsingInvalidValues() {
         Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
@@ -233,7 +235,7 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertTrue(thirdErrorMessage.contains("title can't contain russian letters"));
         softAssert.assertTrue(thirdErrorMessage.contains("description can't contain russian letters"));
         softAssert.assertTrue(thirdErrorMessage.contains("picture Incorrect file path"));
-        softAssert.assertAll();
 
+        softAssert.assertAll();
     }
 }
