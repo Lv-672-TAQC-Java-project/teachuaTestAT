@@ -3,7 +3,6 @@ package com.ita.edu.teachua.api;
 import com.ita.edu.teachua.api.client.UserClient;
 import com.ita.edu.teachua.api.models.credenntials.UserCredentialsPut;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
-import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
@@ -78,16 +77,13 @@ public class UserProfileTest extends TestRunnerWithValueProvider {
         MyProfilePage myProfilePage = new MyProfilePage(driver);
         myProfilePage
                 .clickDropDownMyProfileButton()
-                .clickMyProfileButton()
-                .clickEditMyProfileComponent();
+                .clickMyProfileButton();
 
-        EditMyProfileComponent editMyProfileComponent = new EditMyProfileComponent(driver);
+        softAssert.assertEquals(myProfilePage.getLastNameProfile(), "Kukarska");
 
-        softAssert.assertEquals(editMyProfileComponent.getLastNameProfile(), "Kukarska");
+        softAssert.assertEquals(myProfilePage.getFirstNameProfile(), "Anna");
 
-        softAssert.assertEquals(editMyProfileComponent.getFirstNameProfile(), "Anna");
-
-        softAssert.assertEquals(editMyProfileComponent.getPhoneProfile(), "0999999911");
+        softAssert.assertEquals(myProfilePage.getPhoneProfile(), "0999999911");
 
         List<UserEntity> usersWithExpectedEmail = new UserService().getAllUsersWhereEmailLike(valueProvider.getUserEmailLike());
 
