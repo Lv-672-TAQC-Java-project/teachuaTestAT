@@ -2,6 +2,7 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.TaskClient;
 import com.ita.edu.teachua.api.models.credenntials.TaskCredentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
@@ -16,7 +17,7 @@ public class TaskTest extends ApiTestRunner {
     @BeforeClass
     public void setUpClass() {
 
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
+        Authorization authorization = new Authorization("admin@gmail.com", "admin");
         task = new TaskClient(authorization.getToken());
     }
 
@@ -38,4 +39,24 @@ public class TaskTest extends ApiTestRunner {
         softAssert.assertEquals(response.getStatusCode(), 200);
         softAssert.assertAll();
     }
+
+    @Description("Verify that user can not edit Task using spaces as values")
+    @Issue("TUA-446")
+    @Test(description = "TUA-446")
+    public void verifyThatUserCanCreateNewClubUsingSpacesAsValues() {
+        TaskCredentials credentials = new TaskCredentials(" ", "stringstringstringstringstringstringstring",
+                " ","/upload/test/test.png","2022-11-03", 0L);
+        Response response = task.put(22, credentials);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+
+        var softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 400);
+        var message = errorResponse.getMessage();
+        softAssert.assertTrue(message.contains("name must not be blank"), "message should contain: name must not be blank");
+        softAssert.assertTrue(message.contains("name can't contain russian letters"), "message should contain: name can't contain russian letters");
+        softAssert.assertTrue(message.contains("description can't contain russian letters"), "message should contain: description can't contain russian letters");
+        softAssert.assertTrue(message.contains("name must contain a minimum of 5 and a maximum of 255 letters"), "message should contain: name must contain a minimum of 5 and a maximum of 255 letters");
+        softAssert.assertAll();
+    }
+
 }

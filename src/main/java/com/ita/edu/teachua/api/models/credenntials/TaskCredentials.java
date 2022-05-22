@@ -12,4 +12,13 @@ public class TaskCredentials {
     private String description;
     private String picture;
     private String startDate;
+    private long chid;
+
+    public TaskCredentials(String name, String headerText, String description, String picture, String startDate) {
+        this.name = name;
+        this.headerText = headerText;
+        this.description = description;
+        this.picture = picture;
+        this.startDate = startDate;
+    }
 }

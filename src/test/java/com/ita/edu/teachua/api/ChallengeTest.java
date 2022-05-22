@@ -73,8 +73,8 @@ public class ChallengeTest extends ApiTestRunner {
     public void verifyThatUserIsNotAbleToDeleteChallengeUsingNonAdministratorRights() {
         Authorization authorization = new Authorization(provider.getUserWithNonAdministratorRightsEmail(),
                 provider.getUserWithNonAdministratorRightsPassword());
-        client = new ChallengeClient(authorization.getToken());
-        Response response = client.delete(147);
+        ChallengeClient client1 = new ChallengeClient(authorization.getToken());
+        Response response = client1.delete(147);
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         SoftAssert softAssert = new SoftAssert();

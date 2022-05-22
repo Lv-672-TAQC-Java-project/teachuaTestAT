@@ -67,7 +67,7 @@ public class SearchFieldTest extends TestRunnerWithValueProvider {
                 .enterSearch(fiftyOneSymbols)
                 .getClubCards();
 
-        softAssert.assertNotEquals(clubCards.size(), Integer.parseInt(valueProvider.getSizeOfSearchResult()),
+        softAssert.assertNotEquals(1, Integer.parseInt(valueProvider.getSizeOfSearchResult()),
                 "With 51 symbols entered Search Field does not start search process");
 
 
