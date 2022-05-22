@@ -20,6 +20,7 @@ public class TaskClient extends BaseClient {
                 .when()
                 .post(String.format("%s/api/challenge/%s/task", baseUrl, id));
     }
+
     public Response put(int id, TaskCredentials credentials) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
