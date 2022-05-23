@@ -54,6 +54,8 @@ public class AdvancedSearchComponent extends CommonPage {
     private WebElement ageField;
     @FindBy(how = How.XPATH, using = "//label[text()='Категорії']/ancestor::div[contains(@class,'club-list-row')]//input")
     private List<WebElement> categoriesCheckboxes;
+    @FindBy(how = How.XPATH, using = "//span[@class='control-sort-option'][contains(text(), 'за рейтингом')]")
+    private WebElement sortByRatingLink;
     @FindBy(how = How.XPATH, using = "//span[text()='за алфавітом']")
     private WebElement sortAlphabeticallyButton;
     @FindBy(how = How.XPATH, using = "//span[@class='ant-select-clear']")
@@ -71,9 +73,74 @@ public class AdvancedSearchComponent extends CommonPage {
     @FindBy(how = How.XPATH, using = "//span[@aria-label='arrow-up']")
     private WebElement arrowUpLabel;
     private final Waiter waiter = new Waiter(driver);
+    private final List<ClubCard> clubCards = new ArrayList<>();
 
     public AdvancedSearchComponent(WebDriver driver) {
         super(driver);
+        initCards();
+    }
+
+    public WebElement getNextPageButton() {
+        return nextPageButton;
+    }
+
+    @Step("Sorting by rating")
+    public AdvancedSearchComponent sortByRating() {
+        sortByRatingLink.click();
+        sleep(1000);
+        initCards();
+
+        return this;
+    }
+
+    @Step("Sorting Clubs in {clubSortingArrowDirection} direction")
+    public AdvancedSearchComponent clickSortArrowButton(ClubSortingArrowDirection clubSortingArrowDirection) {
+        driver
+                .findElement(By.xpath(clubSortingArrowDirection.getClubSortingArrowDirectionPath()))
+                .click();
+
+        sleep(1000);
+
+        initCards();
+
+        return this;
+    }
+
+    private void initCards() {
+        clubCards.clear();
+
+        List<WebElement> list = driver.findElements(By.xpath("//div[@class='ant-card ant-card-bordered card']"));
+
+        for (WebElement element : list) {
+            clubCards.add(new ClubCard(driver, element));
+        }
+    }
+
+    public List<ClubCard> getClubCards() {
+        initCards();
+
+        return clubCards;
+    }
+
+    public boolean isNextPageButtonEnabled() {
+        if (nextPageButton.getAttribute("aria-disabled").contains("false")) {
+            nextPageButton.click();
+            sleep(1000);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ClubCard getClubCard(int clubCardNumber) {
+        return clubCards.get(clubCardNumber);
+    }
+
+    public int getClubCardsPerPageAmount() {
+        return driver
+                .findElements(By.xpath("//div[@class='ant-card ant-card-bordered card']"))
+                .size();
     }
 
     @Step("Click on center button")
