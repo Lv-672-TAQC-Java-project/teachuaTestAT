@@ -87,7 +87,6 @@ public class ChallengeTest extends ApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertEquals(response.getStatusCode(), 401);
         softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
         softAssert.assertAll();
