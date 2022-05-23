@@ -11,7 +11,26 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestErrorSmsInProfileInFieldLastName extends TestRunnerWithValueProvider {
+public class ErrorMessagesInProfileFieldTest extends TestRunnerWithValueProvider {
+
+    @DataProvider
+    public Object[][] inputName() {
+
+        return new Object[][]{
+
+                {"AfBbCcDdEeFfGgHhIiJjKkLlMmNn", "Ім'я не може містити більше, ніж 25 символів"},
+                {"AfBbCcDdEeFfGgHhIiJjKkLlMm", "Ім'я не може містити більше, ніж 25 символів"},
+                {"1234", "Ім'я не може містити цифри"},
+                {"!@#$%^&,", "Ім'я не може містити спеціальні символи"},
+                {"-Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {" Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"'Name", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name-", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name ", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"Name'", "Ім'я повинно починатися і закінчуватися літерою"},
+                {"", "Будь ласка введіть Ваше ім'я"},
+        };
+    }
 
     @DataProvider
     public Object[][] inputLastName() {
@@ -45,10 +64,30 @@ public class TestErrorSmsInProfileInFieldLastName extends TestRunnerWithValuePro
                 .clickEditMyProfileComponent();
     }
 
+    @Description("Verify that error messages are shown and 'Зберегти зміни' button becomes disabled while entering invalid data into the 'Ім'я' field")
+    @Issue("TUA-328")
+    @Test(dataProvider = "inputName")
+    public void verifyThatErrorMessagesIsDisplayedInFirstNameField(String input, String expected) {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        EditMyProfileComponent editMyProfileComponent = new EditMyProfileComponent(driver);
+
+        softAssert.assertEquals(editMyProfileComponent
+                        .setFirstName(input)
+                        .getErrorTextAfterInput(), expected,
+                String.format("In field should be text %s", expected));
+        softAssert.assertTrue(editMyProfileComponent.isButtonSaveChangedDisabled(),
+                "button 'Save Changes' should be disabled");
+        softAssert.assertAll();
+
+        editMyProfileComponent.setFirstName("admin");
+    }
+
     @Description("Verify that error messages are shown and 'Зберегти зміни' button becomes disabled while entering invalid data into the 'Прізвище' field")
     @Issue("TUA-343")
     @Test(dataProvider = "inputLastName")
-    public void verifyThatErrorMessagesIsDisplayedInLastNameField(String input, String expected) throws InterruptedException {
+    public void verifyThatErrorMessagesIsDisplayedInLastNameField(String input, String expected) {
 
         SoftAssert softAssert = new SoftAssert();
 
