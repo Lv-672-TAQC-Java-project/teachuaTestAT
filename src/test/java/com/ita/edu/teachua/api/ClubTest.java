@@ -1,6 +1,5 @@
 package com.ita.edu.teachua.api;
 
-
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
 import com.ita.edu.teachua.api.models.response.ErrorResponse;
@@ -16,10 +15,8 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import static org.apache.commons.lang.RandomStringUtils.random;
-
 
 public class ClubTest extends ApiTestRunner {
 
@@ -80,8 +77,10 @@ public class ClubTest extends ApiTestRunner {
     @Issue("TUA-469")
     @Test(description = "TUA-469")
     public void verifyDuplicateClubCannotCreated() {
+        var authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        var clubClient = new ClubClient(authorization.getToken());
 
-        List<Location> locations = new ArrayList<>();
+        var locations = new ArrayList<Location>();
 
         ClubCredentials clubCredentials = new ClubCredentials(
                 Collections.singletonList("Спортивні секції"),
@@ -94,7 +93,7 @@ public class ClubTest extends ApiTestRunner {
                 locations,
                 272);
 
-        Response response = client.postClub(clubCredentials);
+        Response response = clubClient.postClub(clubCredentials);
 
         SoftAssert softAssert = new SoftAssert();
 
@@ -122,7 +121,7 @@ public class ClubTest extends ApiTestRunner {
     @Description("Verify that user as 'Керiвник гуртка' can delete club registered by him.")
     @Issue("TUA-468")
     @Test(description = "TUA-468")
-    public void verifyThatAdminCanDeleteClub(){
+    public void verifyThatAdminCanDeleteClub() {
         String name = "London";
         Response response = client.post(name);
         int id = response.as(ClubResponse.class).getId();
@@ -161,7 +160,7 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertEquals(clubResponse.getName(), clubName);
         softAssert.assertAll();
     }
-  
+
     @Description("Verify that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain less than 5 characters")
     @Issue("TUA-502")
     @Test(description = "TUA-502")
