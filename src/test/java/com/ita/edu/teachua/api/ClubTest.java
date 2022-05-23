@@ -151,6 +151,20 @@ public class ClubTest extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+    @Description("Verify that User as \"Керiвник гуртка\" can create new club using valid characters for \"Назва\" field")
+    @Issue("TUA-500")
+    @Test(description = "TUA-500")
+    public void verifyThatClubLeaderCanCreateNewClubUsingValidCharacters() {
+        String clubName = "Джмелик&company =,/ , , *, (, ), _, :, ;, #, %, ^, ?, [, ]";
+        Response response = client.post(clubName);
+        ClubResponse clubResponse = response.as(ClubResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubResponse.getName(), clubName);
+        softAssert.assertAll();
+    }
+  
     @Description("Verify that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain less than 5 characters")
     @Issue("TUA-502")
     @Test(description = "TUA-502")
@@ -164,7 +178,6 @@ public class ClubTest extends ApiTestRunner {
 
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
-
         softAssert.assertAll();
     }
 }
