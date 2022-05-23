@@ -4,6 +4,7 @@ import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.EditMyProfileComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.Assert;

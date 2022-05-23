@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -65,6 +66,9 @@ public class ChallengeTest extends ApiTestRunner {
     @Test(dataProvider = "inputDate")
     public void verifyCreateChallengeUsingNullSpaceSymbols(ChallengeCredentials inputDate, int expect) {
 
+        var authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        var client = new ChallengeClient(authorization.getToken());
+
         Response response = client.postChallenge(inputDate);
 
         SoftAssert softAssert = new SoftAssert();
@@ -84,7 +88,6 @@ public class ChallengeTest extends ApiTestRunner {
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertEquals(response.getStatusCode(), 401);
         softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");
         softAssert.assertAll();
@@ -181,6 +184,7 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertAll();
     }
 
+
     @Description("This test case verifies that user is not able to edit information about Challenge using valid values")
     @Issue("TUA-432")
     @Test(description = "TUA-432")
@@ -201,5 +205,63 @@ public class ChallengeTest extends ApiTestRunner {
 //        System.out.println(challengeResponse.getMessage());
 
         Assert.assertEquals(response.getStatusCode(), 200, "Server should be responded with status 200");
+    }
+
+    @Description("Verify that user is not able to edit information about Challenge using invalid values")
+    @Issue("TUA-433")
+    @Test(description = "TUA-433")
+    public void verifyUserCannotChangeChallengeInformationUsingInvalidValues() {
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        ChallengeClient client = new ChallengeClient(authorization.getToken());
+
+        ChallengeCredentials challengeCredentials = new ChallengeCredentials("nam",
+                "tit",
+                "des",
+                "",
+                "abc",
+                "abc");
+
+        Response firstResponse = client.putChallenge(145, challengeCredentials);
+        ErrorResponse firstErrorResponse = firstResponse.as(ErrorResponse.class);
+        String firstErrorMessage = firstErrorResponse.getMessage();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(firstErrorResponse.getStatus(), 400);
+        softAssert.assertTrue(firstErrorMessage.contains("JSON parse error: Cannot deserialize value of type `long` from String \"abc\""));
+
+        String description = RandomStringUtils.randomAlphabetic(3005);
+
+        ChallengeCredentials secondChallengeCredentials = new ChallengeCredentials("Lorem ipsum dolor sit amet, consect",
+                "Lorem ipsum dolor sit amet, consect",
+                description,
+                "",
+                "/upload/test/test.png",
+                "4");
+
+        Response secondResponse = client.putChallenge(145, secondChallengeCredentials);
+        ErrorResponse secondErrorResponse = secondResponse.as(ErrorResponse.class);
+        String secondErrorMessage = secondErrorResponse.getMessage();
+
+        softAssert.assertEquals(secondResponse.getStatusCode(), 400);
+        softAssert.assertTrue(secondErrorMessage.contains("Name must contain a minimum of 5 and a maximum of 30 letters"));
+
+        ChallengeCredentials thirdChallengeCredentials = new ChallengeCredentials("эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁ",
+                "эЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁэЭъЪыЫёЁ",
+                "",
+                "эЭъЪыЫёЁ",
+                "2");
+
+        Response thirdResponse = client.putChallenge(145, thirdChallengeCredentials);
+        ErrorResponse thirdErrorResponse = thirdResponse.as(ErrorResponse.class);
+        String thirdErrorMessage = thirdErrorResponse.getMessage();
+
+        softAssert.assertEquals(thirdErrorResponse.getStatus(), 400);
+        softAssert.assertTrue(thirdErrorMessage.contains("name can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("title can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("description can't contain russian letters"));
+        softAssert.assertTrue(thirdErrorMessage.contains("picture Incorrect file path"));
+
+        softAssert.assertAll();
     }
 }

@@ -133,6 +133,4 @@ public class EditMyProfileComponent extends CommonPage {
 
         return buttonSaveChanges.isDisplayed();
     }
-
-
 }

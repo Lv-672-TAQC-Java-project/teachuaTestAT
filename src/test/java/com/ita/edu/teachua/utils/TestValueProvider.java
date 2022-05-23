@@ -119,4 +119,16 @@ public class TestValueProvider {
     public String getNonAdminPassword() {
         return properties.getProperty("nonAdminPassword");
     }
+
+    public String getUserEmail() {
+        return properties.getProperty("userEmail");
+    }
+
+    public String getUserPassword() {
+        return properties.getProperty("userPassword");
+    }
+
+    public String getUserEmailLike() {
+        return properties.getProperty("userEmailLike");
+    }
 }

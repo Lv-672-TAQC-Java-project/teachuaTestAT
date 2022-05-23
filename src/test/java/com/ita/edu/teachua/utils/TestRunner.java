@@ -1,4 +1,4 @@
-package com.ita.edu.teachua.ui.tests;
+package com.ita.edu.teachua.utils;
 
 import com.ita.edu.teachua.utils.TestNGListener;
 import io.github.bonigarcia.wdm.WebDriverManager;

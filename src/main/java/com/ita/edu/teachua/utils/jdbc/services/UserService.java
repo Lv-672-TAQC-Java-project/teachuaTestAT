@@ -19,4 +19,12 @@ public class UserService {
     public List<UserEntity> getAllUsersWhereEmail(String email) {
         return userDao.selectAllWhereEmail(email);
     }
+
+    public List<UserEntity> getAllUsersWhereEmailLike(String email) {
+        return userDao.selectWhereEmailLike(email);
+    }
+  
+    public List<UserEntity> getAllUsersWhereId(int id) {
+        return userDao.selectAllWhereId(id);
+    }
 }

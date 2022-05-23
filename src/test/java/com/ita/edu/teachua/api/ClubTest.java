@@ -1,7 +1,6 @@
 package com.ita.edu.teachua.api;
 
 
-import com.ita.edu.teachua.api.client.Club;
 import com.ita.edu.teachua.api.client.ClubClient;
 import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
 import com.ita.edu.teachua.api.models.response.ErrorResponse;
@@ -25,13 +24,11 @@ import static org.apache.commons.lang.RandomStringUtils.random;
 public class ClubTest extends ApiTestRunner {
 
     private ClubClient client;
-    private Club club;
 
     @BeforeClass
     public void setUpClass() {
         Authorization authorization = new Authorization(provider.getClubHeadEmail(), provider.getClubHeadPassword());
         client = new ClubClient(authorization.getToken());
-        club = new Club(authorization.getToken());
     }
 
     @Description("Verify that User as 'Керiвник гуртка' can create new club is in a center if 'Назва' field consists of a word length of 5 characters")
@@ -97,7 +94,7 @@ public class ClubTest extends ApiTestRunner {
                 locations,
                 272);
 
-        Response response = club.postClub(clubCredentials);
+        Response response = client.postClub(clubCredentials);
 
         SoftAssert softAssert = new SoftAssert();
 
@@ -148,6 +145,36 @@ public class ClubTest extends ApiTestRunner {
         var softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertTrue(errorResponse.getMessage().contains("name can't contain russian letters"));
+        softAssert.assertAll();
+    }
+
+    @Description("Verify that User as \"Керiвник гуртка\" can create new club using valid characters for \"Назва\" field")
+    @Issue("TUA-500")
+    @Test(description = "TUA-500")
+    public void verifyThatClubLeaderCanCreateNewClubUsingValidCharacters() {
+        String clubName = "Джмелик&company =,/ , , *, (, ), _, :, ;, #, %, ^, ?, [, ]";
+        Response response = client.post(clubName);
+        ClubResponse clubResponse = response.as(ClubResponse.class);
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(response.getStatusCode(), 200);
+        softAssert.assertEquals(clubResponse.getName(), clubName);
+        softAssert.assertAll();
+    }
+  
+    @Description("Verify that User as 'Керiвник гуртка' cannot create new club is in a center if 'Назва' field contain less than 5 characters")
+    @Issue("TUA-502")
+    @Test(description = "TUA-502")
+    public void verifyThatUserCanNotCreateNewClub() {
+        String name = RandomStringUtils.randomAlphabetic(4);
+
+        var response = client.post(name);
+        var errorResponse = response.as(ErrorResponse.class);
+
+        var softAssert = new SoftAssert();
+
+        softAssert.assertEquals(response.getStatusCode(), 400);
+        softAssert.assertEquals(errorResponse.getMessage(), "name Довжина назви має бути від 5 до 100 символів");
         softAssert.assertAll();
     }
 }

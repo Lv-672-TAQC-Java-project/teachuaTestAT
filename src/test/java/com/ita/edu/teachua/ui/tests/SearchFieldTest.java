@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.ClubCardComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.entity.ClubsEntity;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
 import io.qameta.allure.Description;
