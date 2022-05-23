@@ -5,6 +5,7 @@ import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -107,5 +108,35 @@ public class ClubDescriptionFieldTest extends TestRunnerWithValueProvider {
                 .clearDescriptionField()
                 .enterSymbols(1500);
         Assert.assertTrue(descriptionClub.isSuccessCheckCircleVisible());
+    }
+
+    @Description("Verify that error message appears when user enters letters in " +
+            "Russian language into the field.")
+    @Issue("TUA-178")
+    @Test(description = "TUA-178")
+    public void russianLettersTest() {
+        String russianLettersString = "эъы" + RandomStringUtils.randomAlphabetic(90);
+        String expectedMsg = "Опис гуртка не може містити російські літери";
+        DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
+        descriptionClub
+                .fillBasicInfo()
+                .fillContactsInfo()
+                .enterDescriptionText(russianLettersString);
+        Assert.assertTrue(descriptionClub.getAlertMsg().contains(expectedMsg));
+    }
+
+    @Description("Verify that error message appears when user enters letters in " +
+            "German language into the field.")
+    @Issue("TUA-178")
+    @Test(description = "TUA-178")
+    public void germanLettersTest() {
+        String expectedMsg = "Некоректний опис гуртка";
+        String germanLettersString = "äöüß" + RandomStringUtils.randomAlphabetic(90);
+        DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
+        descriptionClub
+                .fillBasicInfo()
+                .fillContactsInfo()
+                .enterDescriptionText(germanLettersString);
+        Assert.assertTrue(descriptionClub.getAlertMsg().contains(expectedMsg));
     }
 }
