@@ -191,12 +191,14 @@ public class ChallengeTest extends ApiTestRunner {
         ChallengeCredentials challengeCredentials = new ChallengeCredentials("Example name",
                 "Example title",
                 "Lorem ipsum dolor sit amet, consectetuer adipiscin",
-                "",
+                "https://docs.google.com/forms/d/e/",
                 "/upload/test/test.png",
-                "1");
+                "1",
+                "true");
 
         Response response = client.putChallenge(370, challengeCredentials);
-        ChallengeResponse challengeResponse = response.as(ChallengeResponse.class);
+        ErrorResponse challengeResponse = response.as(ErrorResponse.class);
+        System.out.println(challengeResponse.getMessage());
 
         Assert.assertEquals(response.getStatusCode(), 200, "Server should be responded with status 200");
     }
