@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class ClubResponse {
-    private Integer id;
+    private int id;
     private Integer ageFrom;
     private Integer ageTo;
     private String name;
