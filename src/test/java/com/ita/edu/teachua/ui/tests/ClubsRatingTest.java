@@ -49,6 +49,8 @@ public class ClubsRatingTest extends TestRunnerWithValueProvider {
         softAssert.assertTrue(getUiClubCardsRatingByNameMap(sortedClubsByRating.clickSortArrowButton(UP))
                         .equals(getDbClubCardsRatingByNameMap(centersFromDbDesc)),
                 "sorted Clubs by rating descending should have the same order as in DB");
+
+        softAssert.assertAll();
     }
 
     private LinkedHashMap<String, Integer> getUiClubCardsRatingByNameMap(AdvancedSearchComponent sortedClubsByRating) {
