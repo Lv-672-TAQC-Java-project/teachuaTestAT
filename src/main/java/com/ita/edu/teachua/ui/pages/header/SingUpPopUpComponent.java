@@ -69,13 +69,6 @@ public class SingUpPopUpComponent extends CommonPage {
         return this;
     }
 
-    @Step("click Sing Up")
-    public SingUpPopUpComponent clickSingUpButton() {
-        singUpButton.click();
-        sleep(2000);
-        return this;
-    }
-
     @Step("click close button")
     public HomePage clickCloseButton() {
         closeButton.click();

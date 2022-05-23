@@ -1,6 +1,5 @@
-package com.ita.edu.teachua.ui.tests;
+package com.ita.edu.teachua.utils;
 
-import com.ita.edu.teachua.utils.TestValueProvider;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.IOException;

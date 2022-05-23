@@ -44,7 +44,7 @@ public class ClubsComponent extends BasePage {
     @Step("create new center")
     public MyProfilePage clickFinishButton() {
         finishButton.click();
-        //sleep(1000);
+
         return new MyProfilePage(driver);
     }
 }

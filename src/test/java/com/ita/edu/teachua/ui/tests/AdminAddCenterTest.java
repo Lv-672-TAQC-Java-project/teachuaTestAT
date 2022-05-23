@@ -5,6 +5,7 @@ import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.*;
 import com.ita.edu.teachua.ui.pages.user.models.City;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
