@@ -85,7 +85,7 @@ public class UserProfileTest extends TestRunnerWithValueProvider {
 
         softAssert.assertEquals(myProfilePage.getPhoneProfile(), "0999999911");
 
-        List<UserEntity> usersWithExpectedEmail = new UserService().getAllUsersWhereEmailLike(valueProvider.getUserEmailLike());
+        List<UserEntity> usersWithExpectedEmail = new UserService().getAllUsersWhereEmailLike(valueProvider.getUserEmail().substring(0,5)+"%");
 
         softAssert.assertEquals(usersWithExpectedEmail.get(0).getFirstName(), "Anna");
 
