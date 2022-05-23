@@ -5,29 +5,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
 import java.util.List;
+
+import static com.ita.edu.teachua.utils.Waiter.waitVisibilityOfAllElements;
 
 public class ClubCard extends BaseComponent {
 
     @FindBy(how = How.XPATH, using = ".//li[@class='ant-rate-star ant-rate-star-full']")
-    private List<WebElement> rating;
+    private List<WebElement> ratingStarFull;
+
+    @FindBy(how = How.XPATH, using = ".//ul[@class='ant-rate ant-rate-disabled rating']/li[1]")
+    private List<WebElement> firstRatingStar;
 
     @FindBy(how = How.XPATH, using = ".//div[@class='name']")
     private WebElement name;
 
     public ClubCard(WebDriver driver, WebElement clubCardNode) {
         super(driver, clubCardNode);
-
-
-//        this.rootElementPath = String.format("//div[@class='content-clubs-list content-clubs-block']/div[%d]",
-//                clubCardNumber);
-
-//        WebElement clubCard = driver.findElement(By.xpath(rootElementPath));
-//        actions.moveToElement(clubCard).perform();
     }
 
     public int getRating() {
-        return (rating.isEmpty() ? 0 : rating.size());
+        waitVisibilityOfAllElements(firstRatingStar, 40);
+
+        return (ratingStarFull.isEmpty() ? 0 : ratingStarFull.size());
     }
 
     public String getName() {

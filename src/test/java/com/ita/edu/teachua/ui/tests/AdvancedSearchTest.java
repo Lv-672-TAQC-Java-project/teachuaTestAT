@@ -10,11 +10,15 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.testng.Assert.*;
+
+import java.util.*;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class AdvancedSearchTest extends TestRunner {
 
