@@ -81,7 +81,6 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     @Step("fill description information and click finish button")
     public HomePage fillDescriptionInfo() {
         enterSymbols(50);
-//        getCreateClubBtn().click();
         sleep(2000);
         return new HomePage(driver);
     }

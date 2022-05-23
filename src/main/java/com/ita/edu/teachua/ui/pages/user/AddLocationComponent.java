@@ -132,7 +132,6 @@ public class AddLocationComponent extends BasePage {
     public ContactsClubComponent clickAddClubLocationButton() {
         addLocationButton.click();
 
-
         return new ContactsClubComponent(driver);
     }
 

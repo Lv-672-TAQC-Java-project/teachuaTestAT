@@ -1,10 +1,10 @@
-package com.ita.edu.teachua.newclub.tests;
+package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.AddLocationComponent;
 import com.ita.edu.teachua.ui.pages.user.addclub.DescriptionClubComponent;
 import com.ita.edu.teachua.ui.pages.user.models.City;
-import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.LocationService;
 import io.qameta.allure.Issue;
 import jdk.jfr.Description;
