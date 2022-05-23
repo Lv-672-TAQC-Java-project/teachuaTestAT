@@ -1,7 +1,7 @@
 package com.ita.edu.teachua.api.client;
 
 import com.ita.edu.teachua.api.models.credenntials.UserCredentialsPut;
-import com.ita.edu.teachua.api.models.credenntials.UpdateUserCredentials;
+import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -31,7 +31,7 @@ public class UserClient extends BaseClient {
     }
 
     @Step("Update user by {id}")
-    public Response put(int id, UpdateUserCredentials credentials) {
+    public Response put(int id, UserCredentials credentials) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .body(credentials)

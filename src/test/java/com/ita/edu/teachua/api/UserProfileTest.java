@@ -4,7 +4,7 @@ import com.ita.edu.teachua.api.client.UserClient;
 import com.ita.edu.teachua.api.models.credenntials.UserCredentialsPut;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.MyProfilePage;
-import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
 import com.ita.edu.teachua.utils.jdbc.services.UserService;
 import io.qameta.allure.Description;
