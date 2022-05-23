@@ -1,9 +1,9 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.UserClient;
-import com.ita.edu.teachua.api.models.response.user.UserResponse;
-import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
+import com.ita.edu.teachua.api.models.response.ErrorResponse;
+import com.ita.edu.teachua.api.models.response.user.UserResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
