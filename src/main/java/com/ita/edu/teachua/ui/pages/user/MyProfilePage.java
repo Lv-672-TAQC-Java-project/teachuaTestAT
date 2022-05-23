@@ -35,6 +35,12 @@ public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "//div[@class = 'content-title']")
     private WebElement contentTitle;
 
+    @FindBy(how = How.XPATH, using = "//div[@class='user-name']")
+    private WebElement userName;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='user-phone-data']")
+    private WebElement userPhone;
+
     public MyProfilePage(WebDriver driver) {
         super(driver);
     }
@@ -118,5 +124,20 @@ public class MyProfilePage extends CommonPage {
         dropDownProfileButton.click();
 
         return this;
+    }
+
+    public String getFirstNameProfile() {
+
+        return userName.getText().split(" ")[0];
+    }
+
+    public String getLastNameProfile() {
+
+        return userName.getText().split(" ")[1];
+    }
+
+    public String getPhoneProfile() {
+
+        return userPhone.getText();
     }
 }

@@ -1,5 +1,6 @@
 package com.ita.edu.teachua.api.client;
 
+import com.ita.edu.teachua.api.models.credenntials.ClubCredentials;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -44,5 +45,14 @@ public class ClubClient extends BaseClient {
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
                 .when()
                 .delete(String.format("%s/api/club/%s", baseUrl, id));
+    }
+
+    public Response postClub(ClubCredentials credentials) {
+
+        return prepareRequest()
+                .header("Authorization", String.format("Bearer %s", authorizationToken))
+                .body(credentials)
+                .when()
+                .post(String.format("%s/api/club", baseUrl));
     }
 }

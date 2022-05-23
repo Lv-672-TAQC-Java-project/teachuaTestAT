@@ -16,7 +16,9 @@ public class LoginTest extends ApiTestRunner {
         UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getAdminPassword());
         SingInClient client = new SingInClient();
         Response response = client.successSingInRequest(credentials);
+
         SuccessSignInResponse singInResponse = response.as(SuccessSignInResponse.class);
+
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(singInResponse.getEmail(), provider.getAdminEmail());
         softAssert.assertEquals(singInResponse.getId(), 1);
