@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.TestRunner;
 import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
@@ -10,11 +11,15 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 import static org.testng.Assert.*;
+
+import java.util.*;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class AdvancedSearchTest extends TestRunner {
 
@@ -153,7 +158,6 @@ public class AdvancedSearchTest extends TestRunner {
                 .collect(toList());
     }
 
-
     @Description("Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
     @Issue("TUA-449")
     @Test(description = "TUA-449")
@@ -217,5 +221,40 @@ public class AdvancedSearchTest extends TestRunner {
 
             assertTrue(resultList.containsAll(centersByRatingFromDB.get(key)));
         }
+    }
+
+    @Description("Verify that all parameters are activated with the selected 'Гурток' radio button")
+    @Issue("TUA-509")
+    @Test
+    public void verifyAdvancedSearchModalUi() {
+        new HomePage(driver)
+                .getHeader()
+                .clickAdvancedSearchBtn();
+
+        AdvancedSearchComponent advancedSearchComponent = new AdvancedSearchComponent(driver);
+
+        boolean isClubRadioButtonSelected = advancedSearchComponent.isClubRadioButtonSelected();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(isClubRadioButtonSelected, "Club radio button should be selected");
+
+        boolean isCityDropdownEnabled = advancedSearchComponent.isCityDropdownActivated();
+        softAssert.assertTrue(isCityDropdownEnabled, "City dropdown should be activated");
+
+        boolean isDistrictDropdownEnabled = advancedSearchComponent.isDistrictDropdownActivated();
+        softAssert.assertTrue(isDistrictDropdownEnabled, "District dropdown should be activated");
+
+        boolean isSubwayStationDropdownEnabled = advancedSearchComponent.isSubwayStationDropdownActivated();
+        softAssert.assertTrue(isSubwayStationDropdownEnabled, "Subway station dropdown should be activated");
+
+        boolean isAvailableOnlineCheckboxEnabled = advancedSearchComponent.isAvailableOnlineCheckboxActivated();
+        softAssert.assertTrue(isAvailableOnlineCheckboxEnabled, "Available online checkbox should be activated");
+
+        boolean isCategoriesCheckboxesEnabled = advancedSearchComponent.isCategoriesCheckboxesActivated();
+        softAssert.assertTrue(isCategoriesCheckboxesEnabled, "Categories checkboxes should be activated");
+
+        boolean isAgeFieldEnabled = advancedSearchComponent.isAgeFieldActivated();
+        softAssert.assertTrue(isAgeFieldEnabled, "Age field should be activated");
+
+        softAssert.assertAll();
     }
 }

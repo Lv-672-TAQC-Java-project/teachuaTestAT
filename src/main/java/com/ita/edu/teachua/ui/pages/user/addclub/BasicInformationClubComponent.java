@@ -30,12 +30,6 @@ public class BasicInformationClubComponent extends AddClubPage {
     }
 
     @Step("Enter club name")
-    public BasicInformationClubComponent enterClubName() {
-        fieldName.sendKeys(RandomStringUtils.randomAlphabetic(8));
-        return this;
-    }
-
-    @Step("Enter club name")
     public BasicInformationClubComponent enterClubName(String clubName) {
         fieldName.sendKeys(clubName);
         return this;
@@ -45,15 +39,6 @@ public class BasicInformationClubComponent extends AddClubPage {
     public BasicInformationClubComponent selectCheckboxes() {
         WebElement randomCheckbox = newClubCheckboxes.get(new Random().nextInt(newClubCheckboxes.size()));
         randomCheckbox.click();
-        return this;
-    }
-
-    @Step("Enter age")
-    public BasicInformationClubComponent enterAge() {
-        minimumAgeField.clear();
-        minimumAgeField.sendKeys("4");
-        maximumAgeField.clear();
-        maximumAgeField.sendKeys("16");
         return this;
     }
 
@@ -81,9 +66,9 @@ public class BasicInformationClubComponent extends AddClubPage {
 
     @Step("Fill basic information and click next step button")
     public ContactsClubComponent fillBasicInfo() {
-        enterClubName();
+        enterClubName(RandomStringUtils.randomAlphabetic(8));
         selectCheckboxes();
-        enterAge();
+        enterAge(4, 16);
         getNextStepBtn().click();
         return new ContactsClubComponent(driver);
     }
