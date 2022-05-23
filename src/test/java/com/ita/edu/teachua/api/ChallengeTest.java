@@ -7,6 +7,7 @@ import com.ita.edu.teachua.api.models.response.challenge.ChallengeResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -132,7 +133,7 @@ public class ChallengeTest extends ApiTestRunner {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(responseWithoutAuthorization.getStatusCode(), 200);
         softAssert.assertEquals(challengeResponse.getId(), 196);
-      softAssert.assertAll();
+        softAssert.assertAll();
     }
 
     @Description("This test case verifies that user is not able to create Challenge using invalid values")
@@ -181,6 +182,29 @@ public class ChallengeTest extends ApiTestRunner {
         softAssert.assertEquals(challengeErrorResponse.getStatus(), 400);
         softAssert.assertFalse(challengeErrorResponse.getMessage().isEmpty());
         softAssert.assertAll();
+    }
+
+
+    @Description("This test case verifies that user is not able to edit information about Challenge using valid values")
+    @Issue("TUA-432")
+    @Test(description = "TUA-432")
+    public void VerifyThatUserIsAbleToEditChallengeUsingValidValues() {
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
+        ChallengeClient client = new ChallengeClient(authorization.getToken());
+
+        ChallengeCredentials challengeCredentials = new ChallengeCredentials("Example name",
+                "Example title",
+                "Lorem ipsum dolor sit amet, consectetuer adipiscin",
+                "https://docs.google.com/forms/d/e/132/viewform?embedded=true",
+                "/upload/test/test.png",
+                "1",
+                "true");
+
+        Response response = client.putChallenge(171, challengeCredentials);
+//        ErrorResponse challengeResponse = response.as(ErrorResponse.class);
+//        System.out.println(challengeResponse.getMessage());
+
+        Assert.assertEquals(response.getStatusCode(), 200, "Server should be responded with status 200");
     }
 
     @Description("Verify that user is not able to edit information about Challenge using invalid values")
