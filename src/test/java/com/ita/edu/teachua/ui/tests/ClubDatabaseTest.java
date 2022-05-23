@@ -1,9 +1,9 @@
-package com.ita.edu.teachua.newclub.tests;
+package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.header.HeaderPage;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.ui.pages.user.addclub.BasicInformationClubComponent;
-import com.ita.edu.teachua.ui.tests.TestRunnerWithValueProvider;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import com.ita.edu.teachua.utils.jdbc.services.ClubsService;
 import io.qameta.allure.Issue;
