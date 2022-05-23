@@ -34,10 +34,6 @@ public class LoginPopUpComponent extends BasePage {
         return this;
     }
 
-    public void clickCloseButton() {
-        loginButton.click();
-    }
-
     @Step("set email field value: {email}")
     public LoginPopUpComponent setEmail(String email) {
         emailField.sendKeys(email);

@@ -2,6 +2,7 @@ package com.ita.edu.teachua.ui.tests;
 
 import com.ita.edu.teachua.ui.pages.header.SingUpPopUpComponent;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;

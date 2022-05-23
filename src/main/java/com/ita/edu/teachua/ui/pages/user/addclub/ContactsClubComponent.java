@@ -35,12 +35,6 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
         return this;
     }
 
-    @Step("Fill contact phone")
-    public ContactsClubComponent fillContactPhone() {
-        contactPhone.sendKeys("0" + RandomStringUtils.randomNumeric(9));
-        return this;
-    }
-
     @Step("Click 'next step' button")
     public DescriptionClubComponent goToDescriptionClubComponent() {
         getNextStepBtn().click();
@@ -49,14 +43,9 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
 
     @Step("Fill contacts information and click next step button")
     public DescriptionClubComponent fillContactsInfo() {
-        fillContactPhone();
+        fillContactPhone("0" + RandomStringUtils.randomNumeric(9));
         getNextStepBtn().click();
         return new DescriptionClubComponent(driver);
-    }
-
-    public LocationComponent getLocation(int index) {
-        String location = String.format("/li[%s]", index);
-        return new LocationComponent(driver, locationList.findElement(By.xpath(location)));
     }
 
     @Step("get added location")

@@ -112,4 +112,27 @@ public class TaskTest extends ApiTestRunner {
         softAssert.assertTrue(!taskResponse.getMessage().isEmpty());
         softAssert.assertAll();
     }
+
+    @Description("Verify that user can not create Task using null, spaces as values")
+    @Issue("TUA-443")
+    @Test(description = "TUA-443")
+    public void verifyThatUserCannotCreateTaskUsingNullSpaces() {
+        TaskCredentials taskCredentials = new TaskCredentials("           ",
+                "stringstringstringstringtextstringstringstringstringstringstring",
+                "                                                                " ,
+                "/upload/test/test.png",
+                "2022-05-30");
+
+        Response response = task.post(322, taskCredentials);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        String errorMessage = errorResponse.getMessage();
+
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(errorResponse.getStatus(), 400);
+        softAssert.assertTrue(errorMessage.contains("name must contain a minimum of 5 and a maximum of 50 letters"));
+        softAssert.assertTrue(errorMessage.contains("name must not be blank"));
+        softAssert.assertTrue(errorMessage.contains("description must contain a minimum of 40 and a maximum of 3000 letters"));
+
+        softAssert.assertAll();
+    }
 }
