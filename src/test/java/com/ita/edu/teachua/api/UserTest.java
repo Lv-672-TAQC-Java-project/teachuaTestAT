@@ -20,7 +20,7 @@ public class UserTest extends ApiTestRunner {
 
     @BeforeClass
     public void setUpClass() {
-        Authorization authorization = new Authorization( provider.getAdminEmail(), provider.getPassword());
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
         client = new UserClient(authorization.getToken());
     }
 
@@ -50,12 +50,12 @@ public class UserTest extends ApiTestRunner {
     @Issue("TUA-421")
     @Test(description = "TUA-421")
     public void verifyThatUserCanNotSaveChangesWhereEnterInvalidDataInFieldPhone() {
-        var updateUserCredentials = new UpdateUserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
+        UpdateUserCredentials updateUserCredentials = new UpdateUserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
                 "123456789121212", "ROLE_MANAGER", null, true);
-        var response = client.put(203, updateUserCredentials);
-        var errorResponse = response.as(ErrorResponse.class);
+        Response response = client.put(203, updateUserCredentials);
+        ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
-        var softAssert = new SoftAssert();
+        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
 
@@ -75,7 +75,7 @@ public class UserTest extends ApiTestRunner {
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
 
-        var usersWithExpectedId = new UserService().getAllUsersWhereId(203);
+        List<UserEntity> usersWithExpectedId = new UserService().getAllUsersWhereId(203);
         softAssert.assertEquals(usersWithExpectedId.get(0).getFirstName(), "Anna", "First name should be Anna");
         softAssert.assertEquals(usersWithExpectedId.get(0).getLastName(), "Kukarska", "Last name should be Kukarska");
         softAssert.assertEquals(usersWithExpectedId.get(0).getEmail(), "soyec48727@busantei.com", "Email should be soyec48727@busantei.com");

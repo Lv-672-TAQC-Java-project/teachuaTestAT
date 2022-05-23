@@ -42,11 +42,11 @@ public class UserDao {
 
     @Step("Select all users from users table where {id}")
     public List<UserEntity> selectAllWhereId(int id) {
-        var statement = ManagerDao.get().getStatement();
+        Statement statement = ManagerDao.get().getStatement();
         List<List<String>> rows = null;
 
         try {
-            var resultSet = statement.executeQuery(format(UserEntity.SELECT_ALL_WHERE_ID, id));
+            ResultSet resultSet = statement.executeQuery(format(UserEntity.SELECT_ALL_WHERE_ID, id));
             rows = ManagerDao.get().parseResultSet(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
