@@ -78,11 +78,11 @@ public class ChallengeTest extends ApiTestRunner {
     public void verifyThatUserIsNotAbleToDeleteChallengeUsingNonAdministratorRights() {
         Authorization authorization = new Authorization(provider.getUserWithNonAdministratorRightsEmail(),
                 provider.getUserWithNonAdministratorRightsPassword());
-        ChallengeClient client1 = new ChallengeClient(authorization.getToken());
-        Response response = client1.delete(147);
-        ErrorResponse errorResponse = response.as(ErrorResponse.class);
+        var challengeClient = new ChallengeClient(authorization.getToken());
+        var response = challengeClient.delete(147);
+        var errorResponse = response.as(ErrorResponse.class);
 
-        SoftAssert softAssert = new SoftAssert();
+        var softAssert = new SoftAssert();
 
         softAssert.assertEquals(response.getStatusCode(), 401);
         softAssert.assertEquals(errorResponse.getMessage(), "You have no necessary permissions (role)");

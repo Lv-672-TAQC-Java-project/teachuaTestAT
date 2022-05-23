@@ -108,7 +108,7 @@ public class HeaderPage extends BasePage {
     public ClubsPage enterSearch(String keyWords) {
         searchInput.click();
         searchInput.sendKeys(keyWords);
-        sleep(1000);
+        sleep(500);
         searchInput.sendKeys(Keys.ENTER);
 
         return new ClubsPage(driver);

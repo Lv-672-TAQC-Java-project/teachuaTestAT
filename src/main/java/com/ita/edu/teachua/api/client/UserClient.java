@@ -20,7 +20,7 @@ public class UserClient extends BaseClient {
 
     }
 
-    @Step("Update User")
+    @Step("Update user by {id}")
     public Response put(int id, UpdateUserCredentials credentials) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
