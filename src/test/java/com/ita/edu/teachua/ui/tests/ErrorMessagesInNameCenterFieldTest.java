@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class TestErrorMessages extends TestRunnerWithValueProvider {
+public class ErrorMessagesInNameCenterFieldTest extends TestRunnerWithValueProvider {
 
     @BeforeMethod
     public void beforeMethod() {
