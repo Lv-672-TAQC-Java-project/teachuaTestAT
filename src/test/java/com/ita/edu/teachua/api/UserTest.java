@@ -1,7 +1,7 @@
 package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.UserClient;
-import com.ita.edu.teachua.api.models.credenntials.UpdateUserCredentials;
+import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
 import com.ita.edu.teachua.api.models.response.ErrorResponse;
 import com.ita.edu.teachua.api.models.response.user.UserResponse;
 import com.ita.edu.teachua.utils.jdbc.entity.UserEntity;
@@ -20,8 +20,48 @@ public class UserTest extends ApiTestRunner {
 
     @BeforeClass
     public void setUpClass() {
-        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getPassword());
+        Authorization authorization = new Authorization(provider.getAdminEmail(), provider.getAdminPassword());
         client = new UserClient(authorization.getToken());
+    }
+
+    @Description("This test case verifies that user can not save changes where mandatory fields are empty")
+    @Issue("TUA-411")
+    @Test(description = "TUA-411")
+    public void VerifyThatUserCanNotSaveChangesWhereMandatoryFieldsAreEmpty() {
+        UserCredentials userCredentials = new UserCredentials(provider.getFirstName(),
+                provider.getLastName(),
+                provider.getEmail(),
+                provider.getPhone(),
+                provider.getRoleName(),
+                provider.getUrlLogo(),
+                provider.getStatus()
+                );
+        SoftAssert softAssert = new SoftAssert();
+
+        userCredentials.setFirstName(null);
+        Response response = client.put(203, userCredentials);
+        ErrorResponse userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"firstName\" can`t be null");
+        userCredentials.setFirstName(provider.getFirstName());
+
+        userCredentials.setLastName(null);
+        response = client.put(203, userCredentials);
+        userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "\"lastName\" can`t be null");
+        userCredentials.setLastName(provider.getLastName());
+
+        userCredentials.setPhone(null);
+        response = client.put(203, userCredentials);
+        userResponse = response.as(ErrorResponse.class);
+
+        softAssert.assertEquals(userResponse.getStatus(), 400);
+        softAssert.assertEquals(userResponse.getMessage(), "phone must not be blank");
+
+        softAssert.assertAll();
     }
 
 
@@ -50,26 +90,26 @@ public class UserTest extends ApiTestRunner {
     @Issue("TUA-421")
     @Test(description = "TUA-421")
     public void verifyThatUserCanNotSaveChangesWhereEnterInvalidDataInFieldPhone() {
-        UpdateUserCredentials updateUserCredentials = new UpdateUserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
-                "123456789121212", "ROLE_MANAGER", null, true);
-        Response response = client.put(203, updateUserCredentials);
+        UserCredentials userCredentials = new UserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
+                "123456789121212", "ROLE_MANAGER", null, "true");
+        Response response = client.put(203, userCredentials);
         ErrorResponse errorResponse = response.as(ErrorResponse.class);
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
 
-        updateUserCredentials = new UpdateUserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
-                "assdsdsd", "ROLE_MANAGER", null, true);
-        response = client.put(203, updateUserCredentials);
+        userCredentials = new UserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
+                "assdsdsd", "ROLE_MANAGER", null, "true");
+        response = client.put(203, userCredentials);
         errorResponse = response.as(ErrorResponse.class);
 
         softAssert.assertEquals(response.getStatusCode(), 400);
         softAssert.assertEquals(errorResponse.getMessage(), "phone Phone number must contain 10 numbers and can`t contain other symbols");
 
-        updateUserCredentials = new UpdateUserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
-                "@$#%#%^", "ROLE_MANAGER", null, true);
-        response = client.put(203, updateUserCredentials);
+        userCredentials = new UserCredentials("Nastia", "Kukh", "soyec48727@busantei.com",
+                "@$#%#%^", "ROLE_MANAGER", null, "true");
+        response = client.put(203, userCredentials);
         errorResponse = response.as(ErrorResponse.class);
 
         softAssert.assertEquals(response.getStatusCode(), 400);

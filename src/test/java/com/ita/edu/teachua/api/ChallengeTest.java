@@ -201,9 +201,6 @@ public class ChallengeTest extends ApiTestRunner {
                 "true");
 
         Response response = client.putChallenge(171, challengeCredentials);
-//        ErrorResponse challengeResponse = response.as(ErrorResponse.class);
-//        System.out.println(challengeResponse.getMessage());
-
         Assert.assertEquals(response.getStatusCode(), 200, "Server should be responded with status 200");
     }
 
