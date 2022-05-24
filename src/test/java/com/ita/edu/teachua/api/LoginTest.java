@@ -2,8 +2,8 @@ package com.ita.edu.teachua.api;
 
 import com.ita.edu.teachua.api.client.SingInClient;
 import com.ita.edu.teachua.api.client.UserClient;
-import com.ita.edu.teachua.api.models.credenntials.UserCredentials;
-import com.ita.edu.teachua.api.models.response.user.SuccessSignInResponse;
+import com.ita.edu.teachua.api.models.credenntials.SignCredentials;
+import com.ita.edu.teachua.api.models.response.user.SignInResponse;
 import com.ita.edu.teachua.api.models.response.user.UserResponse;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
@@ -13,11 +13,11 @@ public class LoginTest extends ApiTestRunner {
 
     @Test
     public void singInTest() {
-        UserCredentials credentials = new UserCredentials(provider.getAdminEmail(), provider.getAdminPassword());
+        SignCredentials credentials = new SignCredentials(provider.getAdminEmail(), provider.getAdminPassword());
         SingInClient client = new SingInClient();
         Response response = client.successSingInRequest(credentials);
 
-        SuccessSignInResponse singInResponse = response.as(SuccessSignInResponse.class);
+        SignInResponse singInResponse = response.as(SignInResponse.class);
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(singInResponse.getEmail(), provider.getAdminEmail());

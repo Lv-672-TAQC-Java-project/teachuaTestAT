@@ -131,4 +131,12 @@ public class TestValueProvider {
     public String getUserEmailLike() {
         return properties.getProperty("userEmailLike");
     }
+
+    public String getStatus() {
+        return properties.getProperty("status");
+    }
+
+    public String getUrlLogo() {
+        return properties.getProperty("urlLogo");
+    }
 }
