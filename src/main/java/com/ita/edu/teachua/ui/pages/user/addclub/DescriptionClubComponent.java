@@ -25,18 +25,6 @@ public class DescriptionClubComponent extends ContactsClubComponent {
         return alert.getText();
     }
 
-    @Step("Type in 40 symbols description with russian letters")
-    public DescriptionClubComponent enterRussianSymbols() {
-        clubDescriptionField.sendKeys("эъы" + RandomStringUtils.randomAlphabetic(90));
-        return this;
-    }
-
-    @Step("Type in 40 symbols description with german letters")
-    public DescriptionClubComponent enterGermanSymbols() {
-        clubDescriptionField.sendKeys("äöüß" + RandomStringUtils.randomAlphabetic(90));
-        return this;
-    }
-
     @Step("Visibility of description field success check circle")
     public boolean isSuccessCheckCircleVisible() {
         return successCheckCircle.isDisplayed();

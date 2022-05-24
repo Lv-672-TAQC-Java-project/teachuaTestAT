@@ -4,6 +4,7 @@ import com.ita.edu.teachua.ui.pages.clubs.AdvancedSearchComponent;
 import com.ita.edu.teachua.ui.pages.clubs.ClubCard;
 import com.ita.edu.teachua.ui.pages.home.HomePage;
 import com.ita.edu.teachua.utils.TestRunnerWithValueProvider;
+import com.ita.edu.teachua.utils.Waiter;
 import com.ita.edu.teachua.utils.jdbc.entity.CenterEntity;
 import com.ita.edu.teachua.utils.jdbc.services.CenterService;
 import io.qameta.allure.Description;
