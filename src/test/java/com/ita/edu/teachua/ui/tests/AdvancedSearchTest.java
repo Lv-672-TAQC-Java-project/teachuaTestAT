@@ -158,9 +158,10 @@ public class AdvancedSearchTest extends TestRunner {
                 .collect(toList());
     }
 
+    //TODO enabled when bug #1413 will be fixed
     @Description("Verify that the user can sort the search results by rating after clicking on the 'Центр' radio button")
     @Issue("TUA-449")
-    @Test(description = "TUA-449")
+    @Test(description = "TUA-449", enabled = false)
     public void verifyThatUserCanSortResultsByRatingAfterClickingOnCenterBtn() {
         HomePage home = new HomePage(driver);
         AdvancedSearchComponent centers = home

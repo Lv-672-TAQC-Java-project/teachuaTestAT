@@ -21,6 +21,7 @@ public class ClubClient extends BaseClient {
         this.authorizationToken = authorizationToken;
     }
 
+    @Step("Send a request to create a new club")
     public Response post(String name) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
