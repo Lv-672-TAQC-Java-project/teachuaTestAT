@@ -1,6 +1,7 @@
 package com.ita.edu.teachua.api.client;
 
 import com.ita.edu.teachua.api.models.credenntials.ChallengeCredentials;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -22,6 +23,7 @@ public class ChallengeClient extends BaseClient {
 
     }
 
+    @Step("Send a request to create a new challenge")
     public Response post(int sortNumber) {
         return prepareRequest()
                 .header("Authorization", String.format("Bearer %s", authorizationToken))
