@@ -10,9 +10,12 @@ public class Center {
     private String name;
     private String contacts;
     private String urlBackgroundPicture;
+    private String email;
+    private String phones;
     private String description;
     private String urlWeb;
     private String urlLogo;
+    private String socialLinks;
     private List<Location> locations;
     private List<Club> clubs;
     private User user;

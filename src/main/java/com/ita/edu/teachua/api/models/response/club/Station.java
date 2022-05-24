@@ -6,6 +6,6 @@ import lombok.Data;
 public class Station {
     private Integer id;
     private String name;
-    private City city;
+    private LocationCity city;
     private District district;
 }
