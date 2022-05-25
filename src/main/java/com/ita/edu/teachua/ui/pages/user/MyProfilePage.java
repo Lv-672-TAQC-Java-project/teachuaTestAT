@@ -124,6 +124,8 @@ public class MyProfilePage extends CommonPage {
     }
 
     public MyProfilePage clickDropDownMyProfileButton() {
+        //to load the page, because the wait does not work
+        sleep(3000);
         dropDownProfileButton.click();
 
         return this;
