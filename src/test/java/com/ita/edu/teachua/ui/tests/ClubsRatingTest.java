@@ -25,6 +25,7 @@ import static com.ita.edu.teachua.utils.Waiter.*;
 import static java.lang.Thread.sleep;
 
 public class ClubsRatingTest extends TestRunnerWithValueProvider {
+    //Clubs table needs to be fixed and filled in with valid values
     @Description("Verify that the clubs can be sorted by rating")
     @Issue("TUA-440")
     @Test

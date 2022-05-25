@@ -128,6 +128,7 @@ public class AdvancedSearchComponent extends CommonPage {
     public boolean isNextPageButtonEnabled() {
         if (nextPageButton.getAttribute("aria-disabled").contains("false")) {
             nextPageButton.click();
+            //Server responce take too much time. Cannot add Waiter because there are no suitable locators.
             sleep(1000);
 
             return true;
