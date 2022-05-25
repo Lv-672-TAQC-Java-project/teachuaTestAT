@@ -34,8 +34,7 @@ public class UserTest extends ApiTestRunner {
                 provider.getPhone(),
                 provider.getRoleName(),
                 provider.getUrlLogo(),
-                provider.getStatus()
-                );
+                provider.getStatus());
         SoftAssert softAssert = new SoftAssert();
 
         userCredentials.setFirstName(null);

@@ -139,7 +139,7 @@ public class AdminAddCenterTest extends TestRunnerWithValueProvider {
                 "Pop up should be closed");
 
         int centerNumberAfterAdded = centerService.getAllCentersWhereName(centerName).size();
-        softAssert.assertEquals(centerNumberBeforeAdded, centerNumberAfterAdded + 1);
+        softAssert.assertEquals(centerNumberAfterAdded, centerNumberBeforeAdded + 1);
 
         softAssert.assertAll();
     }

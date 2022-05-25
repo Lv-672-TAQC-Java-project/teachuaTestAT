@@ -12,6 +12,8 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 import java.util.Random;
 
+import static com.ita.edu.teachua.utils.Waiter.waitInvisibilityOfElementLocated;
+
 public class ClubsComponent extends BasePage {
     @FindBy(how = How.XPATH, using = "//*[@id = 'clubs']//div[@class = 'checkbox-item']")
     private List<WebElement> checkBoxClubs;
@@ -45,6 +47,7 @@ public class ClubsComponent extends BasePage {
     public MyProfilePage clickFinishButton() {
         finishButton.click();
 
+        waitInvisibilityOfElementLocated("//span[@class = 'ant-modal-close-x']", 10);
         return new MyProfilePage(driver);
     }
 }

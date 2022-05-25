@@ -3,12 +3,15 @@ package com.ita.edu.teachua.ui.pages.user;
 import com.ita.edu.teachua.ui.pages.base.CommonPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.AddCenterPage;
 import com.ita.edu.teachua.ui.pages.user.addcenter.BasicInformationCenterComponent;
+import com.ita.edu.teachua.utils.Waiter;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import static com.ita.edu.teachua.utils.Waiter.waitVisibilityOfElementLocated;
 
 public class MyProfilePage extends CommonPage {
     @FindBy(how = How.XPATH, using = "//header/div[3]/div[2]")
@@ -40,6 +43,7 @@ public class MyProfilePage extends CommonPage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='user-phone-data']")
     private WebElement userPhone;
+    private final Waiter waiter = new Waiter(driver);
 
     public MyProfilePage(WebDriver driver) {
         super(driver);
@@ -52,8 +56,8 @@ public class MyProfilePage extends CommonPage {
     @Step("Click on add center button and open add center pop up")
     public BasicInformationCenterComponent clickAddCenterInDropDownButton() {
         addCenterButton.click();
-        //need
-        sleep(2000);
+        waitVisibilityOfElementLocated("//div[@class = 'modal-title']", 10);
+
         return new BasicInformationCenterComponent(driver);
     }
 
@@ -72,8 +76,8 @@ public class MyProfilePage extends CommonPage {
     @Step("Open drop down list")
     public MyProfilePage clickAddButton() {
         addButton.click();
-        //need
-        sleep(1000);
+        waitVisibilityOfElementLocated("//div[@class = 'ant-dropdown ant-dropdown-placement-bottomRight ']", 10);
+
         return this;
     }
 

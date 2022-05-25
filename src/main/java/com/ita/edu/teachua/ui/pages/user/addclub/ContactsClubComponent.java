@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.NoSuchElementException;
+
 public class ContactsClubComponent extends BasicInformationClubComponent {
 
     @FindBy(how = How.XPATH, using = "//*[@name = 'Телефон']")
@@ -17,7 +19,7 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
     @FindBy(how = How.XPATH, using = "//*[@class = 'add-club-location']")
     private WebElement addLocationButton;
 
-    @FindBy(how = How.XPATH, using = "//ul[@class = 'ant-list-items']")
+    @FindBy(how = How.XPATH, using = "//div[@class = 'ant-form-item-control-input']")
     private WebElement locationList;
 
     public ContactsClubComponent(WebDriver driver) {
@@ -48,8 +50,16 @@ public class ContactsClubComponent extends BasicInformationClubComponent {
         return new DescriptionClubComponent(driver);
     }
 
+    public int getLocationSize() {
+        try {
+            return locationList.findElements(By.xpath(".//ul//li[@class = 'ant-list-item']")).size();
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
+    }
+
     @Step("get added location")
     public LocationComponent getAddedLocation() {
-        return new LocationComponent(driver, locationList.findElement(By.xpath("./li[last()]")));
+        return new LocationComponent(driver, locationList.findElement(By.xpath(".//ul[@class = 'ant-list-items']/li[last()]")));
     }
 }
