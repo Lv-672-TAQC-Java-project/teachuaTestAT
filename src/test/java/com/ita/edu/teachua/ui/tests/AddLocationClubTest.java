@@ -27,10 +27,12 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
     @Test(description = "TUA-237")
     public void verifyThatAdminCanAddLocationTest() {
         DescriptionClubComponent descriptionClub = new DescriptionClubComponent(driver);
-        descriptionClub
-                .fillBasicInfo()
-                .clickAddLocationButton();
-        String locationName = "Club11";
+
+        descriptionClub.fillBasicInfo();
+        int locationSize = descriptionClub.getLocationSize();
+        descriptionClub.clickAddLocationButton();
+
+        String locationName = "location_club1";
 
         LocationService locationService = new LocationService();
         int locationSizeBefore = locationService.getAllLocationsWhereName(locationName).size();
@@ -75,6 +77,8 @@ public class AddLocationClubTest extends TestRunnerWithValueProvider {
                         .getName()
                         .contains(locationName),
                 "The location should be added to a list with locations");
+        int newLocationSize = descriptionClub.getLocationSize();
+        softAssert.assertNotEquals(locationSize, newLocationSize);
 
         descriptionClub
                 .fillContactsInfo()

@@ -31,4 +31,9 @@ public class Waiter {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }
+
+    public static void waitInvisibilityOfElementLocated(String locator, int time) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
+    }
 }

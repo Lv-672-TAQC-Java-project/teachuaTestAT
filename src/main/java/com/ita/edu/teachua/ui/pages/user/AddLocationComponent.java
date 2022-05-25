@@ -102,7 +102,7 @@ public class AddLocationComponent extends BasePage {
 
     public AddLocationComponent clickCityNameListButton() {
         cityNameListButton.click();
-        sleep(1000);
+
         return this;
     }
 

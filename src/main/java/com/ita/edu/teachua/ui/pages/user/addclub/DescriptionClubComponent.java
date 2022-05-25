@@ -1,12 +1,15 @@
 package com.ita.edu.teachua.ui.pages.user.addclub;
 
 import com.ita.edu.teachua.ui.pages.home.HomePage;
+import com.ita.edu.teachua.utils.Waiter;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
+import static com.ita.edu.teachua.utils.Waiter.waitInvisibilityOfElementLocated;
 
 public class DescriptionClubComponent extends ContactsClubComponent {
     @FindBy(how = How.XPATH, using = "//*[@id='basic_description']")
@@ -15,6 +18,7 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     private WebElement alert;
     @FindBy(how = How.XPATH, using = "//*[@data-icon = 'check-circle']")
     private WebElement successCheckCircle;
+    private final Waiter waiter = new Waiter(driver);
 
     public DescriptionClubComponent(WebDriver driver) {
         super(driver);
@@ -57,19 +61,17 @@ public class DescriptionClubComponent extends ContactsClubComponent {
     @Step("Create Club")
     public HomePage createClub() {
         getCreateClubBtn().click();
-        return new HomePage(driver);
-    }
 
-    @Step("Create new club")
-    public HomePage clickCreateClubButton() {
-        getCreateClubBtn().click();
         return new HomePage(driver);
     }
 
     @Step("fill description information and click finish button")
     public HomePage fillDescriptionInfo() {
         enterSymbols(50);
-        sleep(2000);
+        createClub();
+
+        waitInvisibilityOfElementLocated("//span[@class = 'ant-modal-close-x']", 10);
+
         return new HomePage(driver);
     }
 }
